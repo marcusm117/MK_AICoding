@@ -1,4 +1,12 @@
 % =============================================================================
+% PART II: RESEARCH QUESTIONS
+% =============================================================================
+
+\part{Part II: Research Questions}
+
+
+
+% =============================================================================
 % Part II / RQ1: Economic Impact Prediction
 % =============================================================================
 
@@ -29,90 +37,339 @@
 \end{frame}
 
 
+% =============================================================================
+% Economic Model Deep Dive (3 slides)
+% =============================================================================
+
+\begin{frame}{Economic Model: Design Philosophy}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Scenario Model, Not Prediction:} This is a \textbf{parameterizable scenario estimator}---not a forecast of what \textit{will} happen, but a framework for exploring what \textit{could} happen under different assumptions. Users input organization-specific parameters (headcount, adoption rates, uplift distributions, costs), and the model outputs a \textcolor{red}{net value distribution (P10/P50/P90)} with transparent component decomposition. The goal is to transform qualitative debates into auditable, sensitivity-testable quantitative analysis.
+
+  \item \textbf{Why Net Value Can Be Negative:} Negative ROI is not a bug---it reflects real-world scenarios where: (1) uplift is low or even negative (e.g., \citelink{https://arxiv.org/abs/2507.09089}{METR 2025} found AI slowed experts by +19\% on familiar codebases); (2) security/compliance costs dominate in regulated industries; (3) rework/verification overhead erodes productivity gains; (4) capacity gains fail to translate into delivery speed due to organizational bottlenecks (PM, approvals, dependencies).
+
+  \item \textbf{Core Equation:} The model computes annual net value as:
+  \begin{equation*}
+  \boxed{\text{Net} = \text{Gross} - \text{Rework} - \text{Tool} - \text{Enablement} - \text{Security} + \text{Externalities}}
+  \end{equation*}
+  Where: Gross = labor $\times$ adoption $\times$ exposure $\times$ uplift; costs are per-seat or amortized fixed; externalities = TTM value + quality/defect reduction.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economic Model: Calculation Details}
+\justifying
+\small
+\textbf{1. Gross Capacity Value} (per role, then summed):
+\begin{equation*}
+\text{Gross}_r = \underbrace{(\text{Count}_r \times \text{FullyCost}_r)}_{\text{Total labor cost}} \times \underbrace{\text{Adoption}_r}_{\text{Who uses AI}} \times \underbrace{\text{Exposure}_r}_{\text{AI-able work \%}} \times \underbrace{U_r}_{\text{Uplift (sampled)}}
+\end{equation*}
+\textit{Design:} Uplift $U \sim \text{Triangular}(low, mid, high)$ captures uncertainty. Allows negative values (AI may slow experts on familiar codebases---\citelink{https://arxiv.org/abs/2507.09089}{METR 2025}).
+
+\vspace{4pt}
+\textbf{2. Cost Components} (annual):
+\begin{align*}
+\text{Tool} &= \text{AdoptedSeats} \times \text{SeatCost/year} & \text{\scriptsize (license fees)}\\
+\text{Enablement} &= \text{AdoptedSeats} \times \frac{\text{EnablementCost/seat}}{\text{AmortYears}} & \text{\scriptsize (training, rollout---amortized)}\\
+\text{Security} &= \text{AdoptedSeats} \times \text{SecIncr/seat} + \frac{\text{SecFixed}}{\text{AmortYears}} & \text{\scriptsize (per-seat + program)}
+\end{align*}
+\textit{Design:} Security split into incremental (scales with seats) and fixed (vendor review, policy---doesn't scale). Both amortized over 3 years by default.
+
+\vspace{4pt}
+\textbf{3. Rework Penalty:} $\text{Rework} = \rho \times \max(0, \text{Gross})$ \quad\textit{(only penalizes positive gains)}
+
+\vspace{4pt}
+\textbf{4. Externalities} (optional): Direct TTM value or derived from product lines via $\text{speedup} \times \text{elasticity}$.
+\end{frame}
+
+\begin{frame}{Economic Model: Evidence Anchors for Default Parameters}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Uplift Bounds:}
+  \begin{itemize}\tightlist
+    \item \textcolor{red}{Upper bound (+55.8\%)}: \citelink{https://arxiv.org/abs/2302.06590}{GitHub Copilot RCT} on specific tasks (greenfield, unfamiliar repos)
+    \item \textcolor{red}{Lower bound (negative allowed)}: \citelink{https://arxiv.org/abs/2507.09089}{METR 2025} found +19\% slowdown for experts on familiar codebases
+    \item \textcolor{red}{Mid-point (10--20\%)}: Conservative---RCT conditions don't reflect enterprise reality
+  \end{itemize}
+
+  \item \textbf{Adoption Rates:}
+  \begin{itemize}\tightlist
+    \item \citelink{https://survey.stackoverflow.co/2025/ai}{Stack Overflow 2025}: 51\% daily usage among professional devs, 84\% use or plan to use
+    \item \citelink{https://www.mckinsey.com/~/media/mckinsey/business\%20functions/quantumblack/our\%20insights/the\%20state\%20of\%20ai/november\%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf}{McKinsey 2025}: Wide variance in ``agents reaching scale'' across industries (tech \textgreater{} finance \textgreater{} manufacturing)
+  \end{itemize}
+
+  \item \textbf{Tool \& Security Costs:}
+  \begin{itemize}\tightlist
+    \item \citelink{https://docs.github.com/en/billing/concepts/product-billing/github-copilot-licenses}{GitHub Copilot Business}: \$19/seat/mo (baseline); model uses \$25--45/mo for multi-tool stacks
+    \item \citelink{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf}{NIST SP 800-218A}: Justifies security/governance overhead as real cost (vendor review, policy, audit)
+  \end{itemize}
+
+  \item \textbf{Delivery Translation \& Org Friction:}
+  \begin{itemize}\tightlist
+    \item \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024}: AI adoption correlates with -1.5\% throughput, -7.2\% stability at org level
+    \item Implication: Capacity gains $\neq$ delivery gains. Default $\tau = 0.28$--$0.50$ reflects bottleneck migration.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economic Model: Conservative vs. Optimistic Scenarios}
+\justifying
+\small
+\textbf{Key Insight:} Different parameter assumptions lead to \textcolor{red}{5--10x variation} in ROI estimates. We present two scenarios with explicit assumptions:
+
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{l|cc}
+\toprule
+\textbf{Parameter} & \textbf{Conservative (2025--26)} & \textbf{Optimistic (2027--28)} \\
+\midrule
+Exposure (AI-able work) & 25--35\% (\citelink{https://www.bain.com/insights/generative-ai-and-the-future-of-work/}{Bain}: coding only) & 55--65\% (code + review + debug) \\
+Uplift (mid-point) & 8--12\% & 16--22\% \\
+Delivery translation ($\tau$) & 0.20--0.30 (strict bottleneck) & 0.42--0.50 (process maturity) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{4pt}
+\begin{itemize}\tightlist
+  \item \textbf{Why Conservative is Defensible Now:} \citelink{https://www.bain.com/insights/generative-ai-and-the-future-of-work/}{Bain 2024} finds engineers spend only 25--35\% of time on pure coding; \citelink{https://arxiv.org/abs/2507.09089}{METR 2025} shows experts slow down on familiar code; \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024} shows negative org-level correlation with AI adoption.
+
+  \item \textbf{Why Optimistic is Plausible Later:} AI tools expanding beyond autocomplete to architecture, debugging, code review assistance. Organizations learning to restructure around AI-augmented workflows. Best-in-class adoption practices spreading.
+
+  \item \textbf{How to Read Subsequent Slides:} Analysis slides present \textcolor{red}{both estimates} where they differ significantly. Use conservative for budgeting; optimistic for strategic planning.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economic Model: Industry Templates \& Sensitivity}
+\justifying
+\small
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\begin{itemize}\tightlist
+  \item \textbf{8 Industry Templates:} Pre-calibrated for \textit{internet\_bigtech}, \textit{finance}, \textit{chips\_eda}, \textit{auto\_aero}, \textit{consumer\_retail\_it}, \textit{healthcare}, \textit{government}, \textit{telecom}. Key differentiators: adoption (0.42--0.78), uplift low-end (-0.05 to +0.02), security fixed (\$2--6.5M), delivery translation (0.28--0.50).
+
+  \item \textbf{High-Risk Industries:} At 5,000 engineers, \textcolor{red}{chips\_eda} and \textcolor{red}{government} have P10 near zero, indicating downside risk. These combine low adoption (42--55\%), high rework (5.5--6\%), heavy compliance (\$5--6.5M), and poor delivery translation (0.28--0.38).
+
+  \item \textbf{Break-Even Solver:} Bisection solver finds: (1) minimum adoption for P50$\geq$0; (2) max tolerable security cost; (3) required uplift. Enables ``what-if'' planning.
+\end{itemize}
+\end{column}
+\begin{column}{0.46\textwidth}
+\vspace{-12pt}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Figures/net_value_by_template.png}
+  \caption{\scriptsize Net value by industry (5K engineers). Error bars: P10--P90.}
+\end{figure}
+\end{column}
+\end{columns}
+\mynote{Code: \texttt{Code/econ\_model.py}. See \texttt{Code/README.md} for full documentation.}
+\end{frame}
+
+\begin{frame}{Economic Model: Sensitivity Analysis}
+\justifying
+\small
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{itemize}\tightlist
+  \item \textbf{Two Critical Levers:} \textcolor{red}{Adoption} and \textcolor{red}{uplift} are primary drivers. Net value ranges from \textcolor{red}{near \$0} (low adoption + 0.5x uplift) to \textcolor{red}{\$350M+/year} (95\% adoption + 2.2x uplift). Neither factor alone is sufficient---need \textit{both} high adoption \textit{and} meaningful productivity gains.
+
+  \item \textbf{Policy Implication:} Investing in enablement to drive adoption 50\%$\rightarrow$80\% yields larger ROI than waiting for better models. At 1.0x uplift: \textcolor{red}{\$80M $\rightarrow$ \$130M}.
+
+  \item \textbf{Limitations:} Static annual model; doesn't capture learning curves, competitive dynamics, or skill atrophy. Use as scenario explorer.
+\end{itemize}
+\end{column}
+\begin{column}{0.50\textwidth}
+\vspace{-12pt}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Figures/heatmap_internet_bigtech.png}
+  \caption{\scriptsize Sensitivity: net value vs. adoption \& uplift (internet\_bigtech, 5K engineers).}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% RQ1.1: Big Tech Internal Impact
+% -----------------------------------------------------------------------------
 \begin{frame}{RQ1.1: Big Tech Internal Impact}
   \justifying
   \small
   \begin{itemize}\tightlist
     \item \textbf{RQ1.1.1:} How much can Big Tech (FAANG+) reduce engineering headcount while maintaining output? \\
     \textit{Quantify: \% headcount reduction or \$ saved per year per company.}
-  
+
     \item \textbf{RQ1.1.2:} If headcount stays constant, how much faster can they deliver features/products? \\
     \textit{Quantify: \% increase in velocity (commits/PRs/features per engineer).}
-  
+
     \item \textbf{RQ1.1.3:} Will companies hire fewer engineers but more PMs/designers? (Andrew Ng hypothesis) \\
     \textit{Quantify: Engineer:PM ratio shift (e.g., 8:1 $\rightarrow$ 5:1?).}
-  
+
     \item \textbf{RQ1.1.4:} What is the adoption curve? Which teams/orgs adopt first? \\
     \textit{Quantify: \% of engineering orgs with >50\% AI tool penetration by 2027.}
-  
+
     \item \textbf{RQ1.1.5:} How does AI coding affect code quality metrics (bugs, tech debt, security vulnerabilities)?
   \end{itemize}
-  \end{frame}
-  
-  \begin{frame}{RQ1.2: Traditional Industry IT Departments}
+\end{frame}
+
+\begin{frame}{RQ1.1 Analysis: Big Tech Internal Impact}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Headcount Reduction Potential (RQ1.1.1):} For a \textcolor{red}{10,000-engineer} Big Tech org at \$320K fully-loaded cost:
+  \begin{itemize}\tightlist
+    \item \textit{Conservative:} \textcolor{red}{\$50--80M/year} net value $\rightarrow$ \textasciitilde200 FTE-equivalent (\textcolor{red}{2--3\%} capacity gain)
+    \item \textit{Optimistic:} \textcolor{red}{\$250--300M/year} net value $\rightarrow$ \textasciitilde900 FTE-equivalent (\textcolor{red}{8--9\%} capacity gain)
+  \end{itemize}
+  Reality: Firms reallocate capacity to new projects rather than layoffs, given competitive pressure to ship faster.
+
+  \item \textbf{Velocity Increase (RQ1.1.2):} If headcount stays constant:
+  \begin{itemize}\tightlist
+    \item \textit{Conservative:} \textcolor{red}{3--5\%} org-level throughput increase (using $\tau$ = 0.25, exposure = 30\%)
+    \item \textit{Optimistic:} \textcolor{red}{12--18\%} throughput increase (using $\tau$ = 0.50, exposure = 60\%)
+  \end{itemize}
+  \citelink{https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai}{McKinsey 2023} found 20--45\% task-level gains, but \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024} shows org-level metrics often worsen initially.
+
+  \item \textbf{Engineer:PM Ratio Shift (RQ1.1.3):} PM productivity gains are \textcolor{red}{3--4x smaller} than engineering. Expect ratios to compress from 8:1 toward \textcolor{red}{6:1 or 5:1} as bottlenecks shift upstream.
+
+  \item \textbf{Adoption Curve (RQ1.1.4):} \citelink{https://survey.stackoverflow.co/2025/ai}{Stack Overflow 2025}: 51\% daily AI usage. Expect \textcolor{red}{>70\% Big Tech penetration by 2027}. Early adopters: greenfield, platform teams. Laggards: security-sensitive, legacy codebases.
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% RQ1.2: Traditional Industry IT Departments
+% -----------------------------------------------------------------------------
+\begin{frame}{RQ1.2: Traditional Industry IT Departments}
   \justifying
   \small
   \begin{itemize}\tightlist
     \item \textbf{RQ1.2.1:} Finance sector (banks, hedge funds, trading firms): \\
     \textit{How much can they save on IT development costs? Can AI tools handle compliance-heavy codebases?}
-  
+
     \item \textbf{RQ1.2.2:} Semiconductor/Chip Design: \\
     \textit{Can foundation models help with proprietary HDL/RTL code given minimal open-source training data? What's the productivity gain for EDA workflows?}
-  
+
     \item \textbf{RQ1.2.3:} Manufacturing \& Industrial (automotive, aerospace, robotics): \\
     \textit{Embedded systems, safety-critical code — what's realistic adoption?}
-  
+
     \item \textbf{RQ1.2.4:} Healthcare/Pharma IT: \\
     \textit{Regulatory constraints (HIPAA, FDA) — does AI coding help or create compliance overhead?}
-  
+
     \item \textbf{RQ1.2.5:} Government \& Defense: \\
     \textit{Security clearance, air-gapped environments — can open-weight models capture this market?}
   \end{itemize}
   \textit{Quantify each: \$ savings, \% efficiency gain, adoption timeline.}
-  \end{frame}
-  
-  \begin{frame}{RQ1.3: Startup Ecosystem \& VC Market}
+\end{frame}
+
+\begin{frame}{RQ1.2 Analysis: Traditional Industry IT Departments}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Finance (RQ1.2.1):} For 5,000 engineers with security program (\$5M fixed + \$900/seat):
+  \begin{itemize}\tightlist
+    \item \textit{Conservative:} \textcolor{red}{\$12--18M/year} (exposure=30\%, $\tau$=0.28, uplift=10\%)
+    \item \textit{Optimistic:} \textcolor{red}{\$65--75M/year} (exposure=55\%, $\tau$=0.42, uplift=16\%)
+  \end{itemize}
+  \citelink{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf}{NIST 800-218A} compliance adds 15--20\% overhead. Legacy codebases and SOX audits favor conservative estimate near-term.
+
+  \item \textbf{Semiconductor/EDA (RQ1.2.2):} For 3,000 engineers: \textcolor{red}{P50 = \$8--15M/year}, \textcolor{red}{P10 = -\$3M}---high downside risk. Proprietary HDL/RTL limits exposure to 35--40\%. Break-even at \textcolor{red}{14\% adoption}. Specialized fine-tuning may improve.
+
+  \item \textbf{Auto/Aerospace (RQ1.2.3):} Safety-critical code (MISRA, DO-178C) requires verification. ROI \textcolor{red}{2--3x smaller per engineer} than Big Tech. AI assists test generation, docs, non-safety code first.
+
+  \item \textbf{Healthcare (RQ1.2.4):} For 2,000 engineers: \textcolor{red}{P50 = \$4--8M/year}, P10 near breakeven. HIPAA/FDA constraints (\$4.5M fixed) consume \textasciitilde30\% of gross value. Best for internal tools, analytics, non-PHI systems.
+
+  \item \textbf{Government (RQ1.2.5):} For 2,000 engineers: \textcolor{red}{P50 = \$1--3M/year}, \textcolor{red}{P10 = -\$3M}---highest risk. Air-gapped environments favor \citelink{https://huggingface.co/Qwen}{open-weight models} (Qwen, Llama) on-premise.
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% RQ1.3: Startup Ecosystem & VC Market
+% -----------------------------------------------------------------------------
+\begin{frame}{RQ1.3: Startup Ecosystem \& VC Market}
   \justifying
   \small
   \begin{itemize}\tightlist
     \item \textbf{RQ1.3.1:} How much faster can non-AI startups iterate using AI coding tools? \\
     \textit{Quantify: Time-to-MVP reduction (weeks $\rightarrow$ days?), burn rate impact.}
-  
+
     \item \textbf{RQ1.3.2:} Does faster iteration increase startup success rates or just failure velocity? \\
     \textit{Quantify: Expected change in startup survival rates at Series A/B.}
-  
+
     \item \textbf{RQ1.3.3:} How does this affect VC investment thesis? \\
     \textit{Will VCs fund smaller teams? Expect faster returns? Change valuation multiples?}
-  
+
     \item \textbf{RQ1.3.4:} Can solo founders / 2-person teams now build what required 10-person teams? \\
     \textit{Quantify: Minimum viable team size shift by company stage.}
-  
+
     \item \textbf{RQ1.3.5:} Will AI coding tools create ``hyper-competition'' that compresses margins for all startups?
   \end{itemize}
-  \end{frame}
-  
-  \begin{frame}{RQ1.4: Labor Market Dynamics}
+\end{frame}
+
+\begin{frame}{RQ1.3 Analysis: Startup Ecosystem \& VC Market}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Time-to-MVP (RQ1.3.1):} For 500-engineer scale-up: \textcolor{red}{P50 = \$3.1M/year}. For 10-person seed: \textasciitilde\$60K/year but \textit{transformative} relative impact. \citelink{https://www.ycombinator.com/blog}{YC companies} report MVP timelines: \textcolor{red}{12 weeks $\rightarrow$ 3--4 weeks}. Burn rate: 30--50\% reduction pre-product.
+
+  \item \textbf{Success vs. Failure Velocity (RQ1.3.2):} Double-edged sword. Faster validation/pivot, but ``vibe coding'' creates \textcolor{red}{tech debt time bombs}. Prediction: Series A survival may improve slightly; failure velocity also increases.
+
+  \item \textbf{VC Thesis Shift (RQ1.3.3):} VCs adjusting: (1) funding smaller teams (2--5 person pre-seed); (2) faster milestones (6-month vs. 12-month); (3) valuation compression for ``AI-augmented commodity'' products.
+
+  \item \textbf{Minimum Team Size (RQ1.3.4):} Pre-AI: 8--12 engineers for production SaaS. Post-AI: \textcolor{red}{2--4 engineers} for standard web/mobile. Solo founders $\approx$ former 3-person teams. \textit{Caveat:} Complex systems still need larger teams.
+
+  \item \textbf{Hyper-Competition (RQ1.3.5):} Lower barrier = more competitors. Expect \textcolor{red}{margin compression}. Defensibility shifts: ``we built it'' $\rightarrow$ ``we have distribution/data/network effects.''
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% RQ1.4: Labor Market Dynamics
+% -----------------------------------------------------------------------------
+\begin{frame}{RQ1.4: Labor Market Dynamics}
   \justifying
   \small
   \begin{itemize}\tightlist
     \item \textbf{RQ1.4.1:} Net job displacement: How many SE jobs will be eliminated vs. created? \\
     \textit{Quantify: \# jobs by 2030 (pessimistic / base / optimistic scenarios).}
-  
+
     \item \textbf{RQ1.4.2:} Which SE roles are most/least vulnerable? \\
     \textit{(Junior devs, QA, DevOps, architects, ML engineers — rank by displacement risk.)}
-  
+
     \item \textbf{RQ1.4.3:} Wage effects: Will AI tools compress or polarize SE salaries? \\
     \textit{Quantify: Expected wage change by experience level and role.}
-  
+
     \item \textbf{RQ1.4.4:} Geographic redistribution: Will AI tools accelerate offshoring or re-shoring? \\
     \textit{(If AI handles routine work, does location matter less or more?)}
-  
+
     \item \textbf{RQ1.4.5:} New roles created: AI-assisted code reviewers, prompt engineers, AI ops? \\
     \textit{Quantify: Projected job openings in new categories.}
   \end{itemize}
-  \end{frame}
-  
-  \begin{frame}{RQ1.5 \& RQ1.6: Macro Effects \& Risks}
+\end{frame}
+
+\begin{frame}{RQ1.4 Analysis: Labor Market Dynamics}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Net Displacement (RQ1.4.1):} \citelink{https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm}{BLS} projects 25\% job growth by 2032. AI may reduce to \textcolor{red}{10--15\% growth} (base) or flat (pessimistic). Absolute displacement unlikely before 2030---demand grows faster than productivity.
+
+  \item \textbf{Role Vulnerability (RQ1.4.2):}
+  \textcolor{red}{High risk:} Junior devs, manual QA, tech writers.
+  \textcolor{orange}{Medium:} Mid-level devs, DevOps.
+  \textcolor{green!50!black}{Lower:} Architects, staff+, ML engineers, security, SREs.
+  Key: \textit{judgment in ambiguity} vs. \textit{well-defined execution}.
+
+  \item \textbf{Wage Effects (RQ1.4.3):} Expect \textcolor{red}{polarization}: senior/staff wages rise (scarcity + AI leverage); junior wages stagnate (oversupply). Mid-level bifurcates: AI-masters thrive; others become ``AI-assisted juniors.''
+
+  \item \textbf{Geographic (RQ1.4.4):} Location matters less for execution, more for coordination. Continued offshoring for arbitrage; re-shoring of strategic roles. Remote + AI = intensified global competition.
+
+  \item \textbf{New Roles (RQ1.4.5):} Emerging: AI code reviewers, prompt engineers (transitional), AI/ML ops. Most are \textit{evolutions} of existing roles, not net new categories.
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% RQ1.5 & RQ1.6: Macro Effects & Risks
+% -----------------------------------------------------------------------------
+\begin{frame}{RQ1.5 \& RQ1.6: Macro Effects \& Risks}
   \justifying
   \small
   \textbf{RQ1.5: Macro-Economic Spillovers}
@@ -121,7 +378,7 @@
     \item \textbf{RQ1.5.2:} Will we see a ``productivity paradox'' (Solow) — gains visible in tools but not GDP?
     \item \textbf{RQ1.5.3:} Impact on software-intensive industries beyond tech (logistics, retail, media)?
   \end{itemize}
-  
+
   \vspace{6pt}
   \textbf{RQ1.6: Negative Externalities \& Risks}
   \begin{itemize}\tightlist
@@ -131,16 +388,39 @@
     \item \textbf{RQ1.6.4:} Skill atrophy: Will engineers lose fundamental skills by over-relying on AI?
     \item \textbf{RQ1.6.5:} Concentration risk: What if dominant AI coding tools have outages/go out of business?
   \end{itemize}
-  \end{frame}
-  
-% -----------------------------------------------------------------------------
-% RQ1.1-RQ1.6 detailed analysis to be added
-% -----------------------------------------------------------------------------
+\end{frame}
 
-% \begin{frame}{RQ1.1: Big Tech Impact — Detailed Analysis}
-% \end{frame}
+\begin{frame}{RQ1.5 Analysis: Macro-Economic Spillovers}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{GDP Contribution (RQ1.5.1):} Software sector is \textasciitilde2.5\% of US GDP. Productivity gains translate to:
+  \begin{itemize}\tightlist
+    \item \textit{Conservative (3--5\% org-level):} \textcolor{red}{0.08--0.12\% GDP boost}---barely measurable
+    \item \textit{Optimistic (12--18\% org-level):} \textcolor{red}{0.3--0.45\% GDP boost}---meaningful but not transformative
+  \end{itemize}
+  Larger impact comes from software-enabled gains in \textit{other} sectors (logistics, finance, healthcare).
 
-% \begin{frame}{RQ1.2: Traditional Industry Impact — Detailed Analysis}
-% \end{frame}
+  \item \textbf{Productivity Paradox (RQ1.5.2):} \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024} shows the paradox: AI adoption correlates with \textit{worse} throughput (-1.5\%) and stability (-7.2\%) at org level. This mirrors Solow's 1987 observation. Resolution requires process/culture changes, not just tools. Expect \textcolor{red}{3--5 year lag} before macro gains materialize---conservative estimates are more defensible near-term.
 
-% etc.
+  \item \textbf{Spillover Industries (RQ1.5.3):} Gains accrue to \textit{firms that adopt effectively}, not industries as a whole---expect \textcolor{red}{widening productivity gaps} between AI-adopters and laggards.
+
+  \item \textbf{Global Competitiveness:} US leads in adoption; China catching up (Qwen, DeepSeek). EU faces AI Act compliance headwinds.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ1.6 Analysis: Negative Externalities \& Risks}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Security Vulnerabilities (RQ1.6.1):} AI-generated code shows \textcolor{red}{higher vulnerability rates} (CWE-79, CWE-89). Model's rework\_rate (3.5--6\%) partially captures this. Mitigation: mandatory security review, SAST/DAST, \citelink{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf}{NIST 800-218A}.
+
+  \item \textbf{Technical Debt (RQ1.6.2):} ``Vibe coding'' produces working but unmaintainable code---\textcolor{red}{hidden cost} not fully captured. Mitigate: track AI-generated code, enforce architecture reviews, set debt thresholds.
+
+  \item \textbf{IP/Licensing Risk (RQ1.6.3):} \citelink{https://githubcopilotlitigation.com/}{Copilot lawsuit} creates uncertainty. Use tools with indemnification (Copilot Enterprise, Amazon Q). Open-weight models shift liability but reduce lock-in.
+
+  \item \textbf{Skill Atrophy (RQ1.6.4):} Risk for juniors who ``graduate'' without fundamentals. Mitigate: mandatory code review, pair programming, ``AI-free'' exercises.
+
+  \item \textbf{Concentration Risk (RQ1.6.5):} If dominant tools (Copilot, Cursor) have outages, teams face productivity collapse. Mitigate: multi-vendor strategy, maintain AI-free proficiency.
+\end{itemize}
+\end{frame}

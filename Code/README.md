@@ -1,9 +1,210 @@
 # AI Coding 经济影响预测模型 V3（README）
 
-> 目标：把“AI coding / agentic coding / 专业 IDE/CLI / specialized agents”对**软件工程组织的经济影响**拆解成可调参、可解释、可复现的估算器。  
-> 输出：净值区间（P10/P50/P90）、拆解项、以及 break-even 求解器（净值=0 时 adoption/uplift/security 的阈值）。
+> **时间口径**：默认所有金额为 **年化（USD/year）**。  
+> **目标**：把“AI coding 的经济影响”从定性争论变成**可复算、可调参、可做敏感性分析**的数值框架。
 
 ---
+
+## 0. 这是什么模型（以及它不是什么）
+
+这是一个**可调参的场景模型（scenario model）**：
+
+- **输入**：组织规模（各角色人数）、人员全成本（fully-loaded）、AI 采用率（有效使用）、可被加速的工作占比（exposure）、有效 uplift（生产率变化的区间）、工具成本、enablement（培训/流程/集成）成本、安全/合规额外成本、返工成本等；以及可选的外部性（TTM 与质量）。
+- **输出**：净节省/净增产的**区间**（P10/P50/P90/Mean），并提供“瓶颈迁移（capacity → delivery）”的启发式指标与拆解项。
+
+它**不是**：
+
+- 不是对某家公司未来的“事实预测”；
+- 不是自动告诉你“会裁多少人/少招多少人”；
+- 也不是用公开 benchmark 直接推导 ROI（benchmark ≠ 企业真实仓库 ROI）。
+
+模型的目标是：把“定性争论”变成“可复算、可敏感性分析”的数值框架，帮助你回答：
+
+> 在某个行业/组织约束下，要让 AI coding 的净收益为正，需要哪些条件？哪个因素最关键？  
+> 哪些情况下会负净值（亏），亏在什么地方？
+
+---
+
+## 1. 模型的基本思想：把收益拆成“可计量”的四块
+
+在代码里，核心等式是：
+
+\[
+\textbf{Net}
+=\underbrace{\textbf{Gross}}_{\text{节省工时/产能价值}}
+-\Big(\underbrace{\textbf{Tool}}_{\text{seat/推理}}
++\underbrace{\textbf{Enablement}}_{\text{培训/流程/集成（摊销）}}
++\underbrace{\textbf{Security}}_{\text{合规/隔离/审计（拆分+摊销）}}
++\underbrace{\textbf{Rework}}_{\text{AI 引入返工/验证/修复}}\Big)
++\underbrace{\textbf{Externalities}}_{\text{TTM + 质量外部性（可选）}}
+\]
+
+其中每一项都对应企业里真正要付的账单/成本中心。
+
+---
+
+## 2. 输入参数（每个参数在现实里代表什么）
+
+以 `econ_model_v3.py` 的数据结构与 CLI 参数为准。模型按角色（Engineer / QA / SRE / PM / Design）显式建模，每个角色都有同构参数：
+
+### 2.1 工程端（Engineers；其他角色同理）
+
+- `fully_loaded_cost`：工程师全成本（年）  
+  = 工资 + 奖金 + 福利 + 税费 + 管理摊销 + 办公/设备/IT/间接成本  
+  Fully-loaded 的概念解释（示例）：https://eclub.mit.edu/2015/07/09/fully-loaded-cost-of-an-employee/  
+  工资基准锚点（示例）：BLS Software Developers https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
+
+- `adoption`：实际活跃采用率（不是买 license；是“真的在工作流里用”）  
+  普及度锚点（方向性）：Stack Overflow 2025 AI usage https://survey.stackoverflow.co/2025/ai
+
+- `exposure`：工程师工作中可被 AI 加速的占比  
+  例如 coding / debug / test / refactor / 脚手架 / 文档等。建议用内部数据校准，而不是凭感觉拍脑袋。
+
+- `uplift=(low, mid, high)`：有效生产率变化，用三角分布做不确定性（允许为负）  
+  - 上限型锚点：Copilot RCT 在特定任务上更快 55.8% https://arxiv.org/abs/2302.06590  
+  - 下限型锚点：METR 2025 在某些真实代码库任务上 +19% 耗时 https://arxiv.org/abs/2507.09089
+
+### 2.2 PM 端（用于“瓶颈迁移”的数值入口）
+
+把 PM 放进模型不是为了证明“必须多招 PM”，而是为了把“瓶颈会不会迁移到需求/协调/审批”变成可检验的假设：
+
+- PM 的 `adoption/exposure/uplift` 默认更保守；
+- 在 **TTM 推导模式**中，PM 的收益会进入 “bottleneck” 折损项（见 4.5）。
+
+---
+
+## 3. 收益项 Gross 是怎么计算的（以及为什么用三角分布）
+
+### 3.1 工程收益（核心）
+
+脚本里（简化表达）：
+
+\[
+Gross_{eng}=(Engineers\cdot eng\_cost)\cdot adoption\cdot exposure\cdot U
+\]
+
+其中 \(U\) 是 uplift 随机变量。
+
+更一般地，对任一角色 \(r\)：
+
+\[
+Gross_r=(Count_r\cdot Cost_r)\cdot Adoption_r\cdot Exposure_r\cdot U_r
+\]
+\[
+Gross=\sum_r Gross_r
+\]
+
+### 3.2 为什么用三角分布（Triangular）
+
+模型用 `uplift=(low, mid, high)` 并从三角分布抽样：
+
+`rng.triangular(left=low, mode=mid, right=high, size=n)`
+
+原因：
+- 企业真实 uplift 往往没有足够历史数据拟合更复杂分布；
+- 但你通常能给出三点：保守下界 / 最可能值 / 乐观上界；
+- 三角分布适合“管理层可解释的区间假设”。
+
+### 3.3 Monte Carlo 输出 P10/P50/P90
+
+模型运行 \(n\) 次（例如 10k/20k），得到净值样本，然后输出：
+
+- **P10**：更保守的结果  
+- **P50**：中位数（典型情况）  
+- **P90**：较乐观情况
+
+---
+
+## 4. 成本项（每一项在现实里代表什么）
+
+### 4.1 Tool：seat/推理成本
+
+\[
+Tool = adopted\_seats \cdot seat\_cost\_per\_year
+\]
+
+### 4.2 Enablement：多期摊销（升级项）
+
+\[
+Enablement = adopted\_seats \cdot \frac{enablement\_cost\_per\_seat}{enablement\_years}
+\]
+
+### 4.3 Security：拆分为两类（升级项）
+
+\[
+Security=adopted\_seats\cdot security\_incremental\_per\_seat
++\frac{security\_program\_fixed\_cost}{security\_program\_years}
+\]
+
+治理/合规任务存在的公开证据：NIST SP 800-218A  
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf
+
+### 4.4 Rework：返工比例
+
+\[
+Rework = rework\_rate \cdot \max(0, Gross)
+\]
+
+---
+
+## 5. 外部性（TTM 与质量）与“瓶颈迁移”启发式
+
+### 5.1 直接输入外部性
+
+- `faster_delivery_value=(low, mid, high)`：更快上线带来的年化价值（按业务线估值）
+- `defect_escape_cost_reduction=(low, mid, high)`：缺陷逃逸/事故成本降低的年化价值（按历史事故成本估值）
+
+### 5.2 多业务线汇总（TTM 叠加）
+
+当你提供 `product_lines_json`（每条业务线有 revenue/gm/elasticity）时，模型按业务线叠加 TTM 价值。
+
+启发式交付提速：
+
+\[
+speedup \approx \max(0,eng\_gain\_frac)\cdot delivery\_translation \cdot \max(0, 1+pm\_gain\_frac)
+\]
+
+其中：
+- \(eng\_gain\_frac\) 是工程“产能价值 / 工程劳动成本”的比值；
+- \(pm\_gain\_frac\) 是 PM 端类似的比值（用于表达瓶颈是否迁移到 PM/需求端）；
+- `delivery_translation` 明确表达：**产能提升不等于交付等比例提速**。
+
+业务线 \(i\) 的 TTM 价值：
+
+\[
+TTM_i=(R_i\cdot GM_i)\cdot e_i \cdot speedup
+\]
+\[
+TTM=\sum_i TTM_i
+\]
+
+---
+
+## 6. Break-even 求解器（净值为 0 的阈值）
+
+模型提供 break-even 求解器：自动求
+
+- “净值为 0”时需要的 `adoption_eng`（采用率阈值）
+- “净值为 0”时需要的 `uplift_multiplier`（整体 uplift 放大倍率）
+- “净值为 0”时可承受的 `security_incremental_per_seat` 上限
+- “净值为 0”时可承受的 `security_program_fixed_cost` 上限
+
+方法：二分搜索 + 固定 seed Monte Carlo（目标统计量默认为 P50）。
+
+---
+
+## 7. 为什么会出现“负净值”（不是 bug）
+
+负净值常见来源：
+
+- uplift 低甚至为负（例如 METR 2025 所示的某些场景）；
+- 合规/安全固定成本在小规模试点阶段被少量 seats 分摊导致单位成本极高；
+- rework/验证链条吞噬产能节省；
+- 产能无法转化为交付提速/收入/事故降低（瓶颈迁移到 PM/审批/依赖/需求）。
+
+---
+
+
 
 ## 1. 你提出的 3 项升级在 V3 里的实现方式
 

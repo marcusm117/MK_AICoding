@@ -1,57 +1,57 @@
 # -*- coding: utf-8 -*-
 """
-AI Coding 经济影响预测模型 V3（可调参、可出图、可做 break-even 求解、支持多业务线汇总）
+AI Coding Economic Impact Prediction Model V3 (adjustable parameters, visualization, break-even solver, multi-product-line support)
 Time cutoff: 2025-12
 
 -----------------
-1) 这不是“事实预测”，而是一个“可解释的场景模型 / 可调参的估算器”：
-   - 你输入组织参数（人数、全成本、采用率、uplift、工具成本、合规成本、enablement 等）
-   - 模型输出净值的区间（P10/P50/P90），并拆解贡献项（劳动产能价值/工具成本/安全合规/返工/外部性等）
+1) This is not a "factual prediction", but an "explainable scenario model / adjustable estimator":
+   - You input organizational parameters (headcount, fully-loaded cost, adoption rate, uplift, tool cost, compliance cost, enablement, etc.)
+   - The model outputs net value ranges (P10/P50/P90) and breaks down contribution components (labor capacity value/tool cost/security compliance/rework/externalities, etc.)
 
-2) 为什么有时会出现“负净值”？
-   - 采用率低 + exposure 小（可被加速的工作占比低）→ 产能价值小
-   - rework（返工/审查/修复）偏高 或 uplift 低/为负（例如熟悉 codebase 的资深工程师可能被 AI 干扰）
-   - 安全合规成本（增量 seat + 固定项目）或 enablement 一次性成本过高
-   - “产能”无法转化为“交付速度/收入/成本节省”（组织瓶颈、流程、审批、供应链、需求不足）
+2) Why do we sometimes see "negative net value"?
+   - Low adoption + small exposure (low proportion of work that can be accelerated) → small capacity value
+   - High rework (rework/review/fixes) or low/negative uplift (e.g., senior engineers familiar with codebase may be disrupted by AI)
+   - High security compliance costs (incremental seat + fixed program) or high one-time enablement costs
+   - "Capacity" cannot be converted to "delivery speed/revenue/cost savings" (organizational bottlenecks, processes, approvals, supply chain, insufficient demand)
 
 -----------------
-证据（用于默认参数/分布范围的“锚点”，不是对任何组织的保证）
+Evidence (used as "anchors" for default parameters/distribution ranges, not guarantees for any organization)
 - BLS Software Developers (wage baseline) https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
-- Fully-loaded cost explanation (example) https://eclub.mit.edu/2015/07/09/fully-loaded-cost-of-an-employee/：
-- GitHub Copilot 随机对照实验：特定任务完成时间快 55.8%（上限型证据）：
+- Fully-loaded cost explanation (example) https://eclub.mit.edu/2015/07/09/fully-loaded-cost-of-an-employee/
+- GitHub Copilot randomized controlled trial: 55.8% faster task completion time (upper-bound evidence):
   https://arxiv.org/abs/2302.06590
-- METR 2025：在“熟悉的大型开源代码库”上，允许使用 AI 的组任务耗时反而 +19%：
+- METR 2025: On "familiar large open-source codebases", teams allowed to use AI took +19% longer:
   https://arxiv.org/abs/2507.09089
-- 2024 DORA 报告（Google Cloud blog 摘要）：AI adoption 增加与 throughput -1.5%、stability -7.2% 相关：
+- 2024 DORA Report (Google Cloud blog summary): AI adoption associated with throughput -1.5%, stability -7.2%:
   https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report
-- Stack Overflow Developer Survey 2025：84% 使用或计划使用 AI 工具；专业开发者 51% 每日使用：
+- Stack Overflow Developer Survey 2025: 84% use or plan to use AI tools; 51% of professional developers use daily:
   https://survey.stackoverflow.co/2025/ai
-- McKinsey 2025 State of AI（Exhibit 2/3）：AI agents 在 software engineering/行业中的“达到 scaling”比例（成熟度差异）：
+- McKinsey 2025 State of AI (Exhibit 2/3): AI agents "achieving scale" proportion in software engineering/industries (maturity differences):
   https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf
-- NIST SP 800-218A：GenAI/双用途基础模型的安全开发/治理实践（支持“安全合规额外工作”这一成本项）：
+- NIST SP 800-218A: GenAI/dual-use foundation model security development/governance practices (supports "security compliance extra work" cost item):
   https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf
-- GitHub Copilot Business 官方价格（seat 成本锚点之一）：$19/seat/月：
+- GitHub Copilot Business official pricing (one of the seat cost anchors): $19/seat/month:
   https://docs.github.com/en/billing/concepts/product-billing/github-copilot-licenses
 
 -----------------
-运行示例：
-  # 1) 单一行业模板 + 自定义人数/采用率
+Usage examples:
+  # 1) Single industry template + custom headcount/adoption rate
   python econ_model_v3.py simulate --template internet_bigtech --engineers 5000 --adoption_eng 0.65 --n 20000
 
-  # 2) 多业务线：把 TTM（time-to-market）价值按不同业务线 revenue/gm/elasticity 叠加
+  # 2) Multi-product-line: aggregate TTM (time-to-market) value across different product lines by revenue/gm/elasticity
   python econ_model_v3.py simulate --template internet_bigtech --engineers 5000 --product_lines_json examples/product_lines_example.json --n 30000
 
-  # 3) Break-even：求“净值=0 时所需 adoption（或 uplift）/ 可承受 security 上限”
+  # 3) Break-even: find required adoption (or uplift) / acceptable security ceiling when net value = 0
   python econ_model_v3.py breakeven --template chips_eda --engineers 1200 --variable adoption_eng
   python econ_model_v3.py breakeven --template chips_eda --engineers 1200 --variable uplift_multiplier
   python econ_model_v3.py breakeven --template chips_eda --engineers 1200 --variable security_incremental_per_seat
 
-作者备注：
-- 默认模板是“行业平均 + 偏保守”的起点；强烈建议用你组织的历史数据校准：
-  * 工程师/QA/SRE 真实 fully-loaded cost
-  * 真实 adoption（按周活/日活）、真实 exposure（AI 真正能替代的工时占比）
-  * 真实 defect/incident 成本与频率（外部性）
-  * 工具链与数据/合规要求导致的真实 security fixed & incremental 成本
+Author notes:
+- Default templates are "industry average + conservative" starting points; strongly recommend calibrating with your organization's historical data:
+  * Real fully-loaded cost for engineers/QA/SRE
+  * Real adoption (by weekly/daily active users), real exposure (proportion of work hours AI can actually replace)
+  * Real defect/incident costs and frequencies (externalities)
+  * Real security fixed & incremental costs driven by toolchain and data/compliance requirements
 """
 from __future__ import annotations
 
@@ -486,11 +486,11 @@ def load_product_lines(path: str) -> List[ProductLine]:
 
 def make_templates() -> Dict[str, Scenario]:
     """
-    注意：这些模板是“起点”，并且刻意偏保守：
-    - uplift 的中位数通常显著低于 Copilot RCT 的 55.8%（因为 RCT 是特定任务的上限）
-    - 某些行业允许 uplift 的低端为负（参考 METR 2025 的“可能减速”发现），用于反映：
-      * 熟悉 codebase 的专家在 review/校验上花更多时间
-      * 安全合规和审批链条带来的额外摩擦
+    Note: These templates are "starting points" and are deliberately conservative:
+    - uplift medians are typically significantly lower than Copilot RCT's 55.8% (because RCT is an upper bound for specific tasks)
+    - Some industries allow negative lower bounds for uplift (referencing METR 2025's "potential slowdown" finding), to reflect:
+      * Experts familiar with codebase spending more time on review/verification
+      * Additional friction from security compliance and approval chains
     """
 
     def role(count, cost, adoption, exposure, uplift):
@@ -503,7 +503,7 @@ def make_templates() -> Dict[str, Scenario]:
 
     T = {}
 
-    # 1) Internet / Big Tech (高工具成熟度、较高工程成本、较高 adoption、较高 exposure)
+    # 1) Internet / Big Tech (high tool maturity, higher engineering cost, higher adoption, higher exposure)
     T["internet_bigtech"] = Scenario(
         engineer=role(1000, 320_000, 0.78, 0.55, (0.02, 0.20, 0.38)),
         qa=role(180, 240_000, 0.72, 0.45, (0.01, 0.16, 0.30)),
@@ -516,7 +516,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(faster_delivery_value=None, defect_escape_cost_reduction=None, delivery_translation=0.50),
     )
 
-    # 2) 金融（高合规、审计、数据隔离；adoption 较高但 agentic 更慢；安全成本更高）
+    # 2) Finance (high compliance, audit, data isolation; higher adoption but slower agentic; higher security costs)
     T["finance"] = Scenario(
         engineer=role(1000, 300_000, 0.68, 0.50, (-0.03, 0.16, 0.30)),
         qa=role(200, 230_000, 0.62, 0.45, (-0.02, 0.12, 0.26)),
@@ -529,7 +529,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.42),
     )
 
-    # 3) 芯片/EDA/半导体（代码和 RTL/EDA 脚本很多不可公开，工具链复杂；合规/IP/验证成本高）
+    # 3) Chips/EDA/Semiconductor (much code and RTL/EDA scripts not publicly shareable, complex toolchain; high compliance/IP/verification costs)
     T["chips_eda"] = Scenario(
         engineer=role(1000, 280_000, 0.55, 0.40, (-0.05, 0.12, 0.24)),
         qa=role(180, 220_000, 0.50, 0.38, (-0.05, 0.10, 0.22)),
@@ -542,7 +542,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.38),
     )
 
-    # 4) 汽车/航空航天（安全关键、合规/认证、流程重；adoption 中等，rework 风险更高）
+    # 4) Automotive/Aerospace (safety-critical, compliance/certification, heavy processes; medium adoption, higher rework risk)
     T["auto_aero"] = Scenario(
         engineer=role(1000, 240_000, 0.58, 0.45, (-0.04, 0.12, 0.25)),
         qa=role(220, 210_000, 0.55, 0.40, (-0.04, 0.10, 0.22)),
@@ -555,7 +555,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.35),
     )
 
-    # 5) 消费品/零售 IT（成本更敏感、工具预算更紧；但业务线多，TTM 价值可能很高）
+    # 5) Consumer/Retail IT (more cost-sensitive, tighter tool budgets; but many product lines, TTM value potentially high)
     T["consumer_retail_it"] = Scenario(
         engineer=role(1000, 200_000, 0.62, 0.50, (-0.02, 0.15, 0.30)),
         qa=role(200, 180_000, 0.58, 0.45, (-0.02, 0.12, 0.25)),
@@ -568,7 +568,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.45),
     )
 
-    # 6) 医疗（高合规、隐私；adoption 中低；安全成本高；质量外部性收益潜在更大）
+    # 6) Healthcare (high compliance, privacy; medium-low adoption; high security costs; potentially larger quality externality benefits)
     T["healthcare"] = Scenario(
         engineer=role(1000, 210_000, 0.50, 0.45, (-0.04, 0.12, 0.24)),
         qa=role(220, 190_000, 0.45, 0.42, (-0.04, 0.10, 0.22)),
@@ -581,7 +581,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.33),
     )
 
-    # 7) 政府（采购周期长、数据隔离；但 seat 成本也可能被统一采购拉低）
+    # 7) Government (long procurement cycles, data isolation; but seat costs may be reduced by bulk purchasing)
     T["government"] = Scenario(
         engineer=role(1000, 180_000, 0.42, 0.40, (-0.05, 0.10, 0.20)),
         qa=role(200, 170_000, 0.40, 0.35, (-0.05, 0.08, 0.18)),
@@ -594,7 +594,7 @@ def make_templates() -> Dict[str, Scenario]:
         externalities=Externalities(delivery_translation=0.28),
     )
 
-    # 8) 电信/运营商（大型遗留系统+高稳定性要求；adoption 中等，rework 中等）
+    # 8) Telecom/Carrier (large legacy systems + high stability requirements; medium adoption, medium rework)
     T["telecom"] = Scenario(
         engineer=role(1000, 220_000, 0.55, 0.45, (-0.03, 0.13, 0.26)),
         qa=role(220, 190_000, 0.52, 0.42, (-0.03, 0.11, 0.24)),

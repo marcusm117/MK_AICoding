@@ -12,7 +12,7 @@
 \textbf{Part I: Market Landscape}
 \begin{itemize}\tightlist
   \item Market 1: Foundation Models for Software Engineering
-  \item Market 2: General IDEs/CLIs/Coding Agents
+  \item Market 2: General IDEs/Extensions/CLI Agents for Software Engineering
   \item Market 3: Specialized Agents/Tools for Software Engineering
   \item Market 4: Vibe Coding Tools
 \end{itemize}
@@ -29,7 +29,7 @@
 % PART I: CURRENT MARKET LANDSCAPE
 % =============================================================================
 
-\part{Market Landscape}
+\subsection{Market Landscape Overview}
 
 \begin{frame}{Part I: Market Landscape Overview}
 \justifying
@@ -55,26 +55,20 @@
 \justifying
 \small
 
-\textbf{Market 1: Foundation Models} — Frontier closed-source models (Claude Opus 4.5, GPT-5.2, Gemini 3 Pro) lead on SWE-bench Verified ($\sim$75--81\%), but real-world transfer (SWE-bench Pro) drops to $\sim$45\%. Open-weight models lag $\sim$15--20pt but offer deployment flexibility.
+\textbf{Market 1: Foundation Models} --- Top 3 proprietary models (Claude, GPT, Gemini) score \textcolor{red}{71.8--74.4\%} on SWE-Bench Verified, creating an \textcolor{red}{8.4-point capability gap} vs open-weight (55--63\%) that widens to \textcolor{red}{22+ points} on agentic benchmarks like Terminal-Bench 2.0. Performance degradation on SWE-Bench Pro reveals generalization weakness: Claude drops \textcolor{red}{-38.3\%}, indicating reliance on memorized GitHub patterns.
 
-\vspace{6pt}
-\textbf{Market 2: IDE/CLI/Agents} — Cursor, Windsurf, and Claude Code dominate developer mindshare. Key differentiator: multi-model routing + context management. GitHub Copilot faces disruption from agentic competitors.
+\vspace{5pt}
+\textbf{Market 2: IDE/CLI/Agents} --- \textcolor{red}{Distribution dominates capability}: VS Code/Visual Studio (\textcolor{red}{50M developers}) dwarfs AI-natives (Cursor \textasciitilde1M, Windsurf \textasciitilde800k, TRAE >1M). GitHub Copilot's \textcolor{red}{64.2M installs} exceeds competitors by >20x, but multi-model adoption signals commoditization. Claude Code CLI leads at \textcolor{red}{6.25M weekly downloads} (12x Codex), with MCP creating network effects beyond model performance.
 
-\vspace{6pt}
-\textbf{Market 3: Specialized SE Tools} — Fragmented market with point solutions for testing (Codium), code review (CodeRabbit), and DevOps. Early consolidation signals as IDE vendors add specialized features.
+\vspace{5pt}
+\textbf{Market 3: Specialized Tools} --- 6 sub-markets with combined TAM of \textcolor{red}{\$68--127B}. Security (\$33.7B $\rightarrow$ \$55B by 2029) and DevOps have \textbf{strongest moats}; Code Review \textbf{most vulnerable} to commoditization. M\&A accelerating: \textcolor{red}{39\% increase in 2025} to \$4.3T globally.
 
-\vspace{6pt}
-\textbf{Market 4: Vibe Coding} — Emerging category led by Bolt, Lovable, and v0. Enables non-developers to ship production apps. Growth constrained by complexity ceiling and maintenance challenges.
-
-\vspace{6pt}
-\textit{Cross-cutting trend: Vertical integration (model $\rightarrow$ tool $\rightarrow$ platform) accelerating across all markets.}
+\vspace{5pt}
+\textbf{Market 4: Vibe Coding} --- Consumer-style velocity: Lovable \textcolor{red}{>\$200M ARR}, Retool \textasciitilde\$120M, Replit \textasciitilde\$106M. Two winner profiles emerge: high-ARPPU prosumer (Lovable \textasciitilde\$1,111/year) vs high-volume consumer (Bolt 5M users at \textasciitilde\$8 ARPU). \textbf{Reality check:} \textcolor{red}{80--90\%} prototypes, not production; TAM ceiling \textcolor{red}{\$5--15B}.
 \end{frame}
 
-% =============================================================================
-% PART II: RESEARCH QUESTIONS
-% =============================================================================
 
-\part{Research Questions}
+\subsection{Research Questions Overview}
 
 % -----------------------------------------------------------------------------
 % RQ1: Economic Impact
@@ -101,13 +95,13 @@
 \justifying
 \small
 \begin{itemize}
-  \item \textbf{RQ1.1 Big Tech:} Productivity gains of \textcolor{red}{15--30\%} are projected to generate \textcolor{red}{\$50--100B} in annual savings across FAANG+ by 2028, with engineer-to-PM ratios shifting from 8:1 to approximately 5:1 as AI augments individual developer output.
+  \item \textbf{RQ1.1 Big Tech:} Per 10,000-engineer org at \$320K fully-loaded: Conservative \textcolor{red}{\$50--80M/year} (2--3\% capacity gain); Optimistic \textcolor{red}{\$250--300M/year} (8--9\% gain). Engineer:PM ratio shifts from 8:1 $\rightarrow$ \textcolor{red}{5--6:1}. Expect \textcolor{red}{>70\%} Big Tech penetration by 2027.
 
-  \item \textbf{RQ1.2 Traditional Industries:} Financial services IT departments anticipate 10--20\% cost reductions (\$20--40B globally), while semiconductor/EDA sectors face limited near-term impact (5--10\%) due to proprietary codebase complexity and domain-specific toolchains.
+  \item \textbf{RQ1.2 Traditional Industries:} Finance (5K eng): \textcolor{red}{\$12--75M/year} but NIST compliance adds 15--20\% overhead. Semiconductor: \textcolor{red}{\$8--15M/year} with \textcolor{red}{high downside risk} (P10: -\$3M)---proprietary HDL limits exposure. Healthcare/Government: near breakeven due to HIPAA/air-gap constraints.
 
-  \item \textbf{RQ1.3 Startups/VC:} MVP development timelines are compressing from \textcolor{red}{12 weeks to 3--4 weeks}, enabling 2-person teams to deliver output previously requiring 8--10 engineers, with VCs funding 20--30\% smaller teams at equivalent valuations.
+  \item \textbf{RQ1.3 Startups/VC:} MVP timelines: \textcolor{red}{12 weeks $\rightarrow$ 3--4 weeks}. Minimum viable team: \textcolor{red}{8--12 $\rightarrow$ 2--4 engineers}. \textbf{Catch:} Lower barriers = more competitors = \textcolor{red}{margin compression}. Defensibility shifts from ``we built it'' to distribution/data/network effects.
 
-  \item \textbf{RQ1.4--1.6 Labor \& Macro:} Net job growth remains likely (demand elasticity $>$ displacement), though junior roles face highest risk while architect/ML positions remain insulated. Macro impact: \textcolor{red}{0.2--0.5\% GDP contribution}. Key risks include security vulnerabilities, IP litigation, and vendor concentration.
+  \item \textbf{RQ1.4--1.6 Labor \& Macro:} BLS 25\% growth $\rightarrow$ likely \textcolor{red}{10--15\%} with AI. \textbf{High risk:} junior devs, manual QA. \textbf{Low risk:} architects, ML, security. Macro: \textcolor{red}{0.08--0.45\% GDP boost}---meaningful but not transformative. \textbf{DORA 2024 paradox:} AI adoption correlates with \textcolor{red}{worse} throughput (-1.5\%) and stability (-7.2\%) at org level.
 \end{itemize}
 \end{frame}
 
@@ -136,12 +130,14 @@
 \justifying
 \small
 \begin{itemize}
-  \item \textbf{RQ2.1 Intra-Market Consolidation:} M1 consolidates to \textcolor{red}{3--4 frontier providers} + open-weight tier; M2 reduces to 2--3 dominant IDEs; M3 sees \textcolor{red}{60\%+ acquired}; M4 remains fragmented with niche positioning.
+  \item \textbf{RQ2.1 Market Structure by 2030:} M1 $\rightarrow$ \textcolor{red}{3+2 oligopoly} (3 frontier + Western open + Chinese); \$100M+ training cost creates natural oligopoly. M2 $\rightarrow$ \textcolor{red}{2--3 dominant IDEs}; 60--70\% acquired/shut. M3 $\rightarrow$ \textcolor{red}{60\%+ absorbed}; Security (25\% consolidated) survives, Code Review (80\%) doesn't. M4 $\rightarrow$ \textcolor{red}{\$5--15B TAM}, not \$100B+ fantasy.
 
-  \item \textbf{RQ2.2 Inter-Market Dynamics:} Foundation model companies (\textbf{Anthropic}, \textbf{OpenAI}) are projected to capture \textcolor{red}{30--40\%} of M2 revenue via vertical integration, while IDE-native players like \textbf{Cursor} are unlikely to build competitive models---their moat is UX/distribution, not capability.
+  \item \textbf{RQ2.2--2.3 Key Players:} \textbf{Anthropic}---best vertical position (Terminal-Bench \textcolor{red}{57.8\%}, CLI \textcolor{red}{6.25M/week}, MCP lock-in); gap: IDE distribution (80x smaller than Copilot). \textbf{Microsoft}---50M MAU distribution but OpenAI dependency uncertain post-2030. \textbf{Cursor}---Tab model \textcolor{red}{28\% higher accept rate} but \textcolor{red}{12--18mo lead narrowing}; binary outcome: \$8--15B acquisition or 5M+ breakout. \textbf{Google}---5x context window, 3B Workspace users underutilized.
 
-  \item \textbf{RQ2.3--2.4 Key Players \& Moats:} \textbf{Microsoft} faces strategic inflection (post-OpenAI plan needed); \textbf{Anthropic} best positioned for vertical integration; \textbf{Google} underperforms its distribution assets. Moat durability: M1 (compute/data) $>$ M2 (UX/habit) $>$ M3 (domain expertise) $>$ M4 (community).
+  \item \textbf{RQ2.4 Moat Test (must pass 2+/4):} (1) Not replicable in 18--24mo? (2) Data flywheel? (3) Distribution chokepoint? (4) Governance lock-in? \textbf{Ranking:} \textcolor{red}{M1 (4/4) $>$ Security (3/4) $>$ M2 (2/4) $>$ M4 (0--1/4)}. Open-weight lacks production feedback---explaining persistent \textcolor{red}{22+ point Terminal-Bench gap}.
 
-  \item \textbf{RQ2.5--2.6 Opportunities \& Wildcards:} Emerging opportunities include AI-native dev paradigms and enterprise platforms. \textcolor{red}{Wildcard scenarios:} AGI-level coding, major security incidents, IP litigation waves, and China ecosystem decoupling.
+  \item \textbf{RQ2.5--2.6 Opportunities \& Wildcards:} Agent eval/policy (\textcolor{red}{\$2--5B}), observability (\textcolor{red}{\$1--3B}). \textbf{Wildcards:} Security incident (\textcolor{red}{40--60\%})---12--24mo slowdown if major; IP litigation (\textcolor{red}{20--35\%}); China decoupling (\textcolor{red}{50--70\%})---lose 20--30\% global TAM.
 \end{itemize}
 \end{frame}
+
+

@@ -1,7 +1,9 @@
 \beamer@sectionintoc {1}{Report Overview}{2}{0}{1}
-\beamer@sectionintoc {2}{Market 1: General Foundation Models for Coding}{9}{2}{2}
-\beamer@sectionintoc {3}{Market 2: General IDEs/CLIs/Coding Agents}{20}{2}{3}
-\beamer@sectionintoc {4}{Market 3: Specialized Agents/Tools for SE}{30}{2}{4}
-\beamer@sectionintoc {5}{Market 4: Vibe Coding Tools}{45}{2}{5}
-\beamer@sectionintoc {6}{RQ1: Economic Impact Analysis}{46}{2}{6}
-\beamer@sectionintoc {7}{RQ2: Competitive Dynamics Analysis}{52}{2}{7}
+\beamer@subsectionintoc {1}{1}{Market Landscape Overview}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Research Questions Overview}{5}{0}{1}
+\beamer@sectionintoc {2}{Market 1: General Foundation Models for Software Engineering}{9}{1}{2}
+\beamer@sectionintoc {3}{Market 2: General IDEs/Extensions/CLI Agents for Software Engineering}{20}{1}{3}
+\beamer@sectionintoc {4}{Market 3: Specialized Agents/Tools for Software Engineering}{30}{1}{4}
+\beamer@sectionintoc {5}{Market 4: Vibe Coding Tools}{46}{1}{5}
+\beamer@sectionintoc {6}{RQ1: Economic Impact Analysis}{57}{2}{6}
+\beamer@sectionintoc {7}{RQ2: Competitive Dynamics Analysis}{75}{2}{7}

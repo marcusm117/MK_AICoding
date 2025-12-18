@@ -10,11 +10,12 @@
 \begin{itemize}
   \item \textbf{Research Object:} Natural language-to-application platforms enabling non-programmers to build functional software---``vibe coding'' tools that abstract away traditional development workflows.
 
-  \item \textbf{Key Players:}
+  \item \textbf{Key Players (4 Sub-Categories):}
   \begin{enumerate}
-    \item \textbf{Web App Builders:} Bolt, Lovable, v0 (Vercel), Create.xyz.
-    \item \textbf{Full-Stack Platforms:} Replit Agent, Glide, Softr.
-    \item \textbf{Enterprise/Internal Tools:} Retool AI, Airplane, Superblocks.
+    \item \textbf{Web App Builders:} Lovable, Bolt.new, Vercel v0, Base44 (Wix), Rocket.new, Create.xyz.
+    \item \textbf{Full-Stack Platforms:} Replit Agent, Bubble, FlutterFlow, Glide, Softr.
+    \item \textbf{Enterprise/Internal Tools:} Microsoft Power Platform, Retool, n8n, Superblocks, Airplane (Airtable).
+    \item \textbf{Mobile-First Vibe Coding:} LingGuang (Ant), Vibecode, v0 Mobile, Instance, Vibe Studio.
   \end{enumerate}
 
   \item \textbf{Core Capability Assessment:} Four capabilities define the vibe coding value chain:
@@ -28,9 +29,101 @@
 \end{frame}
 
 % -----------------------------------------------------------------------------
-% Additional M4 content to be added
+% Market 4 Tables (4 Sub-Categories)
 % -----------------------------------------------------------------------------
 
-% \begin{frame}{Market 4: Player Comparison}
-% \input{Tables/P1M4-players.tex}
-% \end{frame}
+\begin{frame}{Market 4.1: Web App Builders}
+\input{Tables/P1M4-webapp.tex}
+\end{frame}
+
+\begin{frame}{Market 4.2: Full-Stack Platforms}
+\input{Tables/P1M4-fullstack.tex}
+\end{frame}
+
+\begin{frame}{Market 4.3: Enterprise / Internal Tools}
+\input{Tables/P1M4-enterprise.tex}
+\end{frame}
+
+\begin{frame}{Market 4.4: Mobile-First Vibe Coding}
+\input{Tables/P1M4-mobile.tex}
+\end{frame}
+
+% =============================================================================
+% Analysis Slides (4 Sub-Categories)
+% =============================================================================
+
+\begin{frame}{Market 4.1: Web App Builders---Analysis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Revenue Velocity is Real, Not Hype:} \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable} doubling from \$100M to \textcolor{red}{>\$200M ARR} in \textasciitilde4 months is an extreme outlier growth curve. \citelink{https://www.wix.com/press-room/home/post/wix-reports-third-quarter-2025-results}{Base44} (Wix) at \textcolor{red}{\$50M ARR track} with \textcolor{red}{1k+ new paying subs/day}. \citelink{https://www.businessinsider.com/stackblitz-bolt-silicon-valley-hottest-ai-coding-startup-nearly-died-2025-5}{Bolt} reached \textcolor{red}{\$40M ARR} with \textcolor{red}{5M users}. This is consumer-style growth, not devtool growth.
+
+  \item \textbf{Beyond Prototypes---``Production'' is the Battleground:} \citelink{https://techcrunch.com/2025/09/22/rocket-new-one-of-indias-first-vibe-coding-startups-snags-15m-from-accel-salesforce-ventures/}{Rocket.new} explicitly markets ``production-ready apps,'' not quick demos (\$4.5M ARR). \citelink{https://www.gic.com.sg/uploads/2025/10/Vercel-Closes-Series-F-at-9.3B-Valuation-to-Scale-the-AI-Cloud.pdf}{v0's} Teams \& Enterprise share (\textcolor{red}{>50\% of v0 revenue}) signals that deploy/security/SSO pipelines decide adoption when stakes rise. \citelink{https://www.netlify.com/press/bolt-netlify-1-million-ai-generated-websites/}{Bolt + Netlify} deployed \textcolor{red}{1M AI-generated websites}.
+
+  \item \textbf{Moat = Product Systems, Not LLM:} Users don't buy ``Claude vs GPT''---they buy intent expansion, iterative editing, guardrails, and deployment that doesn't break. Bolt's browser runtime + WebContainers is a product-systems moat that survives model swaps. \textbf{Key risk:} QA, security, and maintainability costs rise superlinearly when users shift from ``demo'' to ``real workflows.''
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Market 4.2: Full-Stack Platforms---Analysis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Full-Stack Ownership Converts to Durable Revenue:} \citelink{https://sacra.com/research/replit-at-106m-arr/}{Replit's} \textcolor{red}{\textasciitilde\$106M ARR} (Jun 2025 per Sacra) is widely attributed to vibe-coding demand---hosting/DB/auth become switching costs. ``Prompt to code snippet'' converts worse than ``prompt to running app'' because full-stack platforms keep state, data, auth, deployments, logs.
+
+  \item \textbf{Incumbents Have Real, Compounding Ecosystems:} \citelink{https://research.contrary.com/company/bubble}{Bubble} generated \textcolor{red}{\$74.2M revenue} (2024) with \textcolor{red}{4.7M apps built} and \textcolor{red}{>5B page views annually}. \citelink{https://aeo.sig.ai/brands/flutterflow}{FlutterFlow} reached \textcolor{red}{\textasciitilde\$30M revenue} with 830k users. AI boosts build speed but also increases ``ops/maintenance'' expectations---the bottleneck shifts from ``can I build it?'' to ``can I operate it?''
+
+  \item \textbf{Winner Profile---Maintainable Artifacts:} Platforms that turn agent output into maintainable artifacts (code, schema, tests) with clean rollback + observability will win. The \textit{nth} iteration is dramatically cheaper on full-stack platforms than for web builders that export code and lose the loop. \textbf{Prediction:} web builders race ``up'' into runtime ownership; platforms race ``down'' into ``one prompt $\rightarrow$ app'' onboarding.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Market 4.3: Enterprise / Internal Tools---Analysis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Enterprise Traction at Meaningful Scale:} \citelink{https://sacra.com/c/retool/}{Retool} estimated at \textcolor{red}{\textasciitilde\$120M ARR} (Oct 2025 per Sacra) post AppGen/Agents launch. \citelink{https://www.crn.com/news/ai/2025/nvidia-backed-ai-startup-n8n-raises-180m-hits-2-5b-valuation}{n8n} disclosed \textcolor{red}{>\$40M ARR} and \textcolor{red}{230k active users}. \citelink{https://www.microsoft.com/en-us/power-platform/blog/power-apps/microsoft-is-a-leader-in-2025-forrester-wave-low-code-platforms-for-professional-developers/}{Power Platform} reports \textcolor{red}{56M MAU}---``citizen + pro dev'' toolchains are already mainstream.
+
+  \item \textbf{Governance + Connectors = Structural Defensibility:} Data connectors, RBAC, audit logs, on-prem/VPC, compliance, and workflow integration---\textbf{not LLM quality}---drive procurement. \citelink{https://www.microsoft.com/en-us/power-platform/blog/2024/09/09/millions-of-hours-saved-50-faster-app-development-and-206-roi-achieved-with-microsoft-power-apps-premium/}{Microsoft} anchors value in Forrester TEI: \textcolor{red}{50\% faster development}, \textcolor{red}{206\% ROI}. AI-native startups cannot easily replicate years of connector development and compliance certifications.
+
+  \item \textbf{Implication for Broader Thesis:} If ``vibe coding'' expands into real business workflows, the enterprise/internal-tools play is the natural monetization endpoint (higher ACV, lower churn). n8n's ``AI + code + humans'' orchestration thesis shows workflow automation is merging with vibe coding---enterprises buy end-to-end automation, not ``apps'' in isolation. n8n raised \$180M at \$2.5B valuation (Nvidia-backed).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Market 4.4: Mobile-First Vibe Coding---Analysis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Western Mobile Vibe-Coding Shows Weak Adoption So Far:} \citelink{https://techcrunch.com/2025/09/23/dedicated-mobile-apps-for-vibe-coding-have-so-far-failed-to-gain-traction/}{TechCrunch/Appfigures} analysis: \textcolor{red}{16k downloads} and \textcolor{red}{\textasciitilde\$1k consumer spend} for the largest tracked app (Instance). \citelink{https://www.businessinsider.com/vibe-coding-startup-vibecode-helps-build-apps-on-iphone-fundraise-2025-8}{Vibecode} is an exception: \textcolor{red}{40k+ apps created}, App Store \#12 in Dev Tools, multi-model, \$20--\$200/mo pricing---it raised \$9.4M seed from Alexis Ohanian's fund.
+
+  \item \textbf{But Mobile Can Explode Under Right Distribution:} \citelink{https://www.businessinsider.com/chinese-vibe-coding-app-lingguang-ant-group-china-viral-2025-11}{Ant Group's LingGuang} hit \textcolor{red}{\textasciitilde1M downloads in 4 days} and \textcolor{red}{>2M shortly after}---viral growth caused feature outages. This outlier proves ``mobile can work'' at consumer scale, at least in China app ecosystems. \citelink{https://www.gic.com.sg/uploads/2025/10/Vercel-Closes-Series-F-at-9.3B-Valuation-to-Scale-the-AI-Cloud.pdf}{v0 Mobile} has \textcolor{red}{10k+ waitlist} with voice + camera capture thesis.
+
+  \item \textbf{Mobile = Capture Surface, Not Build Surface:} Vercel's framing is directionally correct: mobile is for \textbf{voice/camera capture + async handoff}, not multi-hour engineering sessions. Serious software requires deep debugging, repo context, multi-file reasoning. Mobile-first winners route users into desktop/cloud for heavy lifting. \textbf{Net:} mobile-first is a \textbf{distribution wedge}, not a separate universe.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Cross-Category Synthesis & Outlook
+% =============================================================================
+
+\begin{frame}{Market 4: Cross-Category Synthesis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Traction Ladder Reveals Clear Hierarchy:} Ranked by ARR: \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable} (\textcolor{red}{>\$200M}) $>$ \citelink{https://sacra.com/c/retool/}{Retool} (\textcolor{red}{\textasciitilde\$120M}) $>$ \citelink{https://sacra.com/research/replit-at-106m-arr/}{Replit} (\textcolor{red}{\textasciitilde\$106M}) $>$ \citelink{https://research.contrary.com/company/bubble}{Bubble} (\textcolor{red}{\$74M}) $>$ \citelink{https://www.wix.com/press-room/home/post/wix-reports-third-quarter-2025-results}{Base44} (\textcolor{red}{\$50M track}) $>$ \citelink{https://www.crn.com/news/ai/2025/nvidia-backed-ai-startup-n8n-raises-180m-hits-2-5b-valuation}{n8n}/\citelink{https://www.businessinsider.com/stackblitz-bolt-silicon-valley-hottest-ai-coding-startup-nearly-died-2025-5}{Bolt} (\textcolor{red}{\textasciitilde\$40M each}). Web app builders (Lovable, Base44, Bolt) show \textbf{consumer-style velocity}; enterprise tools (Retool, n8n) show \textbf{durable, high-ACV growth}. Full-stack platforms (Replit, Bubble) occupy the middle with ecosystem lock-in as their primary moat.
+
+  \item \textbf{Unit Economics Fingerprints Diverge Sharply:} \citelink{https://www.businessinsider.com/stackblitz-bolt-silicon-valley-hottest-ai-coding-startup-nearly-died-2025-5}{Bolt}: \$40M ARR / 5M users = \textcolor{red}{\textasciitilde\$8 ARPU/user-year}---wide funnel, low monetization. \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable}: \$200M ARR / \textasciitilde180k paying users = \textcolor{red}{\textasciitilde\$1,111 ARPPU/paying-year}---narrow funnel, high monetization. \citelink{https://sacra.com/research/replit-at-106m-arr/}{Replit} reportedly runs at \textcolor{red}{\textasciitilde23\% gross margin}---compute-heavy model strains unit economics. These divergent fingerprints imply \textbf{two distinct winner profiles}: (1) high-volume/low-ARPU consumer plays and (2) high-ARPPU prosumer/enterprise plays.
+
+  \item \textbf{Moats Vary by Category---LLM Quality is Not a Moat:} Web builders: \textbf{runtime/WebContainers} (Bolt), \textbf{Wix distribution} (Base44). Full-stack: \textbf{state/auth/deployment lock-in} (Replit, Bubble). Enterprise: \textbf{connectors, compliance, RBAC, audit logs} (Retool, n8n, Power Platform). Mobile: \textbf{distribution wedge} (LingGuang via Ant ecosystem). Users don't buy ``Claude vs GPT''---they buy intent expansion, iterative editing, and deployment that doesn't break. The \textbf{hidden ``fifth market''} is AppGen infrastructure: vector stores, eval pipelines, and fine-tuning platforms that power these tools.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Market 4: 6--12 Month Outlook}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Growth Targets Face Arithmetic Reality:} \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable's} \$1B ARR target (12 months) requires \textcolor{red}{\$66.7M net-new ARR/month}---that's \textcolor{red}{8.3$\times$} their current \textasciitilde\$8M/month run rate. Even at 50\% monthly compound growth, they'd need 6+ months of sustained hypergrowth. \citelink{https://sacra.com/research/replit-at-106m-arr/}{Replit's} \$1B by 2026 target from \textasciitilde\$106M (Jun 2025) requires \textcolor{red}{\textasciitilde13--14\% monthly compound} for 18 months---ambitious but more plausible than Lovable's trajectory. \textbf{Prediction:} Lovable likely misses \$1B but may hit \textcolor{red}{\$400--600M ARR} (still exceptional).
+
+  \item \textbf{Two ``Winners' Lanes'' Will Coexist:} \textbf{Lane 1 (Prosumer $\rightarrow$ Enterprise):} v0's \textcolor{red}{>50\% revenue from Teams/Enterprise} per \citelink{https://www.gic.com.sg/uploads/2025/10/Vercel-Closes-Series-F-at-9.3B-Valuation-to-Scale-the-AI-Cloud.pdf}{GIC filing} signals that deploy/security/SSO pipelines decide adoption when stakes rise. Retool, n8n, and Power Platform already own this lane. Web builders (Lovable, Bolt) must race ``up'' into governance/compliance or get commoditized. \textbf{Lane 2 (Consumer Mass-Market):} Bolt's 5M users and LingGuang's 2M downloads prove consumer scale is achievable. Winners here need \textbf{viral loops + low-friction onboarding}---but face \textcolor{red}{low ARPU (\textasciitilde\$8/user)} and potential churn as novelty fades.
+
+  \item \textbf{What Would Falsify ``Mostly Prototyping'' Thesis:} If \citelink{https://www.netlify.com/press/bolt-netlify-1-million-ai-generated-websites/}{Bolt + Netlify's 1M deployed sites} show sustained traffic/usage (not one-time deploys), that's evidence of production adoption. If v0's enterprise share continues growing past 50\%, that's evidence of real business workflows. If \citelink{https://www.microsoft.com/en-us/power-platform/blog/2024/09/09/millions-of-hours-saved-50-faster-app-development-and-206-roi-achieved-with-microsoft-power-apps-premium/}{Power Platform's} Forrester TEI metrics (\textcolor{red}{50\% faster dev}, \textcolor{red}{206\% ROI}) replicate in AI-native tools, that's evidence of enterprise value creation. 
+\end{itemize}
+\end{frame}

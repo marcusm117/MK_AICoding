@@ -7,26 +7,22 @@
 
 \begin{frame}{RQ2: Methodology}
   \justifying
-  \textbf{Approach:} Current state analysis $\rightarrow$ Trend extrapolation $\rightarrow$ Scenario planning
-  
-  \vspace{6pt}
-  \textbf{Analysis Framework:}
+  \small
+  \textbf{Core Thesis:} The AI-coding stack is now a \textbf{value-chain competition} (Model $\rightarrow$ Agent runtime $\rightarrow$ IDE/UI $\rightarrow$ Enterprise governance $\rightarrow$ Cloud billing). Winners capture value where \textbf{(a) switching costs} and \textbf{(b) data flywheels} are strongest.
+
+  \vspace{4pt}
+  \textbf{Evidence Anchors (Hard Constraints):}
   \begin{itemize}\tightlist
-    \item Porter's Five Forces for each market
-    \item Value chain analysis (model $\rightarrow$ tool $\rightarrow$ platform)
-    \item Moat durability assessment
-    \item M\&A activity prediction
+    \item \citelink{https://devblogs.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{IDE distribution is massive:} VS Code/Visual Studio = \textbf{50M MAU}; \citelink{https://www.jetbrains.com/lp/annualreport-2024/}{JetBrains = 11.4M users}
+    \item \citelink{https://scaleapi.github.io/SWE-bench_Pro-os/}{Agentic coding ceiling not close to 100\%:} SWE-Bench Pro leader = \textbf{43.72\%}
+    \item \citelink{https://developers.googleblog.com/en/build-with-google-antigravity-our-new-agentic-development-platform/}{Model optionality emerging:} Antigravity = multi-model IDE (Gemini + Claude + GPT-OSS, free)
+    \item \citelink{https://www.investing.com/news/stock-market-news/openai-plans-to-slash-revenue-share-to-microsoft-the-information-reports-4026862}{Microsoft-OpenAI economics time-bounded:} 20\% revenue share through 2030
+    \item \citelink{https://security.snyk.io/package/npm/\%40anthropic-ai\%2Fclaude-code}{CLI traction as agent runtime wedge:} Claude Code = \textbf{\textasciitilde6.3M weekly downloads}
+    \item \citelink{https://github.blog/news-insights/product-news/github-copilot-agent-mode-activated/}{MCP spreading:} Copilot agent mode + JetBrains Junie = protocol-level moat attempt
   \end{itemize}
-  
-  \vspace{6pt}
-  \textbf{Key Player Analysis:}
-  \begin{enumerate}\tightlist
-    \item Current market position
-    \item Strategic assets and liabilities
-    \item Likely moves (organic growth, M\&A, partnerships)
-    \item 5-year trajectory scenarios
-  \end{enumerate}
-  \mynote{Placeholder — detailed analysis to be added.}
+
+  \vspace{4pt}
+  \textbf{Forecast Method:} Scenario planning (Base/Bull/Bear) + \textbf{4-Question Moat Durability Test}: (1) Can rival replicate in 18--24mo? (2) Does usage create proprietary data? (3) Distribution chokepoint? (4) Governance lock-in?
 \end{frame}
 
 \begin{frame}{RQ2.1: Intra-Market Dynamics (5-Year View)}
@@ -35,19 +31,71 @@
   \begin{itemize}\tightlist
     \item \textbf{RQ2.1.1 (Market 1):} Foundation model market structure by 2030? \\
     \textit{Oligopoly (3-4 players) or fragmented? Will open-weight close the gap?}
-  
+
     \item \textbf{RQ2.1.2 (Market 2):} IDE/CLI/Agent consolidation? \\
     \textit{Will Cursor/Windsurf/Claude Code consolidate? Or will incumbents (VS Code, JetBrains) catch up?}
-  
+
     \item \textbf{RQ2.1.3 (Market 3):} Specialized tools — acquired or independent? \\
     \textit{Which niches survive vs. get absorbed by IDE vendors or foundation model cos?}
-  
+
     \item \textbf{RQ2.1.4 (Market 4):} Vibe coding — mainstream or niche? \\
     \textit{TAM ceiling: how many non-developers will actually build production software?}
   \end{itemize}
-  
+
   \vspace{4pt}
   \textit{Quantify: Market share projections, \# of viable players, expected M\&A.}
+\end{frame}
+
+% =============================================================================
+% RQ2.1 Detailed Analysis Slides
+% =============================================================================
+
+\begin{frame}{RQ2.1.1 Analysis: Foundation Model Market Structure by 2030}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Oligopoly Prediction (3+2 Structure):} By 2030, the foundation model market will consolidate into a \textcolor{red}{``3+2'' structure}: three frontier proprietary providers (\textbf{Anthropic}, \textbf{OpenAI}, \textbf{Google}) controlling \textcolor{red}{60--80\%} of enterprise API revenue, plus two open/semi-open tiers: (1) \textbf{Western open-weight} (Llama, Mistral) for enterprise cost optimization; (2) \textbf{Chinese ecosystem} (DeepSeek, Qwen, Kimi) for sovereignty-constrained deployments. Even the best scaffolded agents remain \textcolor{red}{<50\% on SWE-Bench Pro} (\citelink{https://scaleapi.github.io/SWE-bench_Pro-os/}{leader at 43.72\%})---massive headroom for frontier providers means the ``intelligence premium'' persists.
+
+  \item \textbf{Why Not Fragmentation:} The \textcolor{red}{\$100M+ compute cost} per frontier training run creates natural oligopoly dynamics---only 5--7 organizations globally can sustain this investment. \citelink{https://www.anthropic.com/news/anthropic-series-d}{Anthropic's \$4B Series D}, \citelink{https://openai.com/index/openai-and-softbank/}{OpenAI's \$40B round}, and Google's DeepMind integration demonstrate capital concentration. Mid-tier players (Mistral, Cohere, AI21) will specialize or get acquired---the ``general-purpose frontier'' cannot sustain 10+ competitors.
+
+  \item \textbf{Open-Weight Trajectory:} Open-weight captures \textcolor{red}{20--40\%} of deployments by volume (not revenue) by 2030, winning where \textbf{constraints dominate}: (1) on-prem/sovereign requirements; (2) cost ceilings; (3) customizable scaffolds. However, open-weight remains \textcolor{red}{structurally disadvantaged} in long-horizon agentic reliability---the RLHF feedback loop (production tool calls $\rightarrow$ training signal $\rightarrow$ better execution) favors API providers with millions of daily interactions. The \textcolor{red}{22+ point Terminal-Bench gap} in agentic execution will persist longer than code generation gaps.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.1.2 Analysis: IDE/CLI/Agent Consolidation by 2030}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Consolidation Prediction (2--3 Dominant Players):} The current fragmented landscape (\citelink{https://cursor.com}{Cursor} \textasciitilde1M, \citelink{https://windsurf.com}{Windsurf} \textasciitilde800k, \citelink{https://www.trae.ai/}{TRAE} >1M) will consolidate to \textcolor{red}{2--3 dominant AI-native IDEs} by 2028, with \textcolor{red}{60--70\%} of remaining players acquired or shut down. The market cannot sustain 5+ AI-native IDEs because: (1) development costs are high (proprietary tab models, context engines); (2) user acquisition is expensive; (3) switching costs are low until ecosystem lock-in is achieved. Expect \textcolor{red}{2--3 acquisitions within 18 months}.
+
+  \item \textbf{Incumbent Catch-Up is Real but Slow:} \citelink{https://developer.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{VS Code's 50M MAU} and \citelink{https://www.jetbrains.com/lp/annualreport-2024/}{JetBrains' 11.4M users} represent massive distribution advantages, but AI-native challengers have \textcolor{red}{12--18 month UX leads}. \citelink{https://cursor.com/blog/tab-rl}{Cursor's Tab model} achieves \textcolor{red}{28\% higher accept rate}---this gap will narrow as incumbents invest, but won't close completely because AI-native IDEs can iterate faster without legacy constraints. By 2030, expect a \textbf{bifurcated market}: incumbents dominate enterprise/regulated sectors (compliance, audit trails); AI-natives dominate startups and individual developers.
+
+  \item \textbf{CLI Becomes Cross-Surface Identity:} The CLI category will evolve from ``standalone terminal tools'' to \textbf{unified agent identity across surfaces}. \citelink{https://www.npmjs.com/package/\%40anthropic-ai/claude-code}{Claude Code's 6.25M weekly npm downloads} (12x Codex, 20x Gemini CLI) establishes Anthropic's terminal dominance, but \citelink{https://openai.com/codex/}{OpenAI's Codex positioning} as cross-surface (terminal/IDE/cloud) signals the category boundary is dissolving. By 2030, ``CLI agent'' and ``IDE agent'' will merge into \textbf{``developer agent''} that persists across contexts---the winner owns the agent identity, not the surface.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.1.3 Analysis: Specialized Tools---Acquisition vs Independence}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Acquisition Prediction (\textcolor{red}{60\%+ Acquired by 2030}):} The 2025 M\&A pattern is clear: \citelink{https://www.reuters.com/legal/transactional/openai-acquire-product-testing-startup-statsig-appoints-cto-applications-2025-09-02/}{OpenAI $\rightarrow$ Statsig}, \citelink{https://devops.com/harness-acquires-qwiet-ai-to-gain-code-testing-tool/}{Harness $\rightarrow$ Qwiet AI}, \citelink{https://checkmarx.com/press-releases/checkmarx-acquires-tromzo-to-launch-new-era-of-application-security/}{Checkmarx $\rightarrow$ Tromzo}, \citelink{https://news.nus.edu.sg/nus-spinoff-tech-autocoderover-acquired-by-sonar/}{Sonar $\rightarrow$ AutoCodeRover}. With \citelink{https://www.reuters.com/technology/us-software-firm-freshworks-eyes-acquisitions-with-800-million-cash-pile-ai-2025-12-17/}{global M\&A up 39\% to \$4.3T in 2025}, expect \textcolor{red}{60\%+ of Market 3 point solutions} to be acquired by 2030. Acquirers: DevOps platforms (Harness, GitLab), security incumbents (Checkmarx, Snyk), foundation model companies (OpenAI, Anthropic), and cloud providers (AWS, Azure, GCP).
+
+  \item \textbf{Which Niches Survive Independent:} Three characteristics predict independence: (1) \textbf{TAM > \$10B} with room for multiple winners (Security at \$33--55B, DevOps at \$16--43B); (2) \textbf{hard technical moats} that general agents cannot replicate (device farms, vulnerability databases, compliance certifications); (3) \textbf{workflow centrality} where the tool is the system of record (API governance, infrastructure state). 
+
+  \item \textbf{Sub-Market Specific Predictions:} \textbf{Documentation} (\$2--4B): \textcolor{red}{70\% consolidated}---survivors must own provenance/retrieval (Mintlify acquired Trieve). \textbf{Testing} (\$8--12B): \textcolor{red}{40\% consolidated}---infrastructure moats (BrowserStack, Applitools) survive; test generation commoditized. \textbf{Code Review} (\$3--5B): \textcolor{red}{80\% consolidated}---most vulnerable to IDE integration; \citelink{https://techcrunch.com/2025/09/16/coderabbit-raises-60m-valuing-the-2-year-old-ai-code-review-startup-at-550m/}{CodeRabbit's \$550M valuation} makes it acquisition target. \textbf{DevOps} (\$16--43B): \textcolor{red}{30\% consolidated}---largest TAM supports multiple independents. \textbf{Security} (\$33--55B): \textcolor{red}{25\% consolidated}---strongest moats, mandatory budgets, multiple unicorn-scale survivors.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.1.4 Analysis: Vibe Coding---Mainstream or Niche by 2030?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{TAM Ceiling Analysis:} The ``vibe coding'' addressable market is constrained by two factors: (1) \textbf{complexity ceiling}---AI can generate working code but struggles with architecture, security, and maintainability at scale; (2) \textbf{user capability ceiling}---non-developers can describe \textit{what} they want but cannot debug, optimize, or extend AI-generated code when it breaks. \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable's \$200M+ ARR} proves demand exists, but \textcolor{red}{80--90\% of usage is prototypes/demos}, not production systems. Realistic TAM by 2030: \textcolor{red}{\$5--15B} (internal tools, MVPs, landing pages)---not the ``everyone becomes a developer'' fantasy of \$100B+.
+
+  \item \textbf{Two Winner Lanes Will Coexist:} \textbf{Lane 1 (Prosumer $\rightarrow$ Enterprise):} \citelink{https://www.gic.com.sg/uploads/2025/10/Vercel-Closes-Series-F-at-9.3B-Valuation-to-Scale-the-AI-Cloud.pdf}{v0's >50\% revenue from Teams/Enterprise} signals that governance (SSO, RBAC, audit logs) determines adoption when stakes rise. Winners: \citelink{https://sacra.com/c/retool/}{Retool} (\$120M ARR), \citelink{https://www.crn.com/news/ai/2025/nvidia-backed-ai-startup-n8n-raises-180m-hits-2-5b-valuation}{n8n} (\$40M+ ARR, \$2.5B valuation), \citelink{https://www.microsoft.com/en-us/power-platform/blog/power-apps/microsoft-is-a-leader-in-2025-forrester-wave-low-code-platforms-for-professional-developers/}{Power Platform} (56M MAU). \textbf{Lane 2 (Consumer Mass-Market):} \citelink{https://www.businessinsider.com/stackblitz-bolt-silicon-valley-hottest-ai-coding-startup-nearly-died-2025-5}{Bolt's 5M users at \textasciitilde\$8 ARPU} and \citelink{https://www.businessinsider.com/chinese-vibe-coding-app-lingguang-ant-group-china-viral-2025-11}{LingGuang's 2M downloads in days} prove consumer scale is achievable---but with \textcolor{red}{high churn and low monetization}.
+
+  \item \textbf{Mainstream Verdict: ``Mainstream for Specific Use Cases'':} By 2030, vibe coding will be \textbf{mainstream for}: internal tools, landing pages, MVPs, prototypes, and simple CRUD apps. It will remain \textbf{niche for}: production SaaS, complex systems, regulated industries, and anything requiring long-term maintenance. The \textcolor{red}{``maintenance cliff''} is the critical barrier---AI-generated code is easy to create but hard to modify without understanding.
+\end{itemize}
 \end{frame}
   
 \begin{frame}{RQ2.2: Inter-Market Competition}
@@ -67,6 +115,70 @@
   \textit{Or are they permanently constrained to low-complexity use cases?}
 
   \item \textbf{RQ2.2.5:} Vertical integration trajectory: Who can own model $\rightarrow$ tool $\rightarrow$ platform $\rightarrow$ cloud?
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% RQ2.2 Detailed Analysis Slides
+% =============================================================================
+
+\begin{frame}{RQ2.2.1 Analysis: Can Model Trainers Capture Markets 2--4?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Anthropic's Position (Strongest Vertical Integration Potential):} Anthropic has the \textbf{best foundation} for vertical capture: \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Claude leads Terminal-Bench} (57.8\%), \citelink{https://www.npmjs.com/package/\%40anthropic-ai/claude-code}{Claude Code dominates CLI} (6.25M weekly downloads, 12x Codex), and \citelink{https://modelcontextprotocol.io}{MCP adoption} across Copilot/Cursor/JetBrains creates ecosystem lock-in. However, Anthropic lacks IDE distribution---\citelink{https://marketplace.visualstudio.com/items?itemName=anthropics.claude-code}{Claude Code VS Code extension} (0.8M installs) trails \citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{Copilot} (64.2M) by \textcolor{red}{80x}. \textbf{Prediction:} Anthropic captures \textcolor{red}{30--40\%} of M2 CLI/agent revenue by 2028.
+
+  \item \textbf{OpenAI's Position (Cloud-First, Not Tool-First):} OpenAI's strategy emphasizes \citelink{https://openai.com/codex/}{Codex as cloud platform} rather than local tool dominance. \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Codex-Max achieves 60.4\%} on Terminal-Bench (beating Claude's 57.8\%), but \citelink{https://www.npmjs.com/package/\%40openai/codex}{Codex CLI downloads} (508k) are \textcolor{red}{12x smaller} than Claude Code. OpenAI's edge-case leadership (\citelink{https://scale.com/leaderboard/swe_bench_pro_public}{SWE-Bench Pro} 53.8\%, \citelink{https://arcprize.org/leaderboard}{ARC-AGI 2} 54.2\%) positions it for enterprise private codebases, not mass-market tools. \textbf{Prediction:} OpenAI captures \textcolor{red}{15--25\%} of M2 via enterprise cloud deployments, cedes consumer/prosumer to Anthropic.
+
+  \item \textbf{Google's Position (Distribution + Model Optionality):} Google has \textcolor{red}{unmatched distribution} (Workspace, Android, Cloud, Firebase) and is now positioning \citelink{https://developers.googleblog.com/en/build-with-google-antigravity-our-new-agentic-development-platform/}{Antigravity as multi-model IDE} supporting Gemini 3 Pro + Claude Sonnet 4.5 + GPT-OSS (free, rate-limited). Model choice becomes a feature inside the same IDE. \citelink{https://www.npmjs.com/package/\%40google/gemini-cli}{Gemini CLI} (310k downloads) trails Claude Code, but Antigravity's free multi-model positioning creates pricing pressure on paid IDEs.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.2.2 Analysis: Can IDE Companies Build Competitive Foundation Models?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Cursor's Model Strategy (Specialized, Not Frontier):} \citelink{https://cursor.com/blog/tab-rl}{Cursor trains proprietary Tab models} achieving \textcolor{red}{28\% higher accept rate} with \textcolor{red}{21\% fewer suggestions}---this is \textbf{task-specific optimization}, not frontier model development. The Tab model is trained for completion under tight latency constraints (200--400ms), not general reasoning. Cursor's moat is \textbf{UX + distribution + workflow integration}, not model capability. 
+
+  \item \textbf{Why IDE Companies Remain Model-Dependent:} The fundamental asymmetry: frontier models require \textcolor{red}{10,000+ H100 GPUs}, \textcolor{red}{\$1B+ annual compute budgets}, and \textcolor{red}{100+ research scientists}. IDE companies (Cursor, Windsurf, TRAE) have engineering-heavy teams optimizing UX and scaffolding. \citelink{https://windsurf.com/blog/swe-1-5}{Windsurf's SWE-1.5} and \citelink{https://skywork.ai/blog/vibecoding/doubao-seed-code-ai-coding-2025/}{TRAE's Doubao Seed Code} are workflow-specialized models, not general-purpose frontiers. IDE companies will continue fine-tuning open-weight bases (Qwen, Llama) for specific tasks while relying on Claude/GPT/Gemini for heavy reasoning.
+
+  \item \textbf{The ``Perpetual Dependency'' Verdict:} IDE companies face \textbf{perpetual dependency} on foundation model providers, but this is \textit{manageable} because: (1) multi-model support commoditizes any single provider; (2) model switching costs are low for users; (3) IDE moats (tab completion, context management) are orthogonal to model quality. \textbf{Risk scenario:} foundation model companies (Anthropic, OpenAI) vertically integrate into IDE layer, converting IDE companies from \textit{customers} to \textit{competitors}. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.2.3 Analysis: Can Specialized Tools Expand Horizontally?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Horizontal Expansion is Rare and Difficult:} History shows specialized tools \textit{rarely} become horizontal platforms. \citelink{https://www.sonarsource.com/}{SonarQube} (code quality, 7M developers) stayed in code quality despite 15+ years. \citelink{https://www.postman.com/}{Postman} (API testing, 30M developers) stayed in API workflows. \citelink{https://www.atlassian.com/software/jira}{Jira} (issue tracking) expanded to \textit{adjacent} workflows (Confluence, Bitbucket) but not to IDE. The pattern: \textbf{specialists expand to adjacent stages in the same workflow}, not to entirely different categories. CodeRabbit (code review) $\rightarrow$ IDE is a category jump, not adjacency expansion.
+
+  \item \textbf{Why CodeRabbit $\rightarrow$ IDE is Unlikely:} \citelink{https://techcrunch.com/2025/09/16/coderabbit-raises-60m-valuing-the-2-year-old-ai-code-review-startup-at-550m/}{CodeRabbit's \$550M valuation} is based on \textbf{review automation}, not editor ambitions. Building a competitive IDE requires: (1) \textcolor{red}{\$50M+ in editor development}; (2) competing with Cursor/Windsurf's 3-year head start; (3) abandoning review specialization that drives current growth. The rational strategy: deepen review moat (policy gates, compliance evidence, defect analytics) and get \textbf{acquired by an IDE vendor} for \$500M--1B. \textbf{Prediction:} CodeRabbit acquired by 2027, most likely by Cursor, Microsoft, or a DevOps platform.
+
+  \item \textbf{Viable Horizontal Expansions:} Three expansion paths are realistic: (1) \textbf{Testing $\rightarrow$ CI/CD} (\citelink{https://www.browserstack.com/}{BrowserStack}, \citelink{https://www.launchableinc.com/}{Launchable})---adjacent workflow, shared buyer; (2) \textbf{Security $\rightarrow$ Compliance} (\citelink{https://snyk.io/}{Snyk}, \citelink{https://socket.dev/}{Socket})---same budget owner, regulatory driver; (3) \textbf{DevOps $\rightarrow$ Platform Engineering} (\citelink{https://www.pulumi.com/}{Pulumi}, \citelink{https://www.getport.io/}{Port})---infrastructure abstraction layer. \textbf{Unrealistic:} any M3 player becoming a serious M2 (IDE) competitor---the category gap is too large.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.2.4 Analysis: Can Vibe Coding Tools Move Up-Market?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{``Up-Market'' Has Two Meanings:} (1) \textbf{Complexity up-market}: simple apps $\rightarrow$ complex systems. (2) \textbf{User up-market}: non-developers $\rightarrow$ professional developers. Vibe coding tools face fundamental constraints on \textit{both} dimensions. The complexity ceiling exists because AI-generated code lacks architecture, test coverage, and maintainability. The user ceiling exists because professional developers have \textit{different needs}: version control integration, debugging, refactoring, and codebase navigation that vibe tools don't prioritize.
+
+  \item \textbf{Evidence Against Up-Market Movement:} \citelink{https://techcrunch.com/2025/12/18/vibe-coding-startup-lovable-raises-330m-at-a-6-6b-valuation/}{Lovable} explicitly targets ``entrepreneurs and non-technical founders''---not professional devs. \citelink{https://www.businessinsider.com/stackblitz-bolt-silicon-valley-hottest-ai-coding-startup-nearly-died-2025-5}{Bolt's 5M users} are overwhelmingly prototyping, not building production systems. \citelink{https://sacra.com/research/replit-at-106m-arr/}{Replit's \textasciitilde23\% gross margin} shows compute-heavy vibe coding is economically challenged---professional devs demand local execution and won't pay \$200+/month for cloud compute. Professional developers already have \citelink{https://cursor.com}{Cursor} and \citelink{https://github.com/anthropics/claude-code}{Claude Code}---they don't need vibe tools.
+
+  \item \textbf{Up-Market Verdict: Constrained to ``Pro-sumer'' Ceiling:} Vibe coding tools will expand from non-developers to \textbf{``pro-sumers''} (marketers, designers, PMs who can code a little) but will \textit{not} capture professional software engineers. The evidence: \citelink{https://www.gic.com.sg/uploads/2025/10/Vercel-Closes-Series-F-at-9.3B-Valuation-to-Scale-the-AI-Cloud.pdf}{v0's >50\% enterprise revenue} comes from \textbf{design-to-code handoff}, not replacing engineers. \citelink{https://sacra.com/c/retool/}{Retool's \$120M ARR} serves \textbf{internal tools}, not core product development.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.2.5 Analysis: Vertical Integration---Who Owns Model $\rightarrow$ Cloud?}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{The Full Stack: Model $\rightarrow$ Tool $\rightarrow$ Platform $\rightarrow$ Cloud:} Only \textcolor{red}{3 companies} can plausibly own the full vertical stack: \textbf{Microsoft} (GPT via OpenAI $\rightarrow$ Copilot $\rightarrow$ GitHub $\rightarrow$ Azure), \textbf{Google} (Gemini $\rightarrow$ Antigravity $\rightarrow$ Cloud Build $\rightarrow$ GCP), and \textbf{Amazon} (Bedrock $\rightarrow$ Q Developer $\rightarrow$ CodeCatalyst $\rightarrow$ AWS). Anthropic and OpenAI lack cloud infrastructure; Cursor/Windsurf lack models and cloud; Vercel/Netlify lack models. The question: \textbf{does full-stack ownership create defensible advantage, or is modular best-of-breed superior?}
+
+  \item \textbf{Integration Advantage is Real but Limited:} Full-stack integration enables: (1) \textbf{seamless deployment} (code $\rightarrow$ cloud in one click); (2) \textbf{unified billing} (enterprise procurement prefers single vendor); (3) \textbf{data flywheel} (usage $\rightarrow$ training signal $\rightarrow$ better model). However, the history of developer tools shows \textbf{best-of-breed often wins}: VS Code beat Visual Studio despite Microsoft's integration; Git/GitHub beat TFS despite Azure integration; Docker/Kubernetes beat Cloud Foundry despite PaaS integration. Developers tolerate friction to get the best tool at each layer.
+
+  \item \textbf{2030 Prediction---Hybrid Dominance:} By 2030, \textbf{Anthropic} will own Model + Tool (Claude + Claude Code) but partner for Platform/Cloud. \textbf{Microsoft} will own Tool + Platform + Cloud (Copilot + GitHub + Azure) but depend on multi-model supply. \textbf{Google} will own Model + Cloud (Gemini + GCP) but struggle with Tool/Platform adoption. \textbf{No single company} will dominate all four layers---the market will remain \textbf{``stacked modularity''} where different leaders emerge at each layer. The \textcolor{red}{value capture shifts up-stack}: Cloud margins are thin; Platform (GitHub) is durable; Tool (IDE) is growing; Model is commoditizing.
 \end{itemize}
 \end{frame}
 
@@ -91,6 +203,70 @@
 \end{itemize}
 \end{frame}
 
+% =============================================================================
+% RQ2.3 Detailed Analysis Slides
+% =============================================================================
+
+\begin{frame}{RQ2.3.1 Analysis: Microsoft---Distribution Giant, Model Dependent}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{The OpenAI Partnership Economics:} Microsoft's AI strategy rests on OpenAI partnership with explicit time structure: \citelink{https://www.investing.com/news/stock-market-news/openai-plans-to-slash-revenue-share-to-microsoft-the-information-reports-4026862}{20\% revenue share through 2030} per Reuters, with negotiation tension about access beyond 2030. The viable strategy is \textbf{``broker + platform + enterprise control plane''}: (1) offer multi-model routing inside Copilot (cost/latency/compliance optimization); (2) keep \citelink{https://devblogs.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{VS Code/Visual Studio as default IDE surface---50M MAU} is the anchor; (3) own identity, policy, compliance, logging (what enterprises actually buy).
+
+  \item \textbf{Distribution Advantage is Durable:} \citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{Copilot's 64.2M installs} represent massive distribution---incumbents don't need to ``win on model quality,'' they need to avoid losing on UX + context + latency. \citelink{https://cursor.com/blog/tab-rl}{Cursor's 28\% higher accept rate} proves AI-native IDEs can capture mindshare, but Microsoft's moat is \textbf{enterprise bundling} (GitHub Enterprise + Azure + identity). The key insight: distribution + billing remain decisive even if model intelligence commoditizes.
+
+  \item \textbf{Strategic Assessment (Nuanced):} Microsoft is \textbf{distribution-advantaged but model-dependent}. The ``broker + control plane'' strategy is viable but requires execution: (1) successful multi-model commoditization; or (2) defensive IDE acquisition to prevent AI-native challengers from scaling. \textbf{Prediction:} Microsoft acquires at least one AI-native IDE by 2027; Copilot evolves into ``agentic DevOps platform'' with agent mode + \citelink{https://github.blog/news-insights/product-news/github-copilot-agent-mode-activated/}{MCP support} as core differentiator.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.3.2 Analysis: Anthropic---Best Positioned for Vertical Capture}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Current Position (Strongest in Coding):} Anthropic has assembled the \textbf{most complete coding stack} among foundation model companies: \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Claude leads Terminal-Bench} (57.8\%), \citelink{https://www.swebench.com}{SWE-Bench Verified} (74.4\%); \citelink{https://www.npmjs.com/package/\%40anthropic-ai/claude-code}{Claude Code dominates CLI} (6.25M weekly downloads); \citelink{https://modelcontextprotocol.io}{MCP} adopted by competitors (Copilot, Cursor, JetBrains). The only major gap: \textbf{IDE distribution}---\citelink{https://marketplace.visualstudio.com/items?itemName=anthropics.claude-code}{Claude Code extension} (0.8M) is \textcolor{red}{80x smaller} than Copilot.
+
+  \item \textbf{Strategic Path Forward:} Anthropic should pursue \textbf{``IDE through acquisition''} rather than organic build. Candidates: \citelink{https://cursor.com}{Cursor} (best product, \$10B+ valuation challenge), \citelink{https://windsurf.com}{Windsurf} (Devin heritage, more affordable), or smaller player. Alternative: \textbf{deepen CLI/MCP moat} and let IDE layer commoditize---if Claude Code becomes the ``agent OS'' that all IDEs call, Anthropic wins without owning the editor. The \citelink{https://code.claude.com/docs/en/sub-agents}{subagent architecture} positions Claude Code as orchestration layer.
+
+  \item \textbf{Risks and Constraints:} (1) \textbf{Capital constraints}---Anthropic's \citelink{https://www.anthropic.com/news/anthropic-series-d}{\$4B Series D} is large but dwarfed by Microsoft/Google; a \$10B+ Cursor acquisition may not be feasible. (2) \textbf{Focus dilution}---building IDE distracts from core model research. (3) \textbf{Vertical integration backlash}---if Anthropic competes with Cursor/Copilot, they may switch to GPT/Gemini. \textbf{Prediction:} Anthropic acquires a mid-tier IDE company (Windsurf, Zed, or similar) for \$1--3B by 2027, positions Claude Code + IDE as unified developer stack.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.3.3 Analysis: Cursor---Moat Durability Assessment}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Current Moats (Real but Narrowing):} \citelink{https://cursor.com/blog/tab-rl}{Cursor's Tab model} (\textcolor{red}{28\% higher accept rate}) and context engine represent \textcolor{red}{12--18 month leads} over incumbents. However, these leads are \textbf{narrowing}: VS Code Copilot is improving, JetBrains AI Assistant launched, Google Antigravity offers free multi-model. The Tab completion advantage is \textit{reproducible}---given enough investment, Microsoft/Google can match it. The true moat is \textbf{developer habit + workflow integration}---once developers learn Cursor's shortcuts and workflows, switching costs compound.
+
+  \item \textbf{Vulnerability Analysis:} Three scenarios threaten Cursor: (1) \textbf{Model vendor vertical integration}---if Anthropic launches Claude IDE, Cursor loses its best model partner. (2) \textbf{Incumbent catch-up}---VS Code + Copilot with 2 years of focused investment could match Cursor UX. (3) \textbf{Price war}---Google Antigravity (free) and open-source alternatives (Cline, Continue) commoditize paid IDE. Cursor's \citelink{https://www.bloomberg.com/news/articles/2024-12-19/cursor-in-talks-to-raise-at-10-billion-valuation-as-ai-utilization-surges}{\$10B+ valuation} prices in aggressive growth assumptions that may not materialize under competitive pressure.
+
+  \item \textbf{Strategic Recommendations:} Cursor should: (1) \textbf{Deepen ecosystem lock-in}---extensions, templates, team features that don't transfer to VS Code. (2) \textbf{Build proprietary data flywheel}---use aggregated user patterns to improve beyond what model vendors provide. (3) \textbf{Prepare acquisition optionality}---Microsoft, Google, or Anthropic are natural acquirers if independent path becomes unviable. \textbf{Prediction:} Cursor either gets acquired (\$8--15B) by 2028 or achieves \textcolor{red}{5M+ users} and establishes durable independence as the ``developer's choice'' IDE---middle outcomes (2--3M users, no acquisition) are unstable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.3.4 Analysis: Google---Distribution Giant, Product Laggard}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{The ``Gemini Paradox'' Persists:} \citelink{https://deepmind.google/models/gemini/pro/}{Gemini 3 Pro} achieves near-parity on benchmarks (SWE-Bench 76.2\%, Terminal-Bench 54.4\%) and offers \textcolor{red}{5x context window} (1M tokens vs Claude's 200K). Yet \citelink{https://www.npmjs.com/package/\%40google/gemini-cli}{Gemini CLI downloads} (310k) trail Claude Code by \textcolor{red}{20x}, and \citelink{https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/}{Antigravity} is a late entrant to a crowded market. The pattern: \textbf{Google builds competitive technology but struggles with developer product-market fit}. This is a cultural/organizational issue, not a capability gap.
+
+  \item \textbf{Distribution Leverage is Underutilized:} Google has \textcolor{red}{unmatched distribution assets}: Workspace (3B+ users), Android Studio (dominant mobile IDE), Firebase (3M+ apps), Cloud (10\%+ market share). These assets could force Gemini adoption through: (1) \textbf{bundling}---free Gemini credits with Cloud/Workspace; (2) \textbf{integration}---native Gemini in Android Studio; (3) \textbf{pricing}---undercut Copilot/Cursor on enterprise contracts. Yet Google has historically underinvested in developer tools (see: Cloud's lag vs AWS/Azure).
+
+  \item \textbf{Strategic Assessment:} Google is \textbf{not permanently behind}---it has the model, the distribution, and the capital. The gap is \textbf{product execution and go-to-market focus}. \textbf{Prediction:} Google captures \textcolor{red}{15--25\% of M2 by 2030} through distribution/pricing plays, not product leadership. Android Studio + Gemini becomes the default mobile development stack. Google may acquire a developer tools company (Replit? JetBrains?) to accelerate, but organic product development will remain a weakness. ``Sleeping giant'' is accurate---the question is whether Google \textit{chooses} to wake up.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.3.5 Analysis: Open-Source Ecosystem---Structural Ceiling}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Current State (Capability Plateau):} Open-weight models occupy positions \#4--9 on SWE-Bench: \citelink{https://huggingface.co/moonshotai/Kimi-K2-Instruct}{Kimi K2} (63.4\%), \citelink{https://huggingface.co/MiniMaxAI/MiniMax-M2}{MiniMax M2} (61.2\%), \citelink{https://huggingface.co/deepseek-ai}{DeepSeek V3.2} (60.8\%). Despite radically different architectures (1T params/MoE vs 230B dense), scores cluster in an \textcolor{red}{8-point band}---suggesting a \textbf{capability ceiling} without proprietary RLHF infrastructure. The \textcolor{red}{22+ point Terminal-Bench gap} is worse and more persistent than the code generation gap.
+
+  \item \textbf{Why the Gap Persists:} Three structural disadvantages: (1) \textbf{RLHF data}---frontier tool-calling requires millions of production interactions that open-weight labs cannot collect. (2) \textbf{Compute scale}---\$100M+ training runs require cloud provider partnerships or state backing. (3) \textbf{Talent concentration}---top AI researchers concentrate at Anthropic/OpenAI/Google with equity incentives open-weight orgs cannot match. \citelink{https://mistral.ai/news/devstral-2-vibe-cli}{Devstral 2}'s 72.2\% proves European labs can approach parity, but Mistral has \$600M+ funding: ``open-weight'' doesn't mean ``under-resourced.''
+
+  \item \textbf{Enterprise Viability Assessment:} Open-weight models \textbf{can} sustain enterprise coding tools for: (1) \textbf{air-gapped/government} deployments where cloud APIs are prohibited; (2) \textbf{fine-tuning use cases} where domain adaptation matters more than base quality; (3) \textbf{cost-sensitive workloads} where \$0.10/1K tokens (self-hosted) beats \$3/1K tokens (API). \textbf{Cannot} sustain: frontier agentic workflows, complex reasoning tasks, novel problem-solving. \textbf{Prediction:} Open-weight captures \textcolor{red}{20--30\%} of coding model deployments by volume by 2030, but \textcolor{red}{<10\%} of enterprise revenue---the premium tier remains proprietary.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{RQ2.4: Moats \& Defensibility}
 \justifying
 \small
@@ -106,6 +282,58 @@
   \item \textbf{RQ2.4.4:} Data flywheel effects: Who has the best feedback loop (usage $\rightarrow$ data $\rightarrow$ better model)?
 
   \item \textbf{RQ2.4.5:} Switching costs: How sticky are each category's products?
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% RQ2.4 Detailed Analysis Slides
+% =============================================================================
+
+\begin{frame}{RQ2.4.1 Analysis: Moat Taxonomy by Market}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Market 1 (Foundation Models)---Strongest Moats:} (1) \textbf{Compute access}---\textcolor{red}{\$100M+} per training run requires cloud partnerships or hyperscaler ownership; (2) \textbf{RLHF data}---millions of production interactions create compounding advantage; (3) \textbf{Research talent}---top 100 AI researchers concentrated at 5 labs. These moats are \textbf{widening}---each generation requires more compute, data, and specialized talent. Open-weight cannot replicate proprietary RLHF.
+
+  \item \textbf{Market 2 (IDE/CLI/Agents)---Medium Moats:} (1) \textbf{Tab completion models}---\citelink{https://cursor.com/blog/tab-rl}{Cursor's 28\% advantage} is real but \textit{reproducible} with investment; (2) \textbf{Context engine}---RAG quality compounds over iterations; (3) \textbf{Distribution/habit}---\citelink{https://developer.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{VS Code's 50M users} vs Cursor's 1M shows incumbent advantage. These moats have \textbf{medium durability}---technical leads erode over 18--24 months, but distribution and habit persist longer.
+
+  \item \textbf{Market 3 (Specialized Tools)---Variable:} \textbf{Strong moats:} Security (\citelink{https://snyk.io/}{Snyk's} vulnerability database, compliance certifications), DevOps (\citelink{https://www.pulumi.com/}{Pulumi's} infrastructure state), Testing (\citelink{https://www.browserstack.com/}{BrowserStack's} device farms). \textbf{Weak moats:} Documentation (LLM-commoditized), Code Review (``AI comments'' become table stakes). \textbf{Market 4 (Vibe Coding)---Weakest:} Runtime/hosting creates some lock-in (Replit, Bubble), but core value (``prompt $\rightarrow$ app'') is easily replicated. \textbf{Moat ranking:} \textcolor{red}{M1 $>$ M3-Security/DevOps $>$ M2 $>$ M3-Review/Docs $>$ M4}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.4.2 Analysis: Moat Durability Test (4-Question Framework)}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{The 4-Question Moat Durability Test:} To assess whether a moat survives well-funded attackers (\$10B+ hyperscalers), apply four questions: \textbf{(1) Replication:} Can a rich rival replicate it in 18--24 months? \textbf{(2) Data flywheel:} Does usage create proprietary training/feedback data? \textbf{(3) Distribution chokepoint:} Does the product sit on a distribution chokepoint? \textbf{(4) Governance lock-in:} Does compliance/regulation create enterprise stickiness? A moat must pass \textcolor{red}{at least 2 of 4 tests} to survive hyperscaler competition.
+
+  \item \textbf{Durability Assessment by Player:} \textbf{Anthropic}---\textcolor{green!50!black}{High (4/4)}. Replication: No (RLHF at scale); Data: Yes (billions of API calls); Distribution: Yes (MCP adoption); Governance: Partial. \textbf{Cursor}---\textcolor{orange}{Medium (2/4)}. Replication: Yes (UX reproducible); Data: Yes (Tab model training); Distribution: No (no chokepoint); Governance: No. \textbf{Snyk}---\textcolor{green!50!black}{High (3/4)}. Replication: No (15-year CVE database); Data: Yes (vuln discoveries); Distribution: Partial; Governance: Yes (SOC2/FedRAMP). \textbf{CodeRabbit}---\textcolor{red}{Low (0/4)}. ``AI review'' is a feature, not a product.
+
+  \item \textbf{Strategic Implication:} Companies should \textbf{invest in assets that pass 3+ tests}: proprietary data flywheels, protocol/ecosystem lock-in (MCP), regulatory barriers. Pure ``better UX'' or ``better model'' advantages erode. The question isn't ``is our moat real today?'' but ``will it exist after Google spends \$1B competing?''
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.4.3 Analysis: Specialized Tool Survival Strategies}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{The Existential Threat:} When \citelink{https://cursor.com}{Cursor} or \citelink{https://openai.com/codex/}{Codex} adds ``AI code review,'' \citelink{https://techcrunch.com/2025/09/16/coderabbit-raises-60m-valuing-the-2-year-old-ai-code-review-startup-at-550m/}{CodeRabbit's \$550M valuation} faces compression. General-purpose platforms absorb point solution features---Salesforce absorbed CRM features, Slack absorbed collaboration features. M3 tools face the same: \textbf{if the feature can be ``good enough'' in the IDE, the standalone tool loses}.
+
+  \item \textbf{Defensible Niches (Can Survive):} Three categories resist absorption: (1) \textbf{Infrastructure-heavy}---\citelink{https://www.browserstack.com/}{BrowserStack's} 3,000+ device farm, \citelink{https://applitools.com/}{Applitools'} visual AI cannot be IDE features. (2) \textbf{Compliance/regulatory}---\citelink{https://snyk.io/}{Snyk's} SOC2/FedRAMP, \citelink{https://www.vanta.com/}{Vanta's} audit trails are \textit{required purchases}, not optional. (3) \textbf{System-of-record}---\citelink{https://www.pulumi.com/}{Pulumi's} infrastructure state, \citelink{https://www.getport.io/}{Port's} service catalog own data IDEs cannot replace.
+
+  \item \textbf{Vulnerable Niches (Will Be Absorbed):} (1) \textbf{Documentation}---general agents can generate docs; survivors own provenance/search. (2) \textbf{Code review comments}---``AI suggests changes'' is a feature; survivors pivot to \textbf{policy enforcement} and \textbf{defect analytics}. (3) \textbf{Test generation}---already a Copilot feature; survivors own \textbf{execution infrastructure}. \textbf{Survival strategy:} go \textbf{deeper} (more specialized) or \textbf{wider} (own adjacent workflow stages).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.4.4--2.4.5 Analysis: Data Flywheels \& Switching Costs}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Data Flywheel Mechanics:} Core loop: \textbf{usage $\rightarrow$ data $\rightarrow$ better model $\rightarrow$ more usage}. Strongest when data is high-frequency (every keystroke), labeled (accept/reject), and improvements are perceptible. \textbf{Flywheel ranking:} \textbf{\#1 Anthropic/OpenAI}---billions of API calls with explicit feedback. \textbf{\#2 GitHub Copilot}---\citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{64.2M installs} generate accept/reject data; but data flows to model vendors. \textbf{\#3 Cursor}---1M users training Tab model. \textbf{\#4 Security tools}---vulnerability discoveries improve detection. \textbf{Weakest:} Vibe coding---``regenerate button'' is lower-signal than code completion.
+
+  \item \textbf{Switching Costs by Market:} \textbf{M1 (Models)}---\textcolor{orange}{Medium}. APIs are similar; prompt engineering is model-specific; fine-tuned models are locked. \textbf{M2 (IDE/CLI)}---\textcolor{orange}{Medium}. Developers learn shortcuts/workflows; code itself is portable. Key: switching costs \textbf{compound with duration}---2-year Cursor user faces higher costs than 2-month user. \textbf{M3 (Specialized)}---\textbf{Variable}. \textcolor{red}{High:} IaC state files, compliance evidence, CI pipelines. \textcolor{green!50!black}{Low:} docs (markdown portable), review (PR comments). \textbf{M4 (Vibe)}---\textcolor{green!50!black}{Low-Medium}. Exportable code = easy switch; runtime lock-in (Replit, Bubble) = harder.
+
+  \item \textbf{Strategic Implication:} Companies without flywheel access are structurally disadvantaged. Open-weight lacks production feedback---explaining the \textcolor{red}{22+ point Terminal-Bench gap}. IDE companies that don't train models cede flywheel to vendors. \textbf{Switching cost ranking:} \textcolor{red}{M3-DevOps/Security $>$ M2 $>$ M1 $>$ M3-Docs $>$ M4}.
 \end{itemize}
 \end{frame}
 
@@ -131,15 +359,68 @@
 \end{itemize}
 \end{frame}
 
+% =============================================================================
+% RQ2.5 Detailed Analysis Slides
+% =============================================================================
 
-% -----------------------------------------------------------------------------
-% RQ2.1-RQ2.6 detailed analysis to be added
-% -----------------------------------------------------------------------------
+\begin{frame}{RQ2.5.0 Analysis: Near-Term Infrastructure Opportunities (2026--2027)}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Agent Evaluation \& Policy Tooling (``Agent Air-Traffic Control''):} As enterprises deploy coding agents, they need \textbf{proof, not demos}---standardized eval suites, regression gates, safe-action policies. Procurement requires measurable ROI. Opportunity: (1) benchmark-as-a-service for private codebases; (2) policy engines that constrain agent actions (``can comment'' vs ``can merge'' vs ``can deploy''); (3) red-teaming services for AI-generated code. This is a \textcolor{red}{\$2--5B opportunity} by 2028.
 
-% \begin{frame}{RQ2.1: Intra-Market Dynamics — Detailed Analysis}
-% \end{frame}
+  \item \textbf{Agent Observability (Traces, Blame, Audit):} When AI agents make changes across files/repos, enterprises need: (1) \textbf{who changed what}---agent provenance tracking; (2) \textbf{why}---reasoning traces and tool call logs; (3) \textbf{reproducibility}---can we replay the agent session? Current tools lack this. Opportunity: agent-specific APM (Application Performance Monitoring) that integrates with existing observability stacks (Datadog, Splunk, New Relic). Market size: \textcolor{red}{\$1--3B} by 2028.
 
-% \begin{frame}{RQ2.3: Microsoft Deep Dive}
-% \end{frame}
+  \item \textbf{Model Brokerage \& Routing:} As model optionality becomes standard (see \citelink{https://developers.googleblog.com/en/build-with-google-antigravity-our-new-agentic-development-platform/}{Antigravity's multi-model approach}), enterprises need intelligent routing: (1) \textbf{cost optimization}---route simple tasks to cheaper models; (2) \textbf{latency optimization}---use fast models for autocomplete, slow models for complex reasoning; (3) \textbf{compliance routing}---certain data only to approved models. This becomes huge when model choice is commoditized. \textbf{Additional near-term opportunities:} Secure-by-default sandboxes for code agents (least privilege, ephemeral creds); \citelink{https://github.blog/news-insights/product-news/github-copilot-agent-mode-activated/}{MCP-like tool ecosystems} (internal tools as ``APIs for agents'').
+\end{itemize}
+\end{frame}
 
-% etc.
+\begin{frame}{RQ2.5.1--2.5.2 Analysis: AI-Native Paradigms \& Code-as-Conversation}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{AI-Native Programming Languages (RQ2.5.1):} Current languages (Python, JavaScript, Rust) were designed for \textit{human} programmers---verbose for explicitness, with manual memory management or GC tradeoffs. AI-native languages could optimize for: (1) \textbf{LLM generation efficiency}---syntax patterns that models predict well; (2) \textbf{verification-first}---types and contracts that enable AI-assisted formal verification; (3) \textbf{intent preservation}---semantic markers that survive refactoring. \textbf{Assessment:} Unlikely to emerge as new languages; more likely as \textbf{DSLs and transpilation layers} on existing languages. The network effects of Python/JS ecosystems are too strong to displace.
+
+  \item \textbf{Code-as-Conversation Replacing IDEs (RQ2.5.2):} The vision: developers describe intent in natural language; AI generates, tests, deploys---no traditional editing. \citelink{https://github.com/anthropics/claude-code}{Claude Code} and \citelink{https://openai.com/codex/}{Codex} move toward this, but \textbf{full replacement is unlikely by 2030}. Barriers: (1) \textbf{precision loss}---natural language is ambiguous; complex systems need precise specification; (2) \textbf{debugging}---when AI-generated code fails, developers need to \textit{read} code; (3) \textbf{mental models}---senior developers think in code structures, not prose. \textbf{Prediction:} ``Conversation-first'' becomes dominant for \textcolor{red}{30--50\%} of coding tasks (scaffolding, boilerplate, simple features), but traditional editing remains for complex systems.
+
+  \item \textbf{Opportunity Assessment:} The real opportunity is \textbf{hybrid interfaces}---seamlessly switching between conversation and code. \citelink{https://cursor.com}{Cursor's} inline chat + tab completion is the early version. Next evolution: agents that watch you code and proactively suggest/execute multi-file changes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.5.3--2.5.4 Analysis: Non-Traditional Platforms \& Enterprise Coding}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{AI Coding for IoT/Edge/Quantum (RQ2.5.3):} These platforms have \textbf{minimal training data}---public codebases for Arduino, RTOS, quantum circuits are orders of magnitude smaller than web/mobile. Current models struggle with: (1) \textbf{hardware constraints}---memory limits, power optimization, real-time requirements; (2) \textbf{domain-specific APIs}---proprietary SDKs with limited documentation; (3) \textbf{testing complexity}---simulation often inadequate; real hardware required. \textbf{Assessment:} AI coding impact on embedded/IoT is \textcolor{red}{3--5 years behind} web development. 
+  \item \textbf{Enterprise Coding Platforms (RQ2.5.4):} The Palantir model: deeply embedded platforms that own enterprise data, workflows, and now code generation. \citelink{https://www.palantir.com/platforms/aip/}{Palantir AIP} generates Python/SQL for data pipelines; \citelink{https://www.servicenow.com/now-platform/ai-platform.html}{ServiceNow AI} generates workflow automations. These platforms have \textbf{structural advantages}: (1) proprietary data access (enterprise databases, internal APIs); (2) governance frameworks already in place; (3) existing enterprise relationships. \textbf{Assessment:} Enterprise coding platforms are a \textcolor{red}{\$10--20B opportunity} by 2030.
+
+  \item \textbf{Education/Training Market (RQ2.5.5):} Two segments: (1) \textbf{learning to code with AI}---curricula adapting to AI-assisted development; (2) \textbf{training developers on AI tools}---enterprise enablement programs. \citelink{https://www.codecademy.com/}{Codecademy}, \citelink{https://www.coursera.org/}{Coursera}, and bootcamps are integrating AI coding tools. \textbf{Risk:} if AI can generate code, why learn to code? \textbf{Opportunity:} AI shifts education from ``syntax memorization'' to ``system design and AI collaboration.'' Market size: \textcolor{red}{\$3--5B} by 2030.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% RQ2.6 Detailed Analysis Slides
+% =============================================================================
+
+\begin{frame}{RQ2.6.1--2.6.2 Analysis: AGI Coding \& Security Incident Scenarios}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{AGI-Level Coding Emerges Early (RQ2.6.1):} If models achieve ``10x engineer'' capability by 2027--2028 (vs. consensus 2030+), the market restructures radically: (1) \textbf{M4 (vibe coding) explodes}---non-developers can build complex systems; TAM expands 10x. (2) \textbf{M2 (IDE) compresses}---if AI handles 90\% of coding, IDE features matter less; agents become the product. (3) \textbf{M3 (specialized) collapses}---AGI agents can do testing, security, DevOps without specialized tools. (4) \textbf{M1 (models) winner-take-most}---the first AGI-level coding model captures dominant share. \textbf{Probability:} \textcolor{red}{15--25\%} by 2028. Impact if true: \textcolor{red}{complete market restructuring}; all current valuations become meaningless.
+
+  \item \textbf{Major Security Incident Traced to AI Code (RQ2.6.2):} Scenario: a critical vulnerability (SolarWinds-scale) is traced to AI-generated code, causing \$billions in damage and regulatory backlash. Consequences: (1) \textbf{mandatory AI code disclosure}---regulations requiring labeling of AI-generated code; (2) \textbf{liability shift}---tool vendors become liable for AI-generated vulnerabilities; (3) \textbf{enterprise adoption slowdown}---CISOs mandate human review of all AI code; (4) \textbf{certification requirements}---new compliance frameworks for AI coding tools. \textbf{Probability:} \textcolor{red}{40--60\%} by 2028 (some incident is likely; severity uncertain). Impact: \textcolor{red}{12--24 month adoption slowdown}; security-focused tools (M3) gain share; vibe coding (M4) faces headwinds.
+
+  \item \textbf{Mitigation Strategies:} Smart players are preparing: \citelink{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf}{NIST 800-218A} compliance, AI code provenance tracking, automated security scanning integration. The security incident is \textbf{when, not if}---the question is whether the industry has governance frameworks ready.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2.6.3--2.6.4 Analysis: IP Litigation \& China Decoupling}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Training Data Lawsuit Invalidates Key Models (RQ2.6.3):} The \citelink{https://githubcopilotlitigation.com/}{GitHub Copilot litigation} and similar lawsuits claim models reproduce copyrighted code without license compliance. Worst-case scenario: court rules training on public code requires explicit permission; existing models are enjoined from commercial use. Consequences: (1) \textbf{open-source training banned}---only permissively-licensed code can be used; model quality drops; (2) \textbf{retroactive liability}---vendors face damages for past AI-generated code; (3) \textbf{enterprise indemnification becomes critical}---only vendors with clean training data survive. \textbf{Probability:} \textcolor{red}{20--35\%} for significant adverse ruling by 2027. Impact: \textcolor{red}{6--18 month market disruption}; advantage shifts to vendors with ``clean'' training data (synthetic, licensed, or internal).
+
+  \item \textbf{China AI Decoupling---Bifurcated Global Market (RQ2.6.4):} US export controls already restrict H100/H200 access to Chinese labs. Escalation scenarios: (1) \textbf{API access banned}---Chinese companies cannot use Claude/GPT APIs; must use domestic models (Qwen, DeepSeek, Kimi); (2) \textbf{reciprocal bans}---Chinese government bans US AI tools for sovereignty reasons; (3) \textbf{enterprise fragmentation}---multinationals need separate AI stacks for US/China operations. \textbf{Probability:} \textcolor{red}{50--70\%} for significant bifurcation by 2028. Impact: Chinese tools (TRAE, Lingma) dominate domestic market; Western tools (Cursor, Copilot) lose \textcolor{red}{20--30\%} of potential global TAM.
+
+\end{itemize}
+\end{frame}

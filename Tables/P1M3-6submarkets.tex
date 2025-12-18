@@ -1,0 +1,42 @@
+% Table: Market 3 - Six Sub-Market Comparison Matrix
+% File: Tables/P1M3-6submarkets.tex
+
+\begin{table}[H]
+\centering
+\caption{Market 3 Sub-Market Comparison---Defensibility Ranking}
+\label{tab:m3-comparison}
+\vspace{-4pt}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}rl r c c c p{5.5cm}@{}}
+\toprule
+\textbf{Rank} & \textbf{Sub-Market} & \textbf{TAM} & \textbf{Moat} & \textbf{AI \%} & \textbf{M2 Risk} & \textbf{Why Defensible / Vulnerable} \\
+\midrule
+
+\rowcolor{blue!15} 1 & \textbf{Security / Compliance} & \$34--55B & Strongest & 30--50 & Low & CVE databases, compliance evidence, liability barrier; procurement outside IDE \\
+\addlinespace[2pt]
+
+2 & \textbf{DevOps / Infrastructure} & \$16--43B & Very High & 40--70 & Low & Cloud integrations, state management, blast radius; policy-gated execution \\
+\addlinespace[2pt]
+
+3 & \textbf{Testing / QA} & \$8--12B & High & 70--85 & Med & Device farms, flakiness data, execution infra; agents generate but cannot run at scale \\
+\addlinespace[2pt]
+
+4 & \textbf{Code Review / PR} & \$3--5B & Medium & 50--70 & \textcolor{red}{High} & Survives via policy gates + audit trails; vulnerable if only ``PR summarization'' \\
+\addlinespace[2pt]
+
+5 & \textbf{Spec / Design} & \$5--8B & Med--High & 50--70 & Med & Defensible when owning API contract governance; diagram generation commoditizes \\
+\addlinespace[2pt]
+
+6 & \textbf{Documentation} & \$2--4B & Medium & 70--90 & \textcolor{red}{High} & Highest risk---agents generate docs; survives only if code-coupled + provenance \\
+
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{4pt}
+\raggedright
+\scriptsize
+\textit{Notes:} \textbf{AI \%} = automation ceiling estimate. \textbf{M2 Risk} = cannibalization threat from Market 2 IDEs/agents. Key pattern: high AI potential often correlates with weaker moats---Security has lowest AI ceiling but strongest defensibility. Survivors own \textbf{governance + telemetry} (\citelink{https://www.sonarsource.com/}{SonarQube}, \citelink{https://www.vanta.com/}{Vanta}, \citelink{https://spacelift.io/}{Spacelift}), not just AI capability.
+
+\end{table}

@@ -12,7 +12,7 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from econ_model_v3 import TEMPLATES, scaled_scenario, simulate
+from econ_model import TEMPLATES, scaled_scenario, simulate
 
 OUTDIR = os.path.join(os.path.dirname(__file__), "figures")
 os.makedirs(OUTDIR, exist_ok=True)
