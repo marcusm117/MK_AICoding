@@ -15,25 +15,28 @@
 
 \begin{frame}{RQ1: Methodology}
 \justifying
-\textbf{Approach:} Qualitative analysis $\rightarrow$ Quantitative estimation
+\small
+\textbf{Approach:} Parameterizable scenario model with Monte Carlo simulation $\rightarrow$ P10/P50/P90 net value distributions
 
-\vspace{6pt}
-\textbf{Data Sources:}
+\vspace{4pt}
+\textbf{Core Equation:}
+\begin{equation*}
+\text{Net Value} = \underbrace{\text{Labor} \times \text{Adoption} \times \text{Exposure} \times \text{Uplift}}_{\text{Gross Capacity}} - \text{Rework} - \text{Tool Cost} - \text{Enablement} - \text{Security}
+\end{equation*}
+
+\vspace{4pt}
+\textbf{Key Evidence Anchors:}
 \begin{itemize}\tightlist
-  \item Public company filings, earnings calls
-  \item Industry reports (Gartner, McKinsey, a16z)
-  \item Academic studies on developer productivity
-  \item Expert interviews and surveys
+  \item \textbf{Uplift bounds:} +55.8\% (\citelink{https://arxiv.org/abs/2302.06590}{Copilot RCT}) to -19\% (\citelink{https://arxiv.org/abs/2507.09089}{METR 2025}---experts slowed on familiar code)
+  \item \textbf{Adoption:} 51\% daily usage (\citelink{https://survey.stackoverflow.co/2025/ai}{Stack Overflow 2025}); wide variance by industry
+  \item \textbf{Org-level translation:} \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024} shows AI correlates with \textcolor{red}{-1.5\% throughput, -7.2\% stability}
 \end{itemize}
 
-\vspace{6pt}
-\textbf{Estimation Framework:}
-\begin{enumerate}\tightlist
-  \item Bottom-up: Task-level productivity gains $\times$ task frequency
-  \item Top-down: Market size $\times$ adoption rate $\times$ efficiency factor
-  \item Comparable: Historical automation impact (e.g., IDEs, DevOps)
-\end{enumerate}
-\mynote{Placeholder — detailed calculations to be added.}
+\vspace{4pt}
+\textbf{Model Features:} 8 industry templates (BigTech to Government), sensitivity analysis, break-even solver. Conservative (2025--26) vs. Optimistic (2027--28) scenarios with explicit assumptions.
+
+\vspace{2pt}
+\textit{Goal: Transform qualitative debates into auditable, sensitivity-testable quantitative analysis.}
 \end{frame}
 
 
@@ -88,7 +91,7 @@
 \begin{itemize}\tightlist
   \item \textbf{Uplift Bounds:}
   \begin{itemize}\tightlist
-    \item \textcolor{red}{Upper bound (+55.8\%)}: \citelink{https://arxiv.org/abs/2302.06590}{GitHub Copilot RCT} on specific tasks (greenfield, unfamiliar repos)
+    \item \textcolor{red}{Upper bound (+55.8\%)}: \citelink{https://arxiv.org/abs/2302.06590}{GitHub Copilot RCT} on specific tasks (unfamiliar repos)
     \item \textcolor{red}{Lower bound (negative allowed)}: \citelink{https://arxiv.org/abs/2507.09089}{METR 2025} found +19\% slowdown for experts on familiar codebases
     \item \textcolor{red}{Mid-point (10--20\%)}: Conservative---RCT conditions don't reflect enterprise reality
   \end{itemize}
