@@ -1,0 +1,103 @@
+% !TEX TS-program = xelatex
+% Compile: xelatex -> biber -> xelatex -> xelatex
+% AI Coding Tools Market Research
+% Language: English. Aspect ratio: 16:9.
+
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage[fontset=none,scheme=plain]{ctex}
+  \setCJKmainfont{Heiti SC}
+  \setCJKsansfont{Heiti SC}
+  \setCJKmonofont{Heiti SC}
+\else\ifLuaTeX
+  \usepackage[fontset=none,scheme=plain]{ctex}
+  \setCJKmainfont{Heiti SC}
+  \setCJKsansfont{Heiti SC}
+  \setCJKmonofont{Heiti SC}
+\else
+  % pdfLaTeX: use fandol fontset (free fonts included in TeX Live)
+  \usepackage[fontset=fandol,scheme=plain]{ctex}
+\fi\fi
+    \usepackage{graphicx}
+    \usepackage{booktabs}
+    \usepackage{multirow}
+    \usepackage{ragged2e}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{siunitx}
+    \usepackage{hyperref}
+    \usepackage{caption}
+    \usepackage{pgfplots}
+    \pgfplotsset{compat=1.18}
+    \usepackage{tikz}
+    
+    % Bibliography
+    \usepackage[backend=biber,style=authoryear,sorting=nyt,maxcitenames=2]{biblatex}
+    \addbibresource{refs.bib}
+    
+    % Beamer theme (academic style - Copenhagen)
+    \usetheme{Copenhagen}
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{headline}{}
+    \setbeamertemplate{footline}[frame number]
+    \setbeamertemplate{caption}[numbered]
+    \setbeamerfont{footnote}{size=\tiny}
+    \setbeamerfont{caption}{size=\scriptsize}
+    \setlength{\abovecaptionskip}{2pt}
+    \setlength{\belowcaptionskip}{2pt}
+    
+% Helpers
+\newcommand{\tightlist}{\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}}
+\newcommand{\sourcefoot}[1]{\footnote{\tiny Source: #1}}
+\newcommand{\mynote}[1]{\vspace{2pt}{\scriptsize\textit{Note: }#1}}
+\definecolor{linkgreen}{RGB}{0,150,0}
+\newcommand{\citelink}[2]{\fcolorbox{linkgreen}{white}{\href{#1}{#2}}}
+    
+    \title[AI Coding Tools]{AI Coding Market Research\\ \large Current Landscape \& Future Trends}
+    \author{Marcus Min}
+    \date{2025-12}
+
+    \begin{document}
+
+% =============================================================================
+% Title Page
+% =============================================================================
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================================================
+% Import Sections
+% =============================================================================
+
+% Overview and Report Structure
+\input{Sections/0_overview.tex}
+
+% Part I, Market 1: General Foundation Models
+\input{Sections/1_P1M1.tex}
+
+% Part I, Market 2: General Coding IDE/CLI/Agent
+\input{Sections/2_P1M2.tex}
+
+% Part I, Market 3: Specialized SE Stage Agents
+\input{Sections/3_P1M3.tex}
+
+% Part I, Market 4: Vibe Coding Tools
+\input{Sections/4_P1M4.tex}
+
+% Part II, RQ1: Economic Impact Prediction
+\input{Sections/5_P2RQ1.tex}
+
+% Part II, RQ2: Competitive Dynamics Prediction
+\input{Sections/6_P2RQ2.tex}
+
+% =============================================================================
+% References
+% =============================================================================
+\begin{frame}[allowframebreaks]{References}
+\printbibliography
+\end{frame}
+
+\end{document}

@@ -1,0 +1,37 @@
+% Table: Comparison of Top 3 Foundation Models for Coding
+% File: Tables/P1M1-top3.tex
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of Top 3 Foundation Models for Coding}
+\label{tab:top3-models}
+\small
+\begin{tabular}{@{}l c c c@{}}
+\toprule
+\textbf{} & \textbf{Claude Opus 4.5} & \textbf{GPT-5.2} & \textbf{Gemini 3 Pro} \\
+ & (Anthropic) & (OpenAI) & (Google) \\
+\midrule
+\citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0?models=Gemini+3+Pro,Claude+Opus+4.5,GPT-5.2\&agents=Terminus+2}{Terminal-Bench 2.0} & \textbf{57.8} & 54.0 & 54.4 \\
+\addlinespace[3pt]
+\citelink{https://www.swebench.com/index.html}{SWE-Bench Verified} & \textbf{74.40} & 71.80 & 74.20 \\
+\addlinespace[3pt]
+\citelink{https://scale.com/leaderboard/swe_bench_pro_public}{SWE-Bench Pro} & 45.89 & \textbf{53.8}$^\dagger$ & 43.30 \\
+\quad \textit{(\% drop from Verified)} & \textcolor{blue}{\textit{(--38.3\%)}} & \textcolor{blue}{\textbf{\textit{(--25.1\%)}}} & \textcolor{blue}{\textit{(--41.6\%)}} \\
+\addlinespace[3pt]
+\citelink{https://arcprize.org/leaderboard}{ARC-AGI 1} & 80.0 & \textbf{90.5} & 87.5   \\
+\addlinespace[3pt]
+\citelink{https://arcprize.org/leaderboard}{ARC-AGI 2} & 37.6 & \textbf{54.2} & 45.1 \\
+\quad \textit{(\% drop from 1)} & \textcolor{blue}{\textit{(--53.0\%)}} & \textcolor{blue}{\textbf{\textit{(--40.1\%)}}} & \textcolor{blue}{\textit{(--48.5\%)}} \\
+\addlinespace[3pt]
+Context Window & 200K / 1M (extended) & 400K & \textbf{1M} \\
+\addlinespace[3pt]
+Key Advantage & Tool Calling & Deep Thinking & Long Context \\
+\bottomrule
+\end{tabular}
+
+\vspace{6pt}
+\raggedright
+\scriptsize
+\textit{Notes:} For fair comparision, all Terminal-Bench 2.0 scores use \textcolor{red}{Terminus 2} as the agent framework. All SWE-Bench scores are from the official \textcolor{red}{Bash Only} leaderboard. Click on the links to view the source data. \\
+$^\dagger$GPT-5.2 score is not yet available on the SWE-Bench Pro official leaderboard. We adjusted the reported number from OpenAI (55.6\%) to 53.8\% (55.6\% -- 1.8\%) to account for the typical $\pm$3.6\% variance.
+\end{table}

@@ -1,0 +1,97 @@
+% CLI Agents ranked by (1) npm weekly downloads if available, else (2) GitHub stars.
+% Snapshot date: 2025-12-18 (npm "Weekly Downloads" + GitHub "Stars" as displayed on the linked pages)
+
+\begin{table}[H]
+\centering
+\caption{Top CLI Agents for AI-Assisted Coding Ranked by Public Adoption Proxies}
+\label{tab:cli-adoption-proxy}
+
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rllllr}
+\toprule
+\textbf{Rank} &
+\textbf{Company} &
+\textbf{CLI Agent} &
+\textbf{Supported Models}\textsuperscript{*} &
+\textbf{npm Downloads (7d)} &
+\textbf{GitHub Stars} \\
+\midrule
+
+1 & Anthropic &
+\citelink{https://github.com/anthropics/claude-code}{\textbf{Claude Code}} &
+Claude &
+\citelink{https://www.npmjs.com/package/\%40anthropic-ai/claude-code}{6{,}250{,}680} &
+46{,}500 \\
+
+2 & OpenAI &
+\citelink{https://github.com/openai/codex}{\textbf{Codex CLI}} &
+GPT &
+\citelink{https://www.npmjs.com/package/\%40openai/codex}{508{,}150} &
+54{,}200 \\
+
+3 & Google &
+\citelink{https://github.com/google-gemini/gemini-cli}{\textbf{Gemini CLI}} &
+Gemini &
+\citelink{https://www.npmjs.com/package/\%40google/gemini-cli}{309{,}639} &
+87{,}900 \\
+
+4 & Alibaba &
+\citelink{https://github.com/QwenLM/qwen-code}{\textbf{Qwen Code CLI}} &
+Qwen &
+\citelink{https://www.npmjs.com/package/\%40anthropic-ai/qwen-code}{120{,}156} &
+16{,}500 \\
+
+5 & OpenHands (Open-Source) &
+\citelink{https://github.com/All-Hands-AI/OpenHands}{\textbf{OpenHands CLI}} &
+Claude, GPT, Gemini &
+-- &
+65{,}800 \\
+
+6 & GPT Engineer (Open-Source) &
+\citelink{https://github.com/AntonOsika/gpt-engineer}{\textbf{GPT Engineer}} &
+Claude, GPT, Gemini &
+-- &
+55{,}100 \\
+
+7 & Aider (Open-Source) &
+\citelink{https://github.com/Aider-AI/aider}{\textbf{Aider}} &
+Claude, GPT, Gemini &
+-- &
+39{,}000 \\
+
+8 & GPT Pilot (Open-Source) &
+\citelink{https://github.com/Pythagora-io/gpt-pilot}{\textbf{GPT Pilot}} &
+Claude, GPT, Gemini &
+-- &
+33{,}700 \\
+
+9 & Continue (Open-Source) &
+\citelink{https://github.com/continuedev/continue}{\textbf{Continue CLI}} &
+Claude, GPT, Gemini &
+-- &
+30{,}400 \\
+
+10 & Goose (Open-Source) &
+\citelink{https://github.com/block/goose}{\textbf{Goose}} &
+Claude, GPT, Gemini &
+-- &
+24{,}700 \\
+
+11 & Mistral &
+\citelink{https://github.com/mistralai/mistral-vibe}{\textbf{Mistral Vibe CLI}} &
+Devstral &
+-- &
+2{,}124 \\
+
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{4pt}
+\raggedright
+\scriptsize
+\textit{Notes:} Rankings are descending by (i) npm ``Weekly Downloads'' (last 7 days); else (ii) GitHub stars. \\
+\textsuperscript{*}\textbf{Supported Models} indicates native first-party providers surfaced by the product, not third-party routing via BYOK/LiteLLM/OpenRouter/etc.
+
+\end{table}

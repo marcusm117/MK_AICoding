@@ -1,0 +1,29 @@
+simulate rc=0
+
+=== AI Coding ROI (V3) ===
+Template: internet_bigtech | Engineers: 1200 | Seed: 42 | N: 5000
+Net value: P10=$17.23M  P50=$32.68M  P90=$48.80M  Mean=$32.85M
+
+[Median decomposition ~approx]
+  gross_capacity_value        : $37.66M
+  rework_penalty              : -$1.32M
+  seat_cost                   : -$561.5K
+  enablement_annualized       : -$401.1K
+  tooling_fixed               : -$1.50M
+  security_incremental        : -$534.8K
+  security_program_annualized : -$666.7K
+  externalities_value         : $0
+
+
+breakeven rc=0
+
+=== Break-even solver (net stat == target) ===
+{
+  "variable": "adoption_eng",
+  "value": 0.35992035288712954,
+  "stat": "p50",
+  "target": 0.0,
+  "achieved": -0.00018302397802472115,
+  "note": "Converged."
+}
+

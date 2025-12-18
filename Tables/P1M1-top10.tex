@@ -1,0 +1,46 @@
+% Table: Top 10 Foundation Models for Coding (by SWE-Bench Verified, Bash Only)
+% File: Tables/P1M1-top10.tex
+% One strongest model per company, ranked by performance
+
+\begin{table}[htbp]
+\centering
+\caption{Top 9 Foundation Models for Coding \textcolor{red}{(SWE-Bench Verified, Bash Only)}}
+\label{tab:top9-models}
+\vspace{-8pt}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}clcccl@{}}
+\toprule
+\textbf{Rank} & \textbf{Company} & \textbf{Best Model} & \textbf{SWE-Bench (V)} & \textbf{Weight} & \textbf{Ecosystem} \\
+\midrule
+1 & Anthropic & Claude 4.5 Opus & \textbf{74.40} & Proprietary & \citelink{https://docs.anthropic.com/en/docs/claude-code}{Claude Code} \\
+\addlinespace[2pt]
+2 & Google & Gemini 3 Pro & 74.20 & Proprietary & \citelink{https://github.com/google-gemini/gemini-cli}{Gemini CLI} \& \citelink{https://antigravity.google/}{Antigravity} \\
+\addlinespace[2pt]
+3 & OpenAI & GPT-5.2 & 71.80 & Proprietary & \citelink{https://openai.com/index/introducing-codex/}{Codex} \\
+\addlinespace[2pt]
+4 & Moonshot AI & Kimi K2 Thinking & 63.40 & \citelink{https://huggingface.co/moonshotai/Kimi-K2-Instruct}{Open-weight} & - \\
+\addlinespace[2pt]
+5 & MiniMax & M2 & 61.00 & \citelink{https://huggingface.co/MiniMaxAI/MiniMax-M2}{Open-weight} & - \\
+\addlinespace[2pt]
+6 & DeepSeek & V3.2 Reasoner & 60.00 & \citelink{https://huggingface.co/deepseek-ai}{Open-weight} & - \\
+\addlinespace[2pt]
+7 & Mistral & Devstral & 56.40 & \citelink{https://huggingface.co/mistralai/Devstral-Small-2505}{Open-weight} & \citelink{https://mistral.ai/news/devstral-2-vibe-cli}{Vibe CLI} \\
+\addlinespace[2pt]
+8 & Alibaba & Qwen3-Coder 480B & 55.40 & \citelink{https://huggingface.co/Qwen}{Open-weight} & \citelink{https://lingma.aliyun.com/lingma}{Lingma}  \& \citelink{https://github.com/QwenLM/qwen-code}{Qwen Code} \\
+\addlinespace[2pt]
+9 & Zhipu AI & GLM-4.6 & 55.40 & \citelink{https://huggingface.co/zai-org/GLM-4.6}{Open-weight} & - \\
+\addlinespace[4pt]
+\midrule
+\addlinespace[2pt]
+$\ast$ & ByteDance & \citelink{https://skywork.ai/blog/vibecoding/doubao-seed-code-ai-coding-2025/}{Doubao Seed Code} & 78.80 & Proprietary & \citelink{https://www.trae.ai/}{TRAE} \\
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{6pt}
+\raggedright
+\scriptsize
+$\ast$\textit{ByteDance's Doubao-Seed-Code uses \textcolor{red}{TRAE} as the agent framework, so not directly comparable; listed separately for reference.} \\
+\textit{\citelink{https://x.ai/news/grok-4}{Grok 4} excluded: no SWE-Bench Verified score on official leaderboard; xAI's release blog did not report SE benchmarks.}
+\end{table}

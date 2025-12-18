@@ -1,0 +1,176 @@
+% =============================================================================
+% Part I / Market 1: General Foundation Models for Coding
+% =============================================================================
+
+\section{Market 1: General Foundation Models for Coding}
+
+\begin{frame}{Market 1: Scope \& Definition}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Research Object:} General-purpose and code-specialized foundation models---both closed-source APIs and open-weight distributions---that serve as computational backends for software engineering tasks.
+
+  \item \textbf{Key Players:}
+  \begin{enumerate}
+    \item \textbf{Proprietary:} Anthropic (Claude), OpenAI (GPT/Codex), Google (Gemini).
+    \item \textbf{Open-Weight:} Moonshot (Kimi K2), DeepSeek, MiniMax, Mistral (Devstral), Alibaba (Qwen).
+  \end{enumerate}
+
+  \item \textbf{Core Capability Assessment:} Three capabilities determine suitability as an agentic coding backbone:
+  \begin{enumerate}
+    \item \textbf{Tool Calling \& Agentic Execution} $\rightarrow$ measured by \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0}: instruction-following, shell command execution, error recovery in autonomous workflows.
+    \item \textbf{Repository-Level Bug Fixing} $\rightarrow$ measured by \citelink{https://www.swebench.com}{SWE-Bench Verified} and \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Pro}: multi-file comprehension, targeted edits, and generalization to unseen codebases.
+    \item \textbf{Novel Problem Adaptation} $\rightarrow$ measured by \citelink{https://arcprize.org/leaderboard}{ARC-AGI 1 $\rightarrow$ 2}: fluid intelligence, abstract pattern recognition---proxies for private DSLs and undocumented APIs.
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% Top 3 Models Comparison Table
+% -----------------------------------------------------------------------------
+
+\begin{frame}{Market 1: Comparison of Top 3 Foundation Models for Coding}
+\justifying
+\input{Tables/P1M1-top3.tex}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% Benchmark Selection Rationale (Single Slide)
+% -----------------------------------------------------------------------------
+
+\begin{frame}{Market 1: Benchmark Selection}
+\justifying
+\small
+\textbf{Why Not Function-Level Benchmarks?} Traditional benchmarks such as \citelink{https://github.com/openai/human-eval}{HumanEval} (164 Python problems), \citelink{https://github.com/google-research/google-research/tree/master/mbpp}{MBPP} (974 crowd-sourced tasks), and \citelink{https://github.com/bigcode-project/bigcodebench}{BigCodeBench} (1,140 function calls) have become \textcolor{red}{saturated}---frontier models routinely achieve 90\%+ scores, and these benchmarks test isolated function rather than the repo-level, tool-integrated workflows that characterize modern software engineering.
+
+\vspace{3pt}
+\textbf{Our Benchmark Selection:}
+\begin{itemize}
+  \item \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0}: Evaluates models as \textbf{agentic coding backbones} by testing tool-calling reliability, instruction-following accuracy, and error recovery in realistic terminal environments. Critical because production coding agents must execute shell commands, manage file systems, and handle unexpected errors autonomously.
+
+  \item \citelink{https://www.swebench.com}{SWE-Bench Verified} $\rightarrow$ \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Pro}: Verified (500 human-validated GitHub issues from 12 Python repos) is the industry gold standard for \textbf{repo-level bug fixing}. However, ground-truth PRs are public, raising contamination concerns. \textbf{Pro} (by Scale AI) addresses this using GPL-licensed and proprietary repositories with unpublished solutions. The \textbf{performance drop between versions} serves as our primary metric for distinguishing true generalization from memorization.
+
+  \item \citelink{https://arcprize.org/leaderboard}{ARC-AGI 1 $\rightarrow$ 2}: Tests \textbf{fluid intelligence and novel problem adaptation} via visual puzzles requiring abstract pattern recognition---no memorization possible. ARC-AGI 2 introduces harder tasks emphasizing efficiency and adaptability. The \textbf{drop from 1 to 2} proxies a model's ability to handle private DSLs, undocumented APIs, and low-resource edge cases for enterprise clients.
+  \end{itemize}
+\end{frame}
+
+% =============================================================================
+% Claude Opus 4.5 Analysis (1 Slide)
+% =============================================================================
+
+\begin{frame}{Market 1: Claude Opus 4.5, Tool Calling for Mainstream Engineering}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Market Leadership:} \textbf{Claude} has maintained dominance in agentic coding since \textbf{Claude 3.7 Sonnet} (February 2025)---for most of 2025, it was the \textcolor{red}{only viable frontier option} for production agentic coding. Currently leads \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0} at \textcolor{red}{57.8\%} and \citelink{https://www.swebench.com}{SWE-Bench Verified} at 74.4\%. The \citelink{https://modelcontextprotocol.io}{Model Context Protocol (MCP)} has achieved widespread adoption: \citelink{https://github.com/features/copilot}{GitHub Copilot}, \citelink{https://cursor.com}{Cursor}, and \citelink{https://www.jetbrains.com/junie/}{JetBrains Junie} all use Claude as default/primary model, creating significant switching costs for developers already embedded in the MCP tool ecosystem.
+
+  \item \textbf{Generalization Weakness:} However, Claude exhibits the steepest performance degradation under distribution shift: \textcolor{red}{--38.3\%} from \citelink{https://www.swebench.com}{SWE-Bench Verified} to \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Pro} and \textcolor{red}{--53.0\%} from ARC-AGI 1 to 2 (worst among Top 3). This pattern is consistent with \citelink{https://www.anthropic.com/news/claude-opus-4-5}{Anthropic's own framing} emphasizing ``familiar tasks'' and ``token efficiency''---suggesting optimization for common scenarios rather than novel problem-solving.
+
+  \item \textbf{6--12 Month Outlook:} Claude will likely maintain leadership in mainstream engineering, but the Terminal-Bench lead (within $\pm$2.9\% error margin per \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{official leaderboard}) will narrow as competitors improve agent strategies---\citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Codex-Max already achieves 60.4\%}. The strategic moat is shifting from raw capability toward \textbf{ecosystem lock-in} via MCP adoption.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% GPT-5.2 Analysis (1 Slide)
+% =============================================================================
+
+\begin{frame}{Market 1: GPT-5.2, Deep Thinking for Edge Case Generalization}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Unique Positioning:} \textbf{OpenAI} has captured a differentiated niche focused on \textcolor{red}{generalizability for novel and edge-case tasks}. Starting with \textbf{GPT-5.1}'s success in niche domains like \citelink{https://leanprover-community.github.io/}{Lean theorem proving} and formal verification, GPT-5.2 now leads benchmarks designed to test out-of-distribution performance: \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{SWE-Bench Pro} at \textcolor{red}{53.8\%}, \citelink{https://arcprize.org/leaderboard}{ARC-AGI 2} at \textcolor{red}{54.2\%}, and \citelink{https://aider.chat/docs/leaderboards/}{Aider Polyglot} at \textcolor{red}{88\%} (Top 1).
+
+  \item \textbf{Generalization Strength:} GPT-5.2 exhibits the \textcolor{red}{smallest performance drops} under distribution shift: only \textcolor{red}{--25.1\%} from Verified to Pro and \textcolor{red}{--40.1\%} from ARC-1 to ARC-2 (best among Top 3). \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Scale AI's SWE-Bench Pro} explicitly uses GPL/proprietary repos to resist contamination---GPT-5.2's leadership here suggests genuine generalization rather than memorization. This positions GPT-5.2 as optimal for private codebases, proprietary DSLs, and legacy systems where training data coverage is sparse.
+
+  \item \textbf{6--12 Month Outlook:} OpenAI has strategically differentiated into the ``hard problems'' niche rather than competing head-to-head with Claude on standard tasks. \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Codex-Max already achieves 60.4\%} on Terminal-Bench, suggesting OpenAI is closing the agent execution gap. Enterprise clients with complex internal tooling (finance, semiconductor, legacy enterprise systems) will increasingly favor GPT for edge-case scenarios where Claude's familiarity-based advantages do not apply.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Gemini 3 Pro Analysis (1 Slide)
+% =============================================================================
+
+\begin{frame}{Market 1: Gemini 3 Pro, Long Context \& Future Distribution Advantage}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Generational Leap:} \textbf{Gemini}'s coding evolution reflects generational rather than incremental improvement---per \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench}, Gemini 2.5 Pro scored only 32.6\% (non-competitive), while \textbf{Gemini 3 Pro} achieves near-parity at 54.4\%. Similarly, \citelink{https://deepmind.google/models/gemini/pro/}{Google DeepMind reports} SWE-Bench Verified at 76.2\% and \textcolor{red}{1M token context} (5x Claude's 200K, 2.5x GPT's 400K)---a structural differentiator for large monorepo ingestion.
+
+  \item \textbf{The ``Gemini Paradox'':} Despite strong standard benchmarks, Gemini exhibits the \textcolor{red}{largest performance drops} on generalization tests: \textcolor{red}{--41.6\%} from Verified to \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Pro} (worst among Top 3) and --48.5\% from ARC-1 to ARC-2. This suggests the 1M context advantage may be overvalued---most coding tasks require only 10--50K tokens, RAG + 200K context suffices for most use cases, and extended context without proportional reasoning depth amounts to ``consumption without comprehension.''
+
+  \item \textbf{6--12 Month Outlook:} Gemini is unlikely to establish a \textbf{capability-based moat} like Claude (execution) or GPT (hard problems). \textbf{Google's real advantage is \textcolor{red}{distribution}}---\citelink{https://workspace.google.com/}{Workspace}, \citelink{https://developer.android.com/}{Android}, \citelink{https://cloud.google.com/}{Cloud}, \citelink{https://firebase.google.com/}{Firebase} integration creates ubiquitous access points that Anthropic and OpenAI (as startups) cannot match. If Gemini maintains ``good enough'' performance, distribution may secure market share despite capability gaps.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Top 10 Models Comparison Table
+% =============================================================================
+
+\begin{frame}{Market 1: Top 10 Foundation Models for Coding}
+\justifying
+\input{Tables/P1M1-top10.tex}
+\end{frame}
+
+% =============================================================================
+% Table 2 Analysis: Proprietary vs Open-Weight Gap
+% =============================================================================
+
+\begin{frame}{Market 1: The Proprietary--Open-Weight Capability Chasm}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Structural Bifurcation:} \textbf{Top 3 are exclusively proprietary} (74.40--71.80\%), \textbf{Ranks 4--9 are exclusively open-weight} (55.40--63.40\%). The \textcolor{red}{8.4-point gap} (\#3 GPT-5.2 vs \#4 Kimi K2) is \textbf{benchmark-dependent}: on \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0}, it widens to \textcolor{red}{22+ points} (Claude 57.8\% vs Kimi K2 35.7\%)---open-weight struggles disproportionately with agentic execution. This bifurcation reflects fundamentally different training paradigms: proprietary labs have access to millions of production tool-calling interactions, while open-weight relies primarily on synthetic and public datasets.
+
+  \item \textbf{Open-Weight Plateau:} Despite radically different architectures---\citelink{https://huggingface.co/moonshotai/Kimi-K2-Instruct}{Kimi K2} (1T params, 384 experts, 32B activated) vs \citelink{https://huggingface.co/MiniMaxAI/MiniMax-M2}{MiniMax M2} (230B params, 10B activated)---open-weight scores cluster in an 8-point band (55--63\%). This suggests a \textcolor{red}{capability ceiling} without proprietary RLHF infrastructure and \$100M+ compute budgets. The ceiling appears structural rather than architectural: scaling alone cannot substitute for the quality of human feedback data that powers frontier RLHF.
+
+  \item \textbf{Generalization Gap is Worse:} On \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{SWE-Bench Pro} (contamination-resistant), Claude drops to \textcolor{red}{45.89\%} (--38\%), Kimi K2 to \textcolor{red}{27.67\%} (--58\%). Open-weight relies more heavily on memorization of public GitHub patterns---a critical risk for enterprise clients deploying against proprietary codebases, internal DSLs, and undocumented legacy systems where training data coverage is sparse.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Table 2 Analysis: China's Market Position
+% =============================================================================
+
+\begin{frame}{Market 1: The China Factor---Market Presence vs Frontier Access}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Quantitative Dominance, Qualitative Gap:} Chinese companies occupy \textcolor{red}{5/9 ranked positions} (60\% by count), yet \textbf{zero in Top 3}. Despite massive scale---\citelink{https://huggingface.co/moonshotai/Kimi-K2-Instruct}{Kimi K2} (1T params), \citelink{https://huggingface.co/deepseek-ai}{DeepSeek V3.2} (685B)---the best Chinese model trails GPT-5.2 by 8.4 points on SWE-Bench and \textcolor{red}{18+ points} on Terminal-Bench. An obvious gap is in \textbf{agentic capability}---raw model intelligence for code generation may be approaching parity, but the tool-calling and autonomous execution gap remains substantial.
+
+  \item \textbf{The ByteDance Anomaly:} \citelink{https://www.trae.ai/}{ByteDance's Doubao-Seed-Code} achieves \textcolor{red}{78.80\%} (would be \#1)---but uses proprietary \textbf{TRAE framework}, not Bash-only. \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench} confirms: same model (Claude Opus 4.5) swings \textcolor{red}{8.8 points} between agents (Goose 54.3\% → Droid 63.1\%). Chinese labs may be \textbf{circumventing the model gap via superior agent engineering}---this is a strategically significant workaround that sidesteps US compute export controls entirely: if the model gap cannot be closed, optimize the agent scaffold instead.
+
+  \item \textbf{Geopolitical Asymmetry:} US export controls (H100/H200 restrictions) may explain Top 3 exclusion, but Chinese dominance at open-weight tier (5/6 positions) demonstrates that \textbf{capability diffusion below frontier proceeds unimpeded}. \citelink{https://mistral.ai/news/devstral-2-vibe-cli}{Mistral Devstral 2} at 72.2\% proves European labs can also approach parity---the frontier is not exclusively US domain. Strategic implication: export controls create a \textcolor{red}{temporary} capability gap at the bleeding edge, not a permanent advantage across the full stack.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Table 2 Analysis: Ecosystem as Moat
+% =============================================================================
+
+\begin{frame}{Market 1: Vertical Integration---Ecosystem as Competitive Moat}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Ecosystem-Capability Correlation:} \textbf{100\% of Top 3} have dedicated ecosystems (Claude Code, Gemini CLI, Codex) vs only \textbf{33\% of open-weight} (Mistral Vibe CLI, Alibaba Lingma). Moonshot, MiniMax, DeepSeek, Zhipu show ``-'' = pure model vendors without integrated tooling. This correlation is \textbf{causal, not coincidental}: ecosystems drive capability improvement via real-world feedback loops---every tool call, error recovery, and user correction becomes training signal for the next model iteration.
+
+  \item \textbf{MCP as Protocol War:} Anthropic's \citelink{https://modelcontextprotocol.io}{MCP} (``USB-C for AI'') enables standardized tool integration, creating \textcolor{red}{network effects}---more MCP servers → more valuable Claude Code → more developers → more MCP servers. \citelink{https://github.com/google-gemini/gemini-cli}{Gemini CLI} (87.8K stars) and \citelink{https://openai.com/index/introducing-codex/}{Codex} are competing vertical stacks. The winner of this ``protocol war'' captures disproportionate value as underlying model capabilities commoditize---the protocol layer becomes the new moat when model performance converges.
+
+  \item \textbf{Open-Weight Vulnerability:} Model-only vendors (DeepSeek, Moonshot, MiniMax, Zhipu) risk becoming interchangeable commodity backends for third-party IDEs like \citelink{https://cursor.com}{Cursor}/\citelink{https://windsurf.com}{Windsurf}---competing solely on price with no differentiation. Only \citelink{https://mistral.ai/news/devstral-2-vibe-cli}{Mistral (Vibe CLI)} and \citelink{https://lingma.aliyun.com/lingma}{Alibaba (Lingma)} have ecosystem strategies. \textbf{Strategic maxim: ``Model = commodity; ecosystem = moat; protocol = network effect.''}
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Table 2 Analysis: 6-12 Month Outlook
+% =============================================================================
+
+\begin{frame}{Market 1: 6--12 Month Outlook}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Plateau for Bash Only:} Top 3 spread (\textcolor{red}{2.6 points}) falls within benchmark variance ($\pm$3.6\% per \citelink{https://scale.com/leaderboard/swe_bench_pro_public}{Scale AI})---expect \textbf{ranking shuffles with each release}, but \textbf{breaking 90\% unlikely in 12 months}. ``Bash Only'' uses \textbf{minimal agent framework}, relying purely on the model's self-refinement and deep thinking capability---the remaining 26\% represents ``long-tail hard cases'' (multi-file interactions, implicit constraints, intent-level comprehension) that \textbf{raw model intelligence alone cannot solve} without sophisticated agent scaffolding.
+
+  \item \textbf{Two Gaps Diverging:} \citelink{https://mistral.ai/news/devstral-2-vibe-cli}{Devstral 2} at \citelink{https://www.swebench.com}{72.2\%} proves open-weight can reach SWE-Bench parity---only 0.4 points behind \citelink{https://www.swebench.com}{GPT-5.2's 71.80\%}. Expect Chinese models (DeepSeek V4, Qwen4, Kimi K3) to close this gap to \textcolor{red}{3--8 points} by mid-2026. However, \textbf{\citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench} gap \textcolor{red}{(22+ points)} may persist significantly longer}---tool-calling and agentic execution require proprietary RLHF data from millions of production interactions that open-weight labs simply cannot collect.
+
+  \item \textbf{Alibaba \& ByteDance: The ``Dogfooding'' Advantage:}  Chinese players Alibaba (Qwen + Lingma) and ByteDance (Seed Code + TRAE) are best positioned---both are \textbf{tech giants with massive internal engineering demand}. Alibaba reports ``millions of developers'' with \citelink{https://lingma.aliyun.com/lingma}{87\%+} satisfaction; ByteDance's TRAE achieves \citelink{https://www.swebench.com}{78.80\%} using their proprietary IDE. Unlike pure model vendors (DeepSeek, Moonshot), they can \textbf{dogfood at scale}, continuously collecting production-grade training signal that model-only companies cannot access.
+\end{itemize}
+\end{frame}

@@ -1,0 +1,139 @@
+% =============================================================================
+% Part I / Market 2: General IDEs/CLIs/Coding Agents
+% =============================================================================
+
+\section{Market 2: General IDEs/CLIs/Coding Agents}
+
+\begin{frame}{Market 2: Scope \& Definition}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Research Object:} Developer tools that integrate foundation models into software engineering workflows. Market 2 is \textbf{not one market}---it is a \textbf{three-layer distribution stack}:
+  \begin{enumerate}
+    \item \textbf{IDEs/Editors:} where developers spend time (VS Code, JetBrains, Cursor, Windsurf, TRAE).
+    \item \textbf{Extensions/Plugins:} how AI reaches incumbents at scale (Copilot, Cline, Continue, Codex).
+    \item \textbf{CLI Agents:} power-user + automation channel; also the substrate for benchmarks like Terminal-Bench.
+  \end{enumerate}
+
+  \item \textbf{Why This Matters:} ``Best product'' $\neq$ ``largest adoption'' $\neq$ ``most defensible moat.'' Each layer has different competitive dynamics, and \textbf{distribution dominates capability} at every level.
+
+  \item \textbf{Core Capability Assessment:} Two technical moats define durable differentiation:
+  \begin{enumerate}
+    \item \textbf{Tab Completion} $\rightarrow$ \textit{accuracy $\times$ latency} under tight UX constraints (200--400ms window, high precision required).
+    \item \textbf{Context Management} $\rightarrow$ \textit{retrieval correctness $\times$ retrieval speed}---the ``agent feels smart'' factor that determines whether the model sees the right files.
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+% Market 2 Tables
+% -----------------------------------------------------------------------------
+
+\begin{frame}{Market 2: Top IDEs}
+\input{Tables/P1M2-IDE.tex}
+\end{frame}
+
+\begin{frame}{Market 2: Top IDE Extensions}
+\input{Tables/P1M2-extension.tex}
+\end{frame}
+
+\begin{frame}{Market 2: Top CLI Agents}
+\input{Tables/P1M2-CLI.tex}
+\end{frame}
+
+% =============================================================================
+% Slide 1: Overall Market Analysis - Distribution War
+% =============================================================================
+
+\begin{frame}{Market 2: A Distribution War Disguised as a Product War}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Why Moats Are Currently Shallow:} Because most general coding agents ride the \textbf{same top frontier models} (Claude, GPT, Gemini), durable differentiation shifts away from ``which LLM'' toward two technical moats: (1) \textbf{tab completion precision/latency}---the highest-frequency interaction loop, hardest to fake with generic chat models; and (2) \textbf{context management speed/accuracy}---upstream of everything because ``agent quality $\approx$ right context $\rightarrow$ right plan $\rightarrow$ right edits.'' \citelink{https://cursor.com/blog/tab-rl}{Cursor} publishes \textcolor{red}{28\% higher accept rate} with \textcolor{red}{21\% fewer suggestions}---the clearest public evidence of completion-specific optimization.
+
+  \item \textbf{Agent Scaffold Beats Model Advantages:} \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0} reveals the same model (Claude Opus 4.5) scores \textcolor{red}{63.1\%} under Droid vs \textcolor{red}{54.3\%} under Goose---a \textcolor{red}{9-point spread} for identical ``brains.'' This proves \textbf{workflow + scaffolding + tool discipline} is now a first-class competitive moat, explaining why AI-native IDEs can compete against platforms despite smaller scale.
+
+  \item \textbf{Multi-Model = Model Commoditization:} \citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{Copilot}, \citelink{https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/}{Antigravity}, \citelink{https://cursor.com}{Cursor}, and \citelink{https://windsurf.com}{Windsurf} all offer multi-model choice. When front-ends make models swappable, foundation models become ``supply''---margin and power shift \textbf{up the stack} to IDE/agent workflow. Model vendors risk commoditization unless they own the workflow (\citelink{https://github.com/openai/codex}{Codex}, \citelink{https://github.com/anthropics/claude-code}{Claude Code}) or the protocol (\citelink{https://modelcontextprotocol.io}{MCP}).
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Slide 2: IDE Analysis - Current Market Status
+% =============================================================================
+
+\begin{frame}{Market 2: IDE Analysis---The Traffic Choke Point}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Incumbent Distribution is Massive:} \citelink{https://developer.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{Microsoft} reports \textcolor{red}{50M developers} (VS Code + Visual Studio combined MAU)---the strongest distribution datapoint in Market 2. \citelink{https://www.jetbrains.com/lp/annualreport-2024/}{JetBrains} reports \textcolor{red}{11.4M active users}. AI-native challengers (\citelink{https://news.bloomberglaw.com/legal-ops-and-tech/ai-coding-assistant-draws-a-million-users-without-even-trying}{Cursor $\sim$1M}, \citelink{https://analyticsindiamag.com/global-tech/why-windsurf-thinks-it-has-no-single-moat/}{Windsurf $\sim$800k}, \citelink{https://news.aibase.com/news/18830}{TRAE $>$1M claimed}) total \textcolor{red}{$<$3M combined}---still $<$5\% of incumbent base. IDEs control the default surface area, extension ecosystem, and context instrumentation.
+
+  \item \textbf{AI-Native Differentiation via Vertical Model Integration:} Challengers compete by training \textbf{proprietary models tightly coupled to IDE UX}: \citelink{https://cursor.com/blog/tab-rl}{Cursor's Tab model} achieves 28\% higher accept rate via completion-specific RL; \citelink{https://windsurf.com/blog/swe-1-5}{Windsurf's SWE-1.5} leverages Devin agent research heritage; \citelink{https://skywork.ai/blog/vibecoding/doubao-seed-code-ai-coding-2025/}{TRAE's Doubao Seed Code} scores 78.8\% on SWE-Bench (but requires proprietary framework). This ``model + IDE'' vertical integration enables experiences that extension-based approaches cannot match.
+
+  \item \textbf{Platform Control Becomes More Valuable:} The \citelink{https://www.latent.space/p/windsurf}{Windsurf founders} explicitly cite ``limitations of building within VS Code ecosystem'' as agentic workflows demand deeper platform control. \citelink{https://cdn.vsassets.io/v/M146_20190123.39/_content/Microsoft-Visual-Studio-Marketplace-Terms-of-Use.pdf}{VS Code Marketplace ToS} restricts usage to Microsoft products---forks (Cursor, Windsurf) must rebuild critical extensions (Remote SSH, Containers). As agents get deeper into workflow, \textbf{IDE ownership becomes more valuable than model access}.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Slide 3: Extension Analysis - Current Market Status
+% =============================================================================
+
+\begin{frame}{Market 2: Extension Analysis---Parasitic Distribution at Scale}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Copilot's Structural Dominance:} \citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{GitHub Copilot} at \textcolor{red}{64.2M installs} dwarfs everything by \textcolor{red}{$>$20x}---next tier is \citelink{https://marketplace.visualstudio.com/items?itemName=Codeium.codeium}{Windsurf Plugin} (3.3M), \citelink{https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev}{Cline} (2.8M), \citelink{https://marketplace.visualstudio.com/items?itemName=openai.chatgpt}{Codex} (2.7M). This dominance stems from \textbf{distribution, not capability}: VS Code pre-installation prompts, GitHub integration, enterprise bundle pricing. Copilot's shift to \citelink{https://www.itpro.com/software/development/github-copilot-ai-model-deprecation-openai-anthropic-google}{multi-model support} signals even Microsoft recognizes model lock-in is unsustainable.
+
+  \item \textbf{The Crowded Mid-Tier:} Extensions \#4--11 (Codex, Gemini Code Assist, Claude Code, Lingma, Continue, Amazon Q, Roo Code, Augment) all cluster at \textcolor{red}{0.6--2.7M installs}---a fragmented ``long tail'' where no single vendor has broken away. Single-model extensions (Codex, Gemini, Claude Code, Lingma) are losing ground to multi-model alternatives (Cline, Continue, Roo Code). Developers increasingly view models as \textbf{interchangeable commodities}; they want optionality, not vendor lock-in.
+
+  \item \textbf{Open-Source Success Story:} \citelink{https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev}{Cline} (\#3, 2.8M) and \citelink{https://marketplace.visualstudio.com/items?itemName=Continue.continue}{Continue} (\#8, 1.9M) demonstrate open-source can compete at scale. Their advantage: community contributions, transparency, and \textbf{BYOK pricing} (bring-your-own-key) that undercuts \$20/month subscriptions. \citelink{https://marketplace.visualstudio.com/items?itemName=RooVeterinaryInc.roo-cline}{Roo Code} (\#10, 1.1M)---a Cline fork---shows the open-source compounding effect. Extensions are strategically \textbf{subordinate to IDE platforms} but remain the easiest GTM wedge.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Slide 4: CLI Analysis - Current Market Status
+% =============================================================================
+
+\begin{frame}{Market 2: CLI Analysis---Power-User Workflow Surface}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{Claude Code's Terminal Dominance:} \citelink{https://www.npmjs.com/package/\%40anthropic-ai/claude-code}{Claude Code CLI} at \textcolor{red}{6.25M weekly npm downloads} leads by \textcolor{red}{12x} over \citelink{https://www.npmjs.com/package/\%40openai/codex}{Codex CLI} (508k) and \textcolor{red}{20x} over \citelink{https://www.npmjs.com/package/\%40google/gemini-cli}{Gemini CLI} (310k). This reflects Anthropic's strategic bet on terminal-native agentic workflows. Claude's \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench 2.0} leadership (57.8\%) translates directly to CLI adoption---developers choosing tools for autonomous task execution gravitate to the best-performing agent backbone.
+
+  \item \textbf{npm Downloads $\neq$ Users:} GitHub stars measure \textbf{curiosity}; npm downloads measure \textbf{installation frequency}---neither equals ``users.'' CI pipelines, containers, auto-updaters inflate downloads; some CLIs use binary installers (brew/apt), deflating npm. \citelink{https://github.com/google-gemini/gemini-cli}{Gemini CLI} has highest stars (\textcolor{red}{87.9k}) but only 310k npm downloads---stars reflect Google's marketing reach, not production usage. \citelink{https://www.anthropic.com/engineering/claude-code-best-practices}{Anthropic's best practices} warn context gathering consumes time/tokens, explaining why CLI agents can feel slower per-turn than IDEs with persistent indexes.
+
+  \item \textbf{MCP as Protocol Lock-in:} Anthropic's \citelink{https://modelcontextprotocol.io}{Model Context Protocol (MCP)}---adopted by \citelink{https://marketplace.visualstudio.com/items?itemName=GitHub.copilot}{Copilot}, \citelink{https://cursor.com}{Cursor}, \citelink{https://www.jetbrains.com/junie/}{JetBrains Junie}---creates network effects around Claude Code CLI. Each MCP server integration increases Claude's value proposition, creating switching costs independent of model performance. \citelink{https://code.claude.com/docs/en/sub-agents}{Subagent primitives} further entrench Claude Code as the ``power user standard'' for multi-agent orchestration.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Slide 5: Cross-Market Patterns
+% =============================================================================
+
+\begin{frame}{Market 2: Cross-Market Patterns---Strategic Synthesis}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{The Three-Layer Hierarchy:} IDE is the strongest ``traffic entrance'' (all devs need one); Extension is the easiest GTM wedge (parasitic distribution on VS Code); CLI wins for ``power workflows'' (composability + automation + scriptability). A sophisticated user's optimal portfolio---\textbf{Cursor IDE + Codex extension + Claude Code CLI}---is evidence the market is \textbf{not strongly moated yet}: users mix-and-match surfaces because no single vendor owns all three layers.
+
+  \item \textbf{China's Parallel Stack:} Chinese companies have built a complete parallel ecosystem: \citelink{https://www.trae.ai/}{TRAE} (IDE, ByteDance), \citelink{https://marketplace.visualstudio.com/items?itemName=Alibaba-Cloud.tongyi-lingma}{Lingma} (extension, 2M+ installs), \citelink{https://github.com/QwenLM/qwen-code}{Qwen Code CLI} (120k downloads). \citelink{https://help.aliyun.com/zh/lingma/product-overview/over-90-percent-of-developers-in-gaiaworks-use-tongyi-lingma}{Alibaba reports downloads exceed 7M}---this parallel development means the global market is effectively \textbf{bifurcated}. Western metrics (GitHub stars, Marketplace installs) structurally undercount China adoption.
+
+  \item \textbf{Model Vendors' Strategic Dilemma:} Foundation model vendors face commoditization at the UI layer as IDEs/extensions offer multi-model choice. Three defensive strategies emerge: (1) \textbf{own the workflow} (Claude Code CLI, Codex)---vertical integration from model to surface; (2) \textbf{own the protocol} (Anthropic's \citelink{https://modelcontextprotocol.io}{MCP} adopted by Copilot, Cursor, JetBrains)---network effects via standardization; (3) \textbf{own the distribution} (Google Antigravity via Workspace/Cloud/Firebase, Microsoft Copilot via GitHub/Azure)---platform leverage that pure-play AI labs cannot match.
+\end{itemize}
+\end{frame}
+
+% =============================================================================
+% Slide 6: 6-12 Month Outlook
+% =============================================================================
+
+\begin{frame}{Market 2: 6--12 Month Outlook}
+\justifying
+\small
+\begin{itemize}
+  \item \textbf{IDE Outlook:} VS Code remains the gravity well---even if AI-native IDEs grow fast, the default workflow stays VS Code + extensions for most developers. \citelink{https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/}{Antigravity} (free preview, Gemini + Claude + GPT-OSS) is a ``subsidized entrant'' pressuring Cursor/Windsurf pricing. \textbf{Consolidation likely}: market cannot sustain 5+ AI-native IDEs---expect \textcolor{red}{2--3 acquisitions/shutdowns} within 12 months. IDEs push toward ``agent OS'': deeper repo understanding, background agents watching CI, proactive refactors.
+
+  \item \textbf{Extension Outlook:} Copilot shifts into ``\textbf{model broker + policy layer}''---managing model supply rather than betting on one provider. Open-source multi-provider agents (\citelink{https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev}{Cline}, \citelink{https://marketplace.visualstudio.com/items?itemName=Continue.continue}{Continue}) keep compounding installs via BYOK pricing. Competition shifts to: safer tool execution, better memory/RAG, enterprise deployment packs. \textbf{Copilot's moat erodes but doesn't collapse}---threat is margin compression (\$10/month commodity) rather than displacement.
+
+  \item \textbf{CLI Outlook:} CLI adoption grows, but the category becomes less ``standalone CLI tools'' and more ``\textbf{one agent identity across surfaces}.'' \citelink{https://openai.com/codex/}{OpenAI positions Codex} as cross-surface (terminal/IDE/cloud)---erasing CLI vs IDE boundary. \citelink{https://www.tbench.ai/leaderboard/terminal-bench/2.0}{Terminal-Bench} becomes de facto credibility benchmark; vendors optimize against it. \textbf{Scaffolding improvements may erase model gaps faster than new model releases}---the Droid vs Goose spread proves agent engineering is a faster lever than waiting for frontier models.
+\end{itemize}
+\end{frame}
+

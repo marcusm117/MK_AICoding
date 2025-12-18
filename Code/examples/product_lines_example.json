@@ -1,0 +1,22 @@
+{
+  "product_lines": [
+    {
+      "name": "Core ads",
+      "revenue": 2500000000,
+      "gross_margin": 0.62,
+      "elasticity_per_1pct_speedup": 0.35
+    },
+    {
+      "name": "Subscription",
+      "revenue": 600000000,
+      "gross_margin": 0.78,
+      "elasticity_per_1pct_speedup": 0.55
+    },
+    {
+      "name": "Enterprise SaaS",
+      "revenue": 400000000,
+      "gross_margin": 0.7,
+      "elasticity_per_1pct_speedup": 0.45
+    }
+  ]
+}

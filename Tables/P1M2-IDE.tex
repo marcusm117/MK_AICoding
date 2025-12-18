@@ -1,0 +1,42 @@
+% Table: Top IDEs / Editors for AI-Assisted Coding
+% File: Tables/P1M2-IDE.tex
+
+\begin{table}[htbp]
+\centering
+\caption{Top IDEs for AI-Assisted Coding}
+\label{tab:ide-ranking}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}clllll@{}}
+\toprule
+\textbf{Rank} & \textbf{Company} & \textbf{IDE} & \textbf{Supported Models}\textsuperscript{*}  & \textbf{Self-trained Models} & \textbf{Best Public Adoption Proxy} \\
+\midrule
+1 & Microsoft & \citelink{https://code.visualstudio.com/}{VS Code} & Claude, GPT, Gemini & completion only & \citelink{https://developer.microsoft.com/blog/celebrating-50-million-developers-the-journey-of-visual-studio-and-visual-studio-code}{\textbf{50M MAU} (VS combined)} \\
+\addlinespace[2pt]
+2 & JetBrains & \citelink{https://www.jetbrains.com/}{JetBrains IDEs} & Claude, GPT, Gemini & completion only & \citelink{https://www.jetbrains.com/idea/whatsnew/}{\textbf{11.4M users}} \\
+\addlinespace[2pt]
+3 & Anysphere & \citelink{https://cursor.com/}{Cursor} & Claude, GPT, Gemini & \citelink{https://cursor.com/blog/composer}{Composer-1} & \citelink{https://news.bloomberglaw.com/private-equity/ai-coding-assistant-draws-a-million-users-without-even-trying}{\textbf{$\sim$1M users}} \\
+\addlinespace[2pt]
+4 & ByteDance & \citelink{https://www.trae.ai/}{TRAE} & GPT, Gemini & \citelink{https://skywork.ai/blog/vibecoding/doubao-seed-code-ai-coding-2025/}{Doubao Seed Code} & \citelink{https://news.aibase.com/news/18830}{\textbf{>1M MAU} (claimed)} \\
+\addlinespace[2pt]
+5 & Cognition & \citelink{https://windsurf.com/}{Windsurf} & Claude, GPT, Gemini & \citelink{https://windsurf.com/blog/swe-1-5}{SWE-1.5} & \citelink{https://analyticsindiamag.com/global-tech/why-windsurf-thinks-it-has-no-single-moat/}{\textbf{$\sim$800k active developers}} \\
+\addlinespace[2pt]
+6 & Google & \citelink{https://idx.google.com/antigravity}{Antigravity} & Claude, Gemini & Gemini & No number; \citelink{https://www.androidcentral.com/apps-software/ai/google-antigravitys-rate-limits-are-changing-amid-incredible-demand}{demand signals only} \\
+\addlinespace[2pt]
+7 & Amazon & \citelink{https://kiro.dev/}{Kiro} & Claude & completion only & No number; \citelink{https://www.techradar.com/pro/aws-is-already-limiting-access-to-its-new-kiro-ai-coding-tool-because-its-too-popular}{demand signals only} \\
+\addlinespace[2pt]
+8 & Alibaba & \citelink{https://lingma.aliyun.com/}{Lingma} & Qwen & Qwen & No number; \citelink{https://www.scmp.com/tech/big-tech/article/3294096/meet-alibabas-ai-coder-automated-system-can-build-app-minutes}{demand signals only} \\
+\addlinespace[2pt]
+9 & Zed Industries & \citelink{https://zed.dev/}{Zed} & Claude, GPT, Gemini & completion only & No number; \citelink{https://www.androidcentral.com/apps-software/ai/gemini-cli-zed-code-editor-partnership}{Gemini CLI integration} \\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}%
+}
+
+\vspace{6pt}
+\raggedright
+\scriptsize
+\textit{Notes:} Rankings prioritize monthly active users (MAU) where available. Microsoft's 50M MAU figure combines Visual Studio and VS Code (May 2025). TRAE's 1M+ MAU is single-source and lower-confidence. \\
+\textsuperscript{*}\textbf{Supported Models} indicates native first-party providers surfaced by the product, not third-party routing via BYOK/LiteLLM/OpenRouter/etc.
+
+\end{table}
