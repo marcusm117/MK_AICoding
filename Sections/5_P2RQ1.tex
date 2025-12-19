@@ -44,6 +44,40 @@
 % Economic Model Deep Dive (3 slides)
 % =============================================================================
 
+\begin{frame}{Economic Model: Glossary of Key Terms}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Labor (Fully-Loaded Cost):} Total annual cost per employee, including salary + bonus + benefits + taxes + overhead (office, IT, management). Typically \textcolor{red}{1.3--1.5$\times$ base salary}. Example: \$200K salary $\rightarrow$ \$280--320K fully-loaded. \citelink{https://eclub.mit.edu/2015/07/09/fully-loaded-cost-of-an-employee/}{MIT eClub explanation}.
+
+  \item \textbf{Adoption:} Fraction of engineers \textit{actively using} AI tools in daily workflow---not just license holders. ``Installed tool $\neq$ effective use.'' Requires clear policies, approved use cases, and workflow integration. \citelink{https://survey.stackoverflow.co/2025/ai}{Stack Overflow 2025}: 51\% daily usage among professional devs.
+
+  \item \textbf{Exposure:} Percentage of an engineer's work that \textit{can be accelerated} by AI tools (coding, debugging, testing, documentation). Excludes meetings, requirements, architecture decisions. \citelink{https://www.bain.com/insights/generative-ai-and-the-future-of-work/}{Bain 2024}: engineers spend only \textcolor{red}{25--35\%} on pure coding.
+
+  \item \textbf{Uplift:} Productivity change when AI is applied to exposed work. Can be \textcolor{red}{positive or negative}. Upper bound: +55.8\% (\citelink{https://arxiv.org/abs/2302.06590}{Copilot RCT}). Lower bound: -19\% (\citelink{https://arxiv.org/abs/2507.09089}{METR 2025}---experts slowed on familiar codebases). Model uses triangular distribution (low/mid/high).
+
+  \item \textbf{Delivery Translation ($\tau$):} Fraction of \textit{capacity gains} that convert to \textit{actual delivery speedup}. Accounts for organizational bottlenecks (PM, approvals, dependencies, testing queues). Range: 0.28 (government) to 0.50 (Big Tech).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Economic Model: Glossary of Cost Terms}
+\justifying
+\small
+\begin{itemize}\tightlist
+  \item \textbf{Tool Cost (Seat Cost):} Annual license/subscription fees per user. Baseline: \citelink{https://docs.github.com/en/billing/concepts/product-billing/github-copilot-licenses}{GitHub Copilot Business} at \$19/seat/month. Model uses \$25--45/month to account for multi-tool stacks (IDE plugins, agents, RAG platforms).
+
+  \item \textbf{Enablement Cost:} One-time investment in training, workflow integration, prompt guidelines, code review policies, and internal ``AI Champions.'' Amortized over 3 years. Includes: workshops, documentation, tooling customization, process redesign.
+
+  \item \textbf{Security Cost (Incremental):} Per-seat annual cost for audit logging, DLP, access controls, code review overhead, and vendor add-ons. Scales linearly with adoption. Range: \$400--1,200/seat/year by industry.
+
+  \item \textbf{Security Cost (Fixed Program):} One-time project cost for vendor risk assessment, legal review, policy development, data governance, and security platform integration. Amortized over 3 years. Justified by \citelink{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218A.pdf}{NIST SP 800-218A} requirements. Range: \$2--6.5M by industry.
+
+  \item \textbf{Rework Rate ($\rho$):} Fraction of AI-generated value lost to verification, bug fixes, code review, and quality issues. Captures the ``hidden tax'' of AI output validation. Range: 3.5--6\% of gross value.
+
+  \item \textbf{Externalities:} Value beyond direct labor savings---faster time-to-market (TTM) and reduced defect escape costs. Can flip negative net value to positive if delivery speed creates business value.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Economic Model: Design Philosophy}
 \justifying
 \small
@@ -63,26 +97,25 @@
 \begin{frame}{Economic Model: Calculation Details}
 \justifying
 \small
-\textbf{1. Gross Capacity Value} (per role, then summed):
+\textbf{1. Gross Capacity Value} (per role, then summed across all roles):
 \begin{equation*}
-\text{Gross}_r = \underbrace{(\text{Count}_r \times \text{FullyCost}_r)}_{\text{Total labor cost}} \times \underbrace{\text{Adoption}_r}_{\text{Who uses AI}} \times \underbrace{\text{Exposure}_r}_{\text{AI-able work \%}} \times \underbrace{U_r}_{\text{Uplift (sampled)}}
+\text{Gross}_r = \underbrace{(\text{Count}_r \times \text{FullyCost}_r)}_{\substack{\text{Total labor cost} \\ \text{(headcount} \times \text{\$280--320K)}}} \times \underbrace{\text{Adoption}_r}_{\substack{\text{Active users} \\ \text{(42--78\%)}}} \times \underbrace{\text{Exposure}_r}_{\substack{\text{AI-able work} \\ \text{(25--55\%)}}} \times \underbrace{U_r}_{\substack{\text{Productivity} \\ \text{change}}}
 \end{equation*}
-\textit{Design:} Uplift $U \sim \text{Triangular}(low, mid, high)$ captures uncertainty. Allows negative values (AI may slow experts on familiar codebases---\citelink{https://arxiv.org/abs/2507.09089}{METR 2025}).
+\textit{Interpretation:} Only the fraction of labor that is \textit{both} using AI \textit{and} doing AI-accelerable work generates value. Uplift $U \sim \text{Triangular}(low, mid, high)$ captures uncertainty; negative values allowed (\citelink{https://arxiv.org/abs/2507.09089}{METR 2025}).
 
 \vspace{4pt}
-\textbf{2. Cost Components} (annual):
+\textbf{2. Cost Components} (annualized):
 \begin{align*}
-\text{Tool} &= \text{AdoptedSeats} \times \text{SeatCost/year} & \text{\scriptsize (license fees)}\\
-\text{Enablement} &= \text{AdoptedSeats} \times \frac{\text{EnablementCost/seat}}{\text{AmortYears}} & \text{\scriptsize (training, rollout---amortized)}\\
-\text{Security} &= \text{AdoptedSeats} \times \text{SecIncr/seat} + \frac{\text{SecFixed}}{\text{AmortYears}} & \text{\scriptsize (per-seat + program)}
+\text{Tool} &= \underbrace{\text{AdoptedSeats}}_{\text{Count} \times \text{Adoption}} \times \text{SeatCost/year} & \text{\scriptsize (\$300--540/seat/yr)}\\
+\text{Enablement} &= \text{AdoptedSeats} \times \frac{\text{EnablementCost/seat}}{\textcolor{red}{3\text{ years}}} & \text{\scriptsize (\$900--1500 one-time, amortized)}\\
+\text{Security} &= \text{AdoptedSeats} \times \text{SecIncr/seat} + \frac{\text{SecFixed}}{\textcolor{red}{3\text{ years}}} & \text{\scriptsize (\$400--1200/seat + \$2--6.5M fixed)}
 \end{align*}
-\textit{Design:} Security split into incremental (scales with seats) and fixed (vendor review, policy---doesn't scale). Both amortized over 3 years by default.
 
 \vspace{4pt}
-\textbf{3. Rework Penalty:} $\text{Rework} = \rho \times \max(0, \text{Gross})$ \quad\textit{(only penalizes positive gains)}
+\textbf{3. Rework Penalty:} $\text{Rework} = \rho \times \max(0, \text{Gross})$ where $\rho = 3.5\text{--}6\%$. \textit{Only applies when Gross $>$ 0.}
 
 \vspace{4pt}
-\textbf{4. Externalities} (optional): Direct TTM value or derived from product lines via $\text{speedup} \times \text{elasticity}$.
+\textbf{4. Externalities:} TTM value = $\text{Revenue} \times \text{GM} \times \text{Elasticity} \times \text{Speedup}$, where Speedup = $\text{EngGain} \times \tau$ (delivery translation).
 \end{frame}
 
 \begin{frame}{Economic Model: Evidence Anchors for Default Parameters}
@@ -111,7 +144,7 @@
   \item \textbf{Delivery Translation \& Org Friction:}
   \begin{itemize}\tightlist
     \item \citelink{https://cloud.google.com/blog/products/devops-sre/announcing-the-2024-dora-report}{DORA 2024}: AI adoption correlates with -1.5\% throughput, -7.2\% stability at org level
-    \item Implication: Capacity gains $\neq$ delivery gains. Default $\tau = 0.28$--$0.50$ reflects bottleneck migration.
+    \item Implication: Capacity gains $\neq$ delivery gains. Default $\tau = 0.28$--$0.50$ reflects bottleneck shift.
   \end{itemize}
 \end{itemize}
 \end{frame}

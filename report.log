@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.3.8)  19 DEC 2025 07:40
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.3.8)  19 DEC 2025 08:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1639,16 +1639,33 @@ Overfull \vbox (6.23071pt too high) detected at line 129
 [59
 
 ]
-Overfull \vbox (17.15569pt too high) detected at line 117
- []
-
-
 
 [60
 
 ]
+Overfull \hbox (6.77736pt too wide) in paragraph at lines 119--119
+\TU/lmss/m/n/9 value. Uplift $[] \OMS/cmsy/m/n/9 ^^X []\OT1/cmr/m/n/9 ([][][]\OML/cmm/m/it/9 ; [][][]; [][][][]\OT1/cmr/m/n/9 )$ \TU/lmss/m/n/9 captures uncertainty; negative values allowed ([][][]). 
+ []
+
+
+Overfull \vbox (0.10207pt too high) detected at line 119
+ []
+
+
 
 [61
+
+]
+Overfull \vbox (6.15569pt too high) detected at line 150
+ []
+
+
+
+[62
+
+]
+
+[63
 
 ]
 File: Figures/net_value_by_template.png Graphic file (type bmp)
@@ -1662,29 +1679,16 @@ Package fontspec Info:
 
 
 
-[62
+[64
 
 ]
 File: Figures/heatmap_internet_bigtech.png Graphic file (type bmp)
 <Figures/heatmap_internet_bigtech.png>
 
 
-[63
-
-]
-
-[64
-
-]
-
 [65
 
 ]
-
-LaTeX Font Warning: Font shape `TU/HeitiSC(0)/m/it' undefined
-(Font)              using `TU/HeitiSC(0)/m/n' instead on input line 266.
-
-
 
 [66
 
@@ -1693,6 +1697,11 @@ LaTeX Font Warning: Font shape `TU/HeitiSC(0)/m/it' undefined
 [67
 
 ]
+
+LaTeX Font Warning: Font shape `TU/HeitiSC(0)/m/it' undefined
+(Font)              using `TU/HeitiSC(0)/m/n' instead on input line 299.
+
+
 
 [68
 
@@ -1720,7 +1729,7 @@ LaTeX Font Warning: Font shape `TU/HeitiSC(0)/m/it' undefined
 
 [74
 
-]) (./Sections/6_P2RQ2.tex
+]
 
 [75
 
@@ -1728,9 +1737,17 @@ LaTeX Font Warning: Font shape `TU/HeitiSC(0)/m/it' undefined
 
 [76
 
-]
+]) (./Sections/6_P2RQ2.tex
 
 [77
+
+]
+
+[78
+
+]
+
+[79
 
 ]
 Overfull \vbox (5.82571pt too high) detected at line 75
@@ -1738,7 +1755,7 @@ Overfull \vbox (5.82571pt too high) detected at line 75
 
 
 
-[78
+[80
 
 ]
 Overfull \vbox (5.25676pt too high) detected at line 87
@@ -1746,7 +1763,7 @@ Overfull \vbox (5.25676pt too high) detected at line 87
 
 
 
-[79
+[81
 
 ]
 Overfull \vbox (11.55571pt too high) detected at line 99
@@ -1754,11 +1771,11 @@ Overfull \vbox (11.55571pt too high) detected at line 99
 
 
 
-[80
+[82
 
 ]
 
-[81
+[83
 
 ]
 Overfull \vbox (10.0086pt too high) detected at line 135
@@ -1766,7 +1783,7 @@ Overfull \vbox (10.0086pt too high) detected at line 135
 
 
 
-[82
+[84
 
 ]
 Overfull \vbox (4.3358pt too high) detected at line 147
@@ -1774,7 +1791,7 @@ Overfull \vbox (4.3358pt too high) detected at line 147
 
 
 
-[83
+[85
 
 ]
 Overfull \vbox (12.4467pt too high) detected at line 159
@@ -1782,7 +1799,7 @@ Overfull \vbox (12.4467pt too high) detected at line 159
 
 
 
-[84
+[86
 
 ]
 Overfull \vbox (4.77766pt too high) detected at line 171
@@ -1790,7 +1807,7 @@ Overfull \vbox (4.77766pt too high) detected at line 171
 
 
 
-[85
+[87
 
 ]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <14.4> not available
@@ -1803,14 +1820,6 @@ Overfull \vbox (4.75084pt too high) detected at line 183
 
 
 
-[86
-
-]
-
-[87
-
-]
-
 [88
 
 ]
@@ -1818,23 +1827,15 @@ Overfull \vbox (4.75084pt too high) detected at line 183
 [89
 
 ]
-Overfull \vbox (7.14182pt too high) detected at line 244
- []
-
-
 
 [90
 
 ]
-Overfull \vbox (7.84981pt too high) detected at line 256
- []
-
-
 
 [91
 
 ]
-Overfull \vbox (10.24078pt too high) detected at line 268
+Overfull \vbox (7.14182pt too high) detected at line 244
  []
 
 
@@ -1842,10 +1843,18 @@ Overfull \vbox (10.24078pt too high) detected at line 268
 [92
 
 ]
+Overfull \vbox (7.84981pt too high) detected at line 256
+ []
+
+
 
 [93
 
 ]
+Overfull \vbox (10.24078pt too high) detected at line 268
+ []
+
+
 
 [94
 
@@ -1866,23 +1875,15 @@ Overfull \vbox (10.24078pt too high) detected at line 268
 [98
 
 ]
-Overfull \vbox (2.63177pt too high) detected at line 376
- []
-
-
 
 [99
 
 ]
-Overfull \vbox (8.3538pt too high) detected at line 388
- []
-
-
 
 [100
 
 ]
-Overfull \vbox (2.26875pt too high) detected at line 399
+Overfull \vbox (2.63177pt too high) detected at line 376
  []
 
 
@@ -1890,7 +1891,7 @@ Overfull \vbox (2.26875pt too high) detected at line 399
 [101
 
 ]
-Overfull \vbox (6.44882pt too high) detected at line 415
+Overfull \vbox (8.3538pt too high) detected at line 388
  []
 
 
@@ -1898,8 +1899,24 @@ Overfull \vbox (6.44882pt too high) detected at line 415
 [102
 
 ]
+Overfull \vbox (2.26875pt too high) detected at line 399
+ []
+
+
 
 [103
+
+]
+Overfull \vbox (6.44882pt too high) detected at line 415
+ []
+
+
+
+[104
+
+]
+
+[105
 
 ])
 \tf@nav=\write7
@@ -1927,12 +1944,12 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 52572 strings out of 473832
- 1298517 string characters out of 5729482
- 2185670 words of memory out of 5000000
- 74736 multiletter control sequences out of 15000+600000
+ 52576 strings out of 473832
+ 1298553 string characters out of 5729482
+ 2185806 words of memory out of 5000000
+ 74740 multiletter control sequences out of 15000+600000
  566915 words of font info for 99 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,15n,123p,1298b,923s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,19n,123p,1298b,923s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (103 pages).
+Output written on report.pdf (105 pages).

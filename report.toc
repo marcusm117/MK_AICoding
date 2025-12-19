@@ -6,4 +6,4 @@
 \beamer@sectionintoc {4}{Market 3: Specialized Agents/Tools for Software Engineering}{30}{1}{4}
 \beamer@sectionintoc {5}{Market 4: Vibe Coding Tools}{46}{1}{5}
 \beamer@sectionintoc {6}{RQ1: Economic Impact Analysis}{57}{2}{6}
-\beamer@sectionintoc {7}{RQ2: Competitive Dynamics Analysis}{75}{2}{7}
+\beamer@sectionintoc {7}{RQ2: Competitive Dynamics Analysis}{77}{2}{7}
